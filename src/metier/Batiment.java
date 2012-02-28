@@ -5,32 +5,27 @@ package metier;
  * @authors Ahardane Abdeslam, Balestrat Clément, Pravossoudovitch Yann
  * @version 1.0
  */
-public class Salle implements java.io.Serializable {
+public class Batiment implements java.io.Serializable {
 
     //Attributs
 	private String code;
     private String lib;
-
-    // Attributs d'association
-    private Batiment bat;
     
     /**
-     * Constructeur d'un objet Salle prenant en compte ses 2 attributs
+     * Constructeur d'un objet Batiment prenant en compte ses 2 attributs
      * @param lib Libellé de la salle
      * @param code Code de la salle
-     * @param bat Batiment de la salle
      */
-    public Salle(String lib, String code, Batiment bat) {
+    public Batiment(String lib, String code) {
         this.lib = lib;
         this.code = code;
-        this.bat = bat;
     }
 
     /**
-     * Constructeur d'un objet Salle ne prenant en compte que son attribut code
-     * @param code Code de la salle
+     * Constructeur d'un objet Batiment ne prenant en compte que son attribut code
+     * @param code Code du batiment
      */
-    public Salle(String code) {
+    public Batiment(String code) {
         this.code = code;
     }
 
@@ -49,14 +44,6 @@ public class Salle implements java.io.Serializable {
     public String getCode() {
         return this.code;
     }
-    
-    /**
-     * Accesseur du batiment d'un objet Salle
-     * @return Batiment - Batiment de la salle
-     */
-    public Batiment getBatiment() {
-        return this.bat;
-    }
 
     /**
      * Modifieur du libellé d'un objet Salle
@@ -72,13 +59,5 @@ public class Salle implements java.io.Serializable {
      */
     public void setCode(String code) {
         this.code = code;
-    }
-    
-    /**
-     * Modifieur de la capacité d'un objet Salle
-     * @param code Code de la salle Salle
-     */
-    public void setBatiment(Batiment bat) {
-        this.bat = bat;
     }
 }

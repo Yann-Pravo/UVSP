@@ -1,100 +1,91 @@
 package metier;
 
-import java.util.*;
-
 /**
  * Classe metier de gestion des groupes
  * @authors Ahardane Abdeslam, Balestrat Clément, Pravossoudovitch Yann
  * @version 1.0
  */
-public class Groupe extends TypeGroupe {
+public class Groupe {
 
 	//Attributs
-    public String nomGroupe;
-    public Integer nbEtudiants;
-    ArrayList<Groupe> groupesIncompatibles;
+    private String code;
+    public String lib;
+    public Groupe pere;
 
     /**
      * Constructeur d'un groupe
-     * @param nomGroupe le nom du groupe
-     * @param nomTypeGrp le nom du type de groupe
-     * @param nbEt le nombre d'etudiants
+     * @param code Code du groupe
+     * @param lib Libellé du groupe
+     * @param père Groupe père du groupe
      */
-    public Groupe(String nomGrp, String nomTypeGrp, Integer nbEt) {
-        super(nomTypeGrp);
-        this.nomGroupe = nomGrp;
-        this.nbEtudiants = nbEt;
+    public Groupe(String code, String lib, Groupe pere) {
+        this.code = code;
+        this.lib = lib;
+        this.pere = pere;
     }
 
     /**
-     * Constructeur d'un groupe avec le tableau des groupes incompatibles
-     * @param nomGrp le nom du groupe
-     * @param nomTypeGrp le nom du type de groupe
-     * @param nbEt le nombre d'etudiants
-     * @param listeGroupes la liste des groupes incompatibles
+     * Constructeur d'un groupe qu'avec le code
+     * @param code Code du groupe
      */
-    public Groupe(String nomGrp, String nomTypeGrp, Integer nbEt, ArrayList<Groupe> listeGroupes) {
-        super(nomTypeGrp);
-        this.nomGroupe = nomGrp;
-        this.nbEtudiants = nbEt;
-        this.groupesIncompatibles = listeGroupes;
-    }
-
-
-    /**
-     * Constructeur d'un groupe qu'avec le nom
-     * @param nomGroupe le nom du groupe
-     */
-    public Groupe(String nomGrp) {
-        super();
-        this.nomGroupe = nomGrp;
-    }
-
-    /**
-     * Recuperation du nom du groupe
-     * @return le nom du groupe
-     */
-    public String getNomGroupe() {
-        return nomGroupe;
-    }
-
-    /**
-     * Affectation du nom du groupe
-     * @param unNom le nom du groupe
-     */
-    public void setNomGroupe(String unNom) {
-        this.nomGroupe = unNom;
+    public Groupe(String code) {
+        this.code = code;
     }
     
     /**
-     * Recuperation du nombre d'étudiants du groupe
-     * @return le nombre d'étudiants du groupe
+     * Constructeur d'un groupe qu'avec le code
+     * @param code Code du groupe
      */
-    public int getNbEtudiants() {
-        return nbEtudiants;
+    public Groupe(String code, String lib) {
+        this.code = code;
+        this.lib = lib;
+    }
+
+    /**
+     * Recuperation du code du groupe
+     * @return le code du groupe
+     */
+    public String getCode() {
+        return code;
+    }
+
+    /**
+     * Affectation du code du groupe
+     * @param unNom le code du groupe
+     */
+    public void setCode(String code) {
+        this.code = code;
+    }
+    
+    /**
+     * Recuperation du libellé du groupe
+     * @return Libellé du groupe
+     */
+    public String getLibelle() {
+        return lib;
     }
 
     /**
      * Affectation du nombre d'étudiants du groupe
      * @param nbEtudiants le nombre d'étudiants du groupe
      */
-    public void setNbEtudiants(Integer nbEt) {
-        this.nbEtudiants = nbEt;
+    public void setLibelle(String lib) {
+        this.lib = lib;
     }
 
     /**
-     * Recuperation de la liste des groupes incompatibles
-     * @return la liste des groupes incompatiblese
+     * Recuperation du père du groupe
+     * @return Père du groupe
      */
-    public ArrayList<Groupe> getGroupesIncompatibles() {
-        return  groupesIncompatibles;
+    public Groupe getPere() {
+        return pere;
     }
 
     /**
-     * Affectation de la liste des groupes incompatibles
-     * @param listeGrp la liste des groupes incompatibles
+     * Affectation père du groupe
+     * @param père du groupe
      */
-    public void setNbEtudiants(ArrayList<Groupe> listeGrp) {
-        this.groupesIncompatibles = listeGrp;
+    public void setPere(Groupe pere) {
+        this.pere = pere;
     }
 }

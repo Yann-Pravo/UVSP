@@ -1,25 +1,20 @@
 package metier;
 
-/**
- * Classe métier permettant la définition et la gestion des objets 'Matiere'
- * @authors Ahardane Abdeslam, Balestrat Clément, Pravossoudovitch Yann
- * @version 1.0
- */
-public class Matiere {
+public class Cours {
 
     // Attributs
     private String code;
     private String lib;
 
     // Attributs d'association
-    private UE u;
-    private Enseignant resp;
+    private Matiere mat;
+    private TypeCours type;
 
     /**
      * Constructeur d'un objet Matiere prenant en compte le nom uniquement
      * @param lib Libellé de la matière
      */
-    public Matiere(String lib) {
+    public Cours(String lib) {
         this.lib = lib;
     }
 
@@ -28,7 +23,7 @@ public class Matiere {
      * @param code Code de la matière
      * @param lib Libellé de la matière
      */
-    public Matiere(String code, String lib) {
+    public Cours(String code, String lib) {
         this.code = code;
         this.lib = lib;
     }
@@ -39,10 +34,10 @@ public class Matiere {
      * @param lib Libellé de la matière
      * @param u L'unité d'enseignement associé à la matière
      */
-    public Matiere(String code, String lib, UE u) {
+    public Cours(String code, String lib, Matiere mat) {
         this.code = code;
         this.lib = lib;
-        this.u = u;
+        this.mat = mat;
     }
 
     /**
@@ -53,16 +48,12 @@ public class Matiere {
      * @param u UE associé à la matiere
      * @param resp Responsable de la matiere
      */
-    public Matiere (String code, String lib, String descr, Integer coeff, UE u, Enseignant resp)
+    public Cours(String code, String lib, Matiere mat, TypeCours type)
     {
         this.code = code;
         this.lib = lib;
-        this.u = u;
-        this.resp = resp;
-    }
-
-    public Matiere(String code, int db) {
-        this.code = code;
+        this.mat = mat;
+        this.type = type;
     }
 
     /**
@@ -82,19 +73,19 @@ public class Matiere {
     }
 
     /**
-     * Accesseur du coefficient d'un objet Matiere
-     * @return Integer - Coefficient de l'objet Matière
+     * Accesseur de la matière d'un objet Cours
+     * @return Matiere - Matiere de l'objet Cours
      */
-    public Enseignant getResponsable() {
-        return resp;
+    public Matiere getMatiere() {
+        return mat;
     }
 
     /**
      * Modifieur du coefficient d'un objet Matiere
      * @param coeff Entier définissant le nouveau coefficient de l'objet Matiere
      */
-    public void setResponsable(Enseignant resp) {
-        this.resp = resp;
+    public void setMatiere(Matiere mat) {
+        this.mat = mat;
     }
 
     /**
@@ -115,17 +106,18 @@ public class Matiere {
 
     /**
      * Accesseur sur l'UE associées à un objet Matiere
+     * @author Oph√©lie Mak
      * @return UE L'UE associés à une matière
      */
-    public UE getUE() {
-        return u;
+    public TypeCours getTypeCours() {
+        return type;
     }
 
     /**
      * Modificateur de l'UE associée à un objet Matiere
      * @param u L'UE associée à une matière
      */
-    public void setUE(UE u) {
-        this.u = u;
+    public void setTypeCours(UE u) {
+        this.type = type;
     }
 }
