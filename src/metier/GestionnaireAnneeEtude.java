@@ -137,9 +137,8 @@ public class GestionnaireAnneeEtude {
      * @param nomFormation Nom de la formation ˆ laquelle appartient l'annee d'etude
      */
     public void updateAnneeEtude(String nomAnnee,String description,
-            Integer dureeSeance,Integer nbSeanceAM,Integer nbSeancePM,String nomFormation) {
-        Formation f = new Formation(nomFormation);
-        AnneeEtude a = new AnneeEtude(nomAnnee,description,dureeSeance,nbSeanceAM,nbSeancePM,f);
+            Integer dureeSeance,Integer nbSeanceAM,Integer nbSeancePM) {
+        AnneeEtude a = new AnneeEtude(nomAnnee, description, dureeSeance, nbSeanceAM, nbSeancePM);
         Boolean ok= anneeDao.update(a);
         if ( ok )
             listeAnnee.add(a);
@@ -169,9 +168,8 @@ public class GestionnaireAnneeEtude {
      * @param nomFormation Nom de la formation ˆ laquelle appartient l'annee d'etude
      */
     public void ajouterAnneeEtude(String nomAnnee,String description,
-            Integer dureeSeance,Integer nbSeanceAM,Integer nbSeancePM,String nomFormation) {
-        Formation f = new Formation(nomFormation);
-        AnneeEtude a = new AnneeEtude(nomAnnee,description,dureeSeance,nbSeanceAM,nbSeancePM,f);
+            Integer dureeSeance,Integer nbSeanceAM,Integer nbSeancePM) {
+        AnneeEtude a = new AnneeEtude(nomAnnee,description,dureeSeance,nbSeanceAM,nbSeancePM);
         Boolean ok= anneeDao.create(a);
         if ( ok )
             listeAnnee.add(a);

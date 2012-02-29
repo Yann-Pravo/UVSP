@@ -53,7 +53,7 @@ public class Matiere {
      * @param u UE associé à la matiere
      * @param resp Responsable de la matiere
      */
-    public Matiere (String code, String lib, String descr, Integer coeff, UE u, Enseignant resp)
+    public Matiere (String code, String lib, UE u, Enseignant resp)
     {
         this.code = code;
         this.lib = lib;

@@ -98,9 +98,9 @@ public class GestionnaireMatiere {
      * @param coeff Coefficient de la matière dans l'UE
      * @param nomUE Nom de l'UE associé à la matiere
      */
-    public void ajouterAnneeEtude(String code, String nom, String descr, Integer coeff, String nomUE) {
+    public void ajouterAnneeEtude(String code, String lib, String nomUE, Enseignant resp) {
         UE u = new UE(nomUE);
-        Matiere m = new Matiere(code, nom, descr, coeff, u);
+        Matiere m = new Matiere(code, lib, u, resp);
         Boolean ok = matiereDao.create(m);
         if (ok) {
             listeMat.add(m);

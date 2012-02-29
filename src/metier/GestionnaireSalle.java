@@ -43,8 +43,8 @@ public class GestionnaireSalle {
      * @param capacite la capacité de la salle
      * @return l'objet salle créé
      */
-    public Salle addSalle( String nom, Integer capacite) {
-        Salle salle = new Salle(nom, capacite);
+    public Salle addSalle(String id, String lib, Batiment bat) {
+        Salle salle = new Salle(id, lib, bat);
         salleDAO.create(salle);
         listeSalles.add(salle);
         return salle;
@@ -58,7 +58,7 @@ public class GestionnaireSalle {
     public void deleteSalle(Salle salle)
     {
         int i = 0;
-        while (!salle.getNom().equals((listeSalles.get(i)).getNom()))
+        while (!salle.getLibelle().equals((listeSalles.get(i)).getLibelle()))
         {
                 i++;
         }
@@ -72,9 +72,9 @@ public class GestionnaireSalle {
      * @param nom le nom de la salle
      * @param capacite la capacité de la salle
      */
-    public void updateSalle( String nom, Integer capacite)
+    public void updateSalle(String id, String lib, Batiment bat)
     {
-        Salle salle = new Salle( nom, capacite);
+        Salle salle = new Salle(id, lib, bat);
         salleDAO.update(salle);
         listeSalles = salleDAO.getListe();
     }
