@@ -32,7 +32,7 @@ public class Cours {
      * Constructeur d'un objet Matiere prenant en compte son code et son nom
      * @param code Code de la matière
      * @param lib Libellé de la matière
-     * @param u L'unité d'enseignement associé à la matière
+     * @param mat matière
      */
     public Cours(String code, String lib, Matiere mat) {
         this.code = code;
@@ -45,8 +45,8 @@ public class Cours {
      * et son coefficient
      * @param code Code de la matière
      * @param lib Libellé de la matière
-     * @param u UE associé à la matiere
      * @param resp Responsable de la matiere
+     * @param type Type du cours
      */
     public Cours(String code, String lib, Matiere mat, TypeCours type)
     {
@@ -105,9 +105,8 @@ public class Cours {
     }
 
     /**
-     * Accesseur sur l'UE associées à un objet Matiere
-     * @author Oph√©lie Mak
-     * @return UE L'UE associés à une matière
+     * Accesseur au type associé à un objet Matiere
+     * @return type associés à une matière
      */
     public TypeCours getTypeCours() {
         return type;
@@ -117,7 +116,7 @@ public class Cours {
      * Modificateur de l'UE associée à un objet Matiere
      * @param u L'UE associée à une matière
      */
-    public void setTypeCours(UE u) {
+    public void setTypeCours(TypeCours type) {
         this.type = type;
     }
 }

@@ -16,23 +16,20 @@ public class Conge extends TypeConge{
     private Date dateFin ;
 
     //Attributs de l'association
-    AnneeEtude anneeAE;
     AnneeUniversitaire anneeAU;
 
     /**
-     * Constructeur d'un objet Conge prenant en compte ses 6 attributs
+     * Constructeur d'un objet Conge prenant en compte ses 5 attributs
      * @param nomC Nom du congé
      * @param nomT Nom du type de congé
-     * @param anneeE Objet année d'étude
      * @param anneeU Objet année univerisitaire
      * @param dateD date début du congé
      * @param dateF date fin du congé
      */
-    public Conge (String nomC, String nomT, AnneeEtude anneeE, AnneeUniversitaire anneeU, Date dateD, Date dateF)
+    public Conge (String nomC, String nomT, AnneeUniversitaire anneeU, Date dateD, Date dateF)
     {
         super(nomT);
         this.nomConge = nomC;
-        this.anneeAE = anneeE;
         this.anneeAU = anneeU;
         this.dateDebut = dateD;
         this.dateFin = dateF;
@@ -70,21 +67,6 @@ public class Conge extends TypeConge{
         this.dateDebut = dateD;
     }
 
-    /**
-     * Accesseur à l'objet AnnéeEtude d'un objet Conge
-     * @return  anneeAE -  Objet ann√©eEtude de l'objet Conge
-     */
-    public AnneeEtude getAnneeAE() {
-        return anneeAE;
-    }
-
-    /**
-     * Modifieur de la date début de l'objet conge
-     * @param anneeAE Objet année d'étude correspondant à l'objet Conge
-     */
-    public void setAnneeAE(AnneeEtude anneeAE) {
-        this.anneeAE = anneeAE;
-    }
 
     /**
      * Accesseur à l'objet AnnéeUniversitaire d'un objet Conge

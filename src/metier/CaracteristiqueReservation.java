@@ -30,10 +30,10 @@ public class CaracteristiqueReservation {
     }
 
     /**
-     * Modifieur de la salle
-     * @param res Chaîne de caractères définissant la nouvelle réservation de la salle
+     * Modifieur de la reservation
+     * @param res Chaîne de caractères définissant la nouvelle réservation
      */
-    public void setSalle(Reservation res) {
+    public void setReservation(Reservation res) {
         this.res = res;
     }
     
