@@ -47,7 +47,7 @@ CREATE TABLE UE
    ID_UE NUMBER(10)  NOT NULL,
    LIBELLE_UE CHAR(255)  NULL,
    ID_ENSEIGNANT NUMBER(10)  NULL,
-   ID_SEMESTRE NUMBER(10) NULL
+--   ID_SEMESTRE NUMBER(10) NULL
 , CONSTRAINT PK_UE PRIMARY KEY (ID_UE)
   ) ;
 -- ----------------------------------------------------------------------------- -- INDEX DE LA TABLE UE -- -----------------------------------------------------------------------------
