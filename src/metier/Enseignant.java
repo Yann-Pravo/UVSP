@@ -7,7 +7,7 @@ import java.util.Date;
  * @authors Ahardane Abdeslam, Balestrat Clément, Pravossoudovitch Yann
  * @version 1.0
  */
-public class Enseignant implements java.io.Serializable {
+public class Enseignant {
 
 	//Attributs
     private String codeEnseignant;

@@ -5,7 +5,7 @@ package metier;
  * @authors Ahardane Abdeslam, Balestrat Clément, Pravossoudovitch Yann
  * @version 1.0
  */
-public class Batiment implements java.io.Serializable {
+public class Batiment{
 
     //Attributs
 	private String code;

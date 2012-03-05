@@ -9,7 +9,7 @@ public class Cours {
     // Attributs d'association
     private Matiere mat;
     private TypeCours type;
-
+    
     /**
      * Constructeur d'un objet Matiere prenant en compte le nom uniquement
      * @param lib Libellé de la matière

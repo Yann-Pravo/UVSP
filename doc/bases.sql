@@ -1,4 +1,6 @@
 -- ----------------------------------------------------------------------------- -- Génération d'une base de données pour -- Oracle Version 9.xx -- (2/3/2012 10:54:38) -- ----------------------------------------------------------------------------- -- Nom de la base : MLR1 -- Projet : Espace de travail -- Auteur : etienne -- Date de dernière modification : 2/3/2012 10:54:21 -- -----------------------------------------------------------------------------
+DROP TABLE ANNEEETUDE CASCADE CONSTRAINTS;
+DROP TABLE SEMESTRE CASCADE CONSTRAINTS;
 DROP TABLE UE CASCADE CONSTRAINTS;
 DROP TABLE MATIERE CASCADE CONSTRAINTS;
 DROP TABLE GROUPE CASCADE CONSTRAINTS;
@@ -14,18 +16,46 @@ DROP TABLE COURS CASCADE CONSTRAINTS;
 DROP TABLE CARACTERISTIQUE_SALLE CASCADE CONSTRAINTS;
 DROP TABLE RESERVATION_CARACTERISTIQUE CASCADE CONSTRAINTS;
 -- ----------------------------------------------------------------------------- -- CREATION DE LA BASE -- -----------------------------------------------------------------------------
-CREATE DATABASE MLR1;
+--CREATE DATABASE MLR1;
+      -- ----------------------------------------------------------------------------- -- TABLE : ANNEEETUDE -- -----------------------------------------------------------------------------
+CREATE TABLE ANNEEETUDE
+  (
+   ID_ANNEEETUDE NUMBER(10)  NOT NULL,
+   DESCRIPTION_ANNEEETUDE VARCHAR(50)  NULL,
+   LIBELLE_ANNEEETUDE VARCHAR2(5)  NULL,
+   DUREESEANCE_ANNEEETUDE FLOAT(5) NULL,
+   NBSEANCEAM_ANNEEETUDE NUMBER(2) NULL,
+   NBSEANCEPM_ANNEEETUDE NUMBER(2) NULL
+, CONSTRAINT PK_ANNEEETUDE PRIMARY KEY (ID_ANNEEETUDE)
+  ) ;
+   -- ----------------------------------------------------------------------------- -- TABLE : SEMESTRE -- -----------------------------------------------------------------------------
+CREATE TABLE SEMESTRE
+  (
+   ID_SEMESTRE NUMBER(10)  NOT NULL,
+   LIBELLE_SEMESTRE VARCHAR2(30)  NULL,
+   NIVEAU_SEMESTRE NUMBER(2)  NULL,
+   ID_ANNEEETUDE NUMBER(10) NULL
+, CONSTRAINT PK_SEMESTRE PRIMARY KEY (ID_SEMESTRE)
+  ) ;
+-- ----------------------------------------------------------------------------- -- INDEX DE LA TABLE SEMESTRE -- -----------------------------------------------------------------------------
+CREATE INDEX I_FK_SEMESTRE_ANNEEETUDE
+    ON SEMESTRE (ID_ANNEEETUDE ASC)
+   ;
 -- ----------------------------------------------------------------------------- -- TABLE : UE -- -----------------------------------------------------------------------------
 CREATE TABLE UE
   (
    ID_UE NUMBER(10)  NOT NULL,
+   LIBELLE_UE CHAR(255)  NULL,
    ID_ENSEIGNANT NUMBER(10)  NULL,
-   LIBELLE_UE CHAR(255)  NULL
+   ID_SEMESTRE NUMBER(10) NULL
 , CONSTRAINT PK_UE PRIMARY KEY (ID_UE)
   ) ;
 -- ----------------------------------------------------------------------------- -- INDEX DE LA TABLE UE -- -----------------------------------------------------------------------------
 CREATE INDEX I_FK_UE_ENSEIGNANT
     ON UE (ID_ENSEIGNANT ASC)
+   ;
+   CREATE INDEX I_FK_UE_SEMESTRE
+    ON UE (ID_SEMESTRE ASC)
    ;
 -- ----------------------------------------------------------------------------- -- TABLE : MATIERE -- -----------------------------------------------------------------------------
 CREATE TABLE MATIERE
@@ -344,12 +374,19 @@ insert into Salle values (12,1,'SC102');
 insert into Salle values (13,1,'SC201');
 insert into Salle values (14,1,'SC202');
 
+--ANNEEETUDE:
+insert into ANNEEETUDE values(1, '4ème année d"étude de la formation IG', 'IG4', '1,5', '3', '3');
+
+--SEMESTRE:
+insert into SEMESTRE values(1, 'Semestre 7', 7, 1);
+insert into SEMESTRE values(2, 'Semestre 8', 8, 1);
+
 --UE:
-insert into UE values(1, 1, 'Conception de bases de donnees');
-insert into UE values(2, 8, 'Système et réseaux');
-insert into UE values(3, 4, 'Entreprendre et agir');
-insert into UE values(4, 6, 'Entrepreneuriale: projet et stage');
-insert into UE values(5, 9, 'Langues et communication');
+insert into UE values(1, 'Conception de bases de donnees',  1, 2);
+insert into UE values(2, 'Système et réseaux', 8, 2);
+insert into UE values(3, 'Entreprendre et agir', 4, 2);
+insert into UE values(4, 'Entrepreneuriale: projet et stage', 6, 2);
+insert into UE values(5, 'Langues et communication', 9, 2);
 
 --caracteristique_salle :
 insert into CARACTERISTIQUE_SALLE values (1,2);

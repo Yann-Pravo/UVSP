@@ -8,7 +8,7 @@ package metier;
 public class CaracteristiqueSalle {
 
     // Attributs
-    private Salle sal;
+    private String sal;
     private Caracteristique caract;
     
     /**
@@ -16,7 +16,7 @@ public class CaracteristiqueSalle {
      * @param sal Id de la salle
      * @param caract Id de la caractéristique
      */
-    public CaracteristiqueSalle(Salle sal, Caracteristique caract) {
+    public CaracteristiqueSalle(String sal, Caracteristique caract) {
         this.sal = sal;
         this.caract = caract;
     }
@@ -25,7 +25,7 @@ public class CaracteristiqueSalle {
      * Accesseur du id de la salle
      * @return id de la salle
      */
-    public Salle getSalle() {
+    public String getSalle() {
         return sal;
     }
 
@@ -33,7 +33,7 @@ public class CaracteristiqueSalle {
      * Modifieur de la salle
      * @param res Chaîne de caractères définissant la nouvelle réservation de la salle
      */
-    public void setSalle(Salle sal) {
+    public void setSalle(String sal) {
         this.sal = sal;
     }
     

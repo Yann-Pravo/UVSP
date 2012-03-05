@@ -16,7 +16,7 @@ public class Semestre {
     // Attributs associations
     private ArrayList<UE> ue;
     private AnneeEtude anneeEtude;
-
+    
     /**
      * Constructeur d'un objet Semestre prenant en compte uniquement son nom
      * @param nomSemestre Nom du semestre
@@ -36,7 +36,7 @@ public class Semestre {
         this.nomSemestre = nomSemestre;
         this.anneeEtude = anneeEtude;
         this.niveau = niveau;
-        this.ue = new ArrayList();
+        this.ue = new ArrayList<UE>();
     }
 
     /**
@@ -80,8 +80,8 @@ public class Semestre {
      * Modifieur du nom de l'année d'étude d'un objet Semestre
      * @param anneeEtude L'année d'étude du semestre
      */
-    public void setAnneeEtude(String nomAnneeEtude) {
-        this.anneeEtude = anneeEtude;
+    public void setAnneeEtud(AnneeEtude nomAnneeEtude) {
+        this.anneeEtude = nomAnneeEtude;
     }
 
     /**

@@ -18,7 +18,7 @@ public class TypeConge {
     {
         this.nom_type_conge = nom_type_conge;
     }
-
+    
     /**
      * Accesseur du code d'un objet TypeConge
      * @return String - Nom aTypeConge

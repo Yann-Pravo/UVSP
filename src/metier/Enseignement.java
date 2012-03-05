@@ -11,7 +11,7 @@ public class Enseignement {
 
     //Attributs
     private Double nbHeureReel;
-
+    
     //Attributs d'association
     private Cours cours;
     private Groupe groupe;

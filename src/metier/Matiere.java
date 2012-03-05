@@ -14,7 +14,7 @@ public class Matiere {
     // Attributs d'association
     private UE u;
     private Enseignant resp;
-
+    
     /**
      * Constructeur d'un objet Matiere prenant en compte le nom uniquement
      * @param lib Libellé de la matière

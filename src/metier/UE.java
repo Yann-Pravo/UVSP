@@ -7,8 +7,7 @@ import java.util.ArrayList;
  * @authors Ahardane Abdeslam, Balestrat Clément, Pravossoudovitch Yann
  * @version 1.0
  */
-public class UE implements java.io.Serializable {
-
+public class UE {
 	// Attributs
 	private String codeUE;
 	private String nomUE;
@@ -18,7 +17,7 @@ public class UE implements java.io.Serializable {
 
 	//Attributs associations
 	private Semestre sem;
-	private ArrayList<Matiere> matieres = new ArrayList();
+	private ArrayList<Matiere> matieres = new ArrayList<Matiere>();
 
 	/**
      * Constructeur d'un objet UE prenant en compte ses 5 attributs et l'attribut d'association
@@ -177,4 +176,12 @@ public class UE implements java.io.Serializable {
     public void setSem(Semestre sem) {
         this.sem = sem;
     }
+
+	public ArrayList<Matiere> getMatieres() {
+		return matieres;
+	}
+
+	public void setMatieres(ArrayList<Matiere> matieres) {
+		this.matieres = matieres;
+	}
 }

@@ -11,7 +11,7 @@ public class Groupe {
     private String code;
     public String lib;
     public Groupe pere;
-
+    
     /**
      * Constructeur d'un groupe
      * @param code Code du groupe

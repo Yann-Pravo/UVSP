@@ -5,7 +5,7 @@ package metier;
  * @authors Ahardane Abdeslam, Balestrat Clément, Pravossoudovitch Yann
  * @version 1.0
  */
-public class Salle implements java.io.Serializable {
+public class Salle {
 
     //Attributs
 	private String code;
@@ -65,7 +65,7 @@ public class Salle implements java.io.Serializable {
     public void setLibelle(String lib) {
         this.lib = lib;
     }
-
+    
     /**
      * Modifieur de la capacité d'un objet Salle
      * @param code Code de la salle Salle

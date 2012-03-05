@@ -9,7 +9,7 @@ import java.util.* ;
  * @version 1.0
  */
 public class Conge extends TypeConge{
-
+	
     // Attributs
     private String nomConge;
     private Date dateDebut;
