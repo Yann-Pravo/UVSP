@@ -53,7 +53,7 @@ public class AnneeEtude {
         this.nbSeancePM = nbSeancePM;
         this.s1 = null;
         this.s2 = null;
-        this.annneUniv = new ArrayList();
+        this.annneUniv = new ArrayList<AnneeUniversitaire>();
     }
 
     /**
