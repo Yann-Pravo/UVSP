@@ -1,4 +1,4 @@
--- ----------------------------------------------------------------------------- -- Génération d'une base de données pour -- Oracle Version 9.xx -- (2/3/2012 10:54:38) -- ----------------------------------------------------------------------------- -- Nom de la base : MLR1 -- Projet : Espace de travail -- Auteur : etienne -- Date de dernière modification : 2/3/2012 10:54:21 -- -----------------------------------------------------------------------------
+-- ----------------------------------------------------------------------------- -- Génération d'une base de données pour -- Oracle Version 9.xx -- (2/3/2012 10:54:38) -- ----------------------------------------------------------------------------- -- Nom de la base : MLR1 -- Projet : Espace de travail -- Date de dernière modification : 2/3/2012 10:54:21 -- -----------------------------------------------------------------------------
 DROP TABLE ANNEEETUDE CASCADE CONSTRAINTS;
 DROP TABLE SEMESTRE CASCADE CONSTRAINTS;
 DROP TABLE UE CASCADE CONSTRAINTS;
