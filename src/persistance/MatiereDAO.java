@@ -33,7 +33,7 @@ public class MatiereDAO extends DAO<Matiere> {
         boolean ok = true;
         try {
         	PreparedStatement prepare = this.connect.prepareStatement("INSERT INTO MATIERE VALUES(?, ?, ?, ?)");
-            prepare.setInt(1, m.getIdMat());
+        	prepare.setString(1, "seqMatiere.nextval");
             prepare.setInt(2, m.getUEMat().getIdUE());
             prepare.setInt(3, m.getResponsable().getIdEns());
             prepare.setString(4, m.getNomMat());
@@ -86,10 +86,16 @@ public class MatiereDAO extends DAO<Matiere> {
         try {
             ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM MATIERE " + "WHERE ID_MATIERE = '" + m.getIdMat() + "'");
             if (result.first()) {
-                UE u = new UE(result.getInt("ID_UE"));
+            	UEDAO ueDAO = new UEDAO();
+                UE ue = new UE(result.getInt("ID_UE"));
+                ue = ueDAO.find(ue);
+                
+                EnseignantDAO ensDAO = new EnseignantDAO();
                 Enseignant ens = new Enseignant(result.getInt("ID_ENSEIGNANT"));
+                ens = ensDAO.find(ens);
+                
                 m.setNomMat(result.getString("LIBELLE_MATIERE"));
-                m.setUEMat(u);
+                m.setUEMat(ue);
                 m.setResponsable(ens);
             }
         }
@@ -130,9 +136,15 @@ public class MatiereDAO extends DAO<Matiere> {
         try {
             ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM MATIERE");
             while (result.next()) {
-                UE u = new UE(result.getString("ID_UE"));
+            	UEDAO ueDAO = new UEDAO();
+                UE ue = new UE(result.getInt("ID_UE"));
+                ue = ueDAO.find(ue);
+                
+                EnseignantDAO ensDAO = new EnseignantDAO();
                 Enseignant ens = new Enseignant(result.getInt("ID_ENSEIGNANT"));
-                Matiere m = new Matiere(result.getInt("ID_MATIERE"), result.getString("LIBELLE_MATIERE"), u, ens);
+                ens = ensDAO.find(ens);
+                
+                Matiere m = new Matiere(result.getInt("ID_MATIERE"), result.getString("LIBELLE_MATIERE"), ue, ens);
                 list.add(m);
             }
         }
@@ -154,8 +166,14 @@ public class MatiereDAO extends DAO<Matiere> {
         try {
             ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM MATIERE WHERE ID_UE = '" + ue + "'");
             while (result.next()) {
-                UE u = new UE(result.getString("ID_UE"));
+            	UEDAO ueDAO = new UEDAO();
+                UE u = new UE(result.getInt("ID_UE"));
+                u = ueDAO.find(u);
+                
+                EnseignantDAO ensDAO = new EnseignantDAO();
                 Enseignant ens = new Enseignant(result.getInt("ID_ENSEIGNANT"));
+                ens = ensDAO.find(ens);
+                
                 Matiere m = new Matiere(result.getInt("ID_MATIERE"), result.getString("LIBELLE_MATIERE"), u, ens);
                 list.add(m);
             }

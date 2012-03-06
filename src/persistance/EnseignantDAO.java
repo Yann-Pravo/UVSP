@@ -98,7 +98,7 @@ public class EnseignantDAO extends DAO<Enseignant> {
 	}
 
 	public ArrayList<Enseignant> getListe() {
-		ArrayList<Enseignant> list = new ArrayList();
+		ArrayList<Enseignant> list = new ArrayList<Enseignant>();
 		try {
 			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY)
 					.executeQuery("select * from ENSEIGNANT");

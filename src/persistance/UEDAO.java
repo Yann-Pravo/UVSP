@@ -8,6 +8,7 @@ package persistance;
  */
 import metier.UE;
 import metier.Enseignant;
+import persistance.EnseignantDAO;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -36,7 +37,7 @@ public class UEDAO extends DAO<UE> {
         boolean ok;
         try {
             PreparedStatement prepare = this.connect.prepareStatement("INSERT INTO UE VALUES(?, ?, ?)");
-            prepare.setInt(1, u.getIdUE());
+            prepare.setString(1, "seqUE.nextval");
             prepare.setString(2, u.getNomUE());
             prepare.setInt(3, u.getEnseignant().getIdEns());
             prepare.executeUpdate();
@@ -58,7 +59,9 @@ public class UEDAO extends DAO<UE> {
         try {
         	ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM UE" +"WHERE ID_UE = '" + u.getIdUE() + "'");
         	if (result.first()) {
+        		EnseignantDAO ensDAO = new EnseignantDAO();
         		Enseignant ens = new Enseignant(result.getInt("ID_ENSEIGNANT"));
+        		ens = ensDAO.find(ens);
                 nu.setNomUE(result.getString("LIBELLE_UE"));
                 nu.setEnseignant(ens);
         	}
