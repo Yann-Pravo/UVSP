@@ -9,55 +9,44 @@ package metier;
 public class Caracteristique {
 
 	// Attributs
-	private String id;
-	private String libelle;
+	private int idCar;
+	private String lib;
 	
-	/**
-     * Constructeur d'un objet CaracteristiqueReservation prenant en compte la reservation et la caractéristique
-     * @param idSalle Id de la salle
-     * @param idCaract Id de la caractéristique
-     */
+	public Caracteristique(int id)
+	{
+		this.idCar=id;
+	}
 	
-	public Caracteristique(String id, String libelle){
-		this.id=id;
-		this.libelle= libelle;
+	public Caracteristique(int id, String libelle)
+	{
+		this.idCar=id;
+		this.lib= libelle;
+	}
+	
+	public Caracteristique(String libelle)
+	{
+		this.lib = libelle;
 	}
 	
 	
-	/**
-     * Accesseur du id de la caracteristique
-     * @return id de la caracteristique
-     */
-	
-	public String getId() {
-		return id;
+	public int getIdCar()
+	{
+		return this.idCar;
 	}
 	
-    /**
-     * Modifieur de la caracteristique
-     * @param id Chaîne de caractères définissant le nouvel id de la caracteristique
-     */
-	
-	public void setId(String id) {
-		this.id = id;
+	public void setIdCar(int id)
+	{
+		this.idCar = id;
 	}
 	
-	/**
-     * Accesseur du libelle de la caracteristique
-     * @return libelle de la caracteristique
-     */
 	
 	public String getLibelle() {
-		return libelle;
+		return this.lib;
 	}
 	
-    /**
-     * Modifieur le libelle de la caracteristique
-     * @param libelle Chaîne de caractères définissant la nouvelle caracteristique
-     */
 	
 	public void setLibelle(String libelle) {
-		this.libelle = libelle;
+		this.lib = libelle;
 	}
 	
 }

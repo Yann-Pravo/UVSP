@@ -9,7 +9,9 @@ package metier;
  */
 public class Enseignement {
 
+	
     //Attributs
+	private int idEnseignement;
     private Double nbHeureReel;
     
     //Attributs d'association
@@ -17,11 +19,18 @@ public class Enseignement {
     private Groupe groupe;
     private Enseignant enseignant;
 
-    /** Mthode permettant d'instancier un objet de la classe "Enseignement".
-     * @param groupe Groupe de l'enseignement.
-     * @param enseignant L'enseignant de cet enseignement.
-     * @param Inbheures Le nombre d'heures rel de l'enseignement.
-     */
+    public Enseignement(int id) {
+    	this.idEnseignement = id;
+    }
+    
+    public Enseignement(int id, Groupe groupe, Double Inbheures, Enseignant enseignant, Cours cours) {
+    	this.idEnseignement = id;
+    	this.groupe = groupe;
+        this.enseignant = enseignant;
+        this.nbHeureReel = Inbheures;
+        this.cours = cours;
+    }
+
     public Enseignement(Groupe groupe, Double Inbheures, Enseignant enseignant, Cours cours) {
         this.groupe = groupe;
         this.enseignant = enseignant;
@@ -32,6 +41,11 @@ public class Enseignement {
     /** Mthode permettant d'accder ˆ un objet de la classe "Enseignement".
      * @return Renvoie un nombre rel reprsentant le nombre d'heures rel de l'enseignenemt.
      */
+    public int getIdEnseignement()
+    {
+    	return this.idEnseignement;
+    }
+    
     public Double getNbHeureReel() {
         return this.nbHeureReel;
     }
@@ -61,6 +75,14 @@ public class Enseignement {
      *  objet de la classe "Enseignement".
      * @param InbHeure le nouveau nombre d'heures rÃ©el.
      */
+    
+    
+    
+    public void setIdEnseignement(int id)
+    {
+    	this.idEnseignement = id;
+    }
+    
     public void setNbHeureReel(Double InbHeure) {
         this.nbHeureReel = InbHeure;
     }

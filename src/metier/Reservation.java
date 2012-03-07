@@ -1,55 +1,101 @@
 package metier;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 public class Reservation {
 
-	private String cara;
+	private int idResa;
+	private Date date;
+	
 	private Salle salle;
-	private Enseignement ens;
 	private Creneau creneau;
+	private Enseignement ens;
+	private ArrayList<Caracteristique> caract;
 	
-	public Reservation(String cara, Salle salle, Enseignement ens, Creneau creneau){
-		this.cara = cara;
+	public Reservation(int id)
+	{
+		this.idResa = id;
+	}
+	
+	public Reservation(int id, Date d, Salle s, Creneau c, Enseignement e, ArrayList<Caracteristique> car)
+	{
+		this.idResa = id;
+		this.date = d;
+		this.salle = s;
+		this.creneau = c;
+		this.ens = e;
+		this.caract = car;
+	}
+	
+	
+	public int getIdResa()
+	{
+		return this.idResa;
+	}
+	
+	public void setIdResa(int id)
+	{
+		this.idResa = id;
+	}
+	
+	
+	
+	public Date getDateResa()
+	{
+		return this.date;
+	}
+	
+	public void setDateResa(Date d)
+	{
+		this.date = d;
+	}
+	
+
+	
+	public Salle getSalle() 
+	{
+		return this.salle;
+	}
+	public void setSalle(Salle salle) 
+	{
 		this.salle = salle;
-		this.ens = ens;
-		this.creneau= creneau;
 	}
 	
-	public Reservation(String cara, Enseignement ens, Creneau creneau){
-		this.cara = cara;
-		this.ens = ens;
-		this.creneau= creneau;
-	}
 	
-	public Reservation(String cara, Salle salle, Enseignement ens){
-		this.cara = cara;
-		this.salle = salle;
+	public Enseignement getEns() 
+	{
+		return this.ens;
+	}
+	public void setEns(Enseignement ens) 
+	{
 		this.ens = ens;
 	}
 	
-	public String getCara() {
-		return cara;
+	
+	
+	
+	public Creneau getCreneau() 
+	{
+		return this.creneau;
 	}
-	public void setCara(String cara) {
-		this.cara = cara;
-	}
-	public Salle getSalle() {
-		return salle;
-	}
-	public void setSalle(Salle salle) {
-		this.salle = salle;
-	}
-	public Enseignement getEns() {
-		return ens;
-	}
-	public void setEns(Enseignement ens) {
-		this.ens = ens;
-	}
-	public Creneau getCreneau() {
-		return creneau;
-	}
-	public void setCreneau(Creneau creneau) {
+	public void setCreneau(Creneau creneau) 
+	{
 		this.creneau = creneau;
 	}
+	
+	
+	
+	public ArrayList<Caracteristique> getCarResa()
+	{
+		return this.caract;
+	}
+	
+	public void setCarResa(ArrayList<Caracteristique> c)
+	{
+		this.caract = c;
+	}
+	
 	
 	
 }

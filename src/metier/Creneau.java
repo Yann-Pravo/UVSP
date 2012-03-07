@@ -2,21 +2,27 @@ package metier;
 
 public class Creneau {
 
-	private String id;
+	private int idCreneau;
 	private String heureDeb;
 	private String heureFin;
 	
-	public Creneau(String id, String HD, String HF){
-		this.id = id;
+	public Creneau(int id){
+		this.idCreneau = id;
+	}
+	
+	public Creneau(int id, String HD, String HF){
+		this.idCreneau = id;
 		this.heureDeb=HD;
 		this.heureFin=HF;
 	}
-	public String getId() {
-		return id;
+	public int getIdCreneau() {
+		return this.idCreneau;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setIdCreneau(int id) {
+		this.idCreneau = id;
 	}
+	
+	
 	public String getHeureDeb() {
 		return heureDeb;
 	}

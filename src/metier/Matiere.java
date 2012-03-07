@@ -10,19 +10,26 @@ public class Matiere {
     // Attributs
     private int idMat;
     private String nomMat;
+    
 
     // Attributs d'association
     private UE ue;
     private Enseignant resp;
+
+    public Matiere(int id) {
+        this.idMat = id;
+    }
     
     public Matiere(int id, String libelle) {
         this.idMat = id;
         this.nomMat = libelle;
     }
 
+  
     public Matiere(String libelle) {
         this.nomMat = libelle;
     }
+
 
     public Matiere(int id, String libelle, UE u) {
         this.idMat = id;
@@ -30,6 +37,7 @@ public class Matiere {
         this.ue = u;
     }
 
+    
     public Matiere (int id, String libelle, UE u, Enseignant ens)
     {
        this.idMat = id;
@@ -38,10 +46,12 @@ public class Matiere {
        this.resp = ens;
     }
 
+
     public int getIdMat() {
         return this.idMat;
     }
 
+   
     public void setIdMat(int id) {
         this.idMat = id;
     }
@@ -75,4 +85,6 @@ public class Matiere {
     public void setResponsable(Enseignant resp) {
         this.resp = resp;
     }
+
+
 }

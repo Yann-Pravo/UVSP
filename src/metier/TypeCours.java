@@ -8,30 +8,45 @@ package metier;
 public class TypeCours {
 	
     //Attributs
-    private String nom_type_cours;
-    /**
-     * Constructeur d'un objet TypeCours prenant en compte un attribut
-     * @param nom d'un objet TypeCours
-     */
-    public TypeCours (String nom_type_cours)
+	private int idTypeCours;
+    private String libelle;
+
+    public TypeCours(int id)
     {
-        this.nom_type_cours = nom_type_cours;
+    	this.idTypeCours =id;
+    }
+    
+    public TypeCours (int id, String nom)
+    {
+    	this.idTypeCours =id;
+        this.libelle = nom;
     }
 
-    /**
-     * Accesseur du code d'un objet Typecours 
-     * @return String - Nom a TypeCours 
-     */
+    
+    public TypeCours(String nom)
+    {
+    	this.libelle = nom;
+    }
+  
+    
+    public int getIdTypeCours()
+    {
+    	return this.idTypeCours;
+    }
+    
+    public void setIdTypeCours(int id)
+    {
+    	this.idTypeCours = id;
+    }
+
+
     public String getNomTypeCours() {
-        return nom_type_cours ;
+        return this.libelle ;
     }
 
-    /**
-     * Modifieur du code d'un objet TypeCours 
-     * @param nom de l'objet TypeCours 
-     */
+ 
     public void setNomTypeCours (String nom) {
-        this.nom_type_cours  = nom ;
+        this.libelle  = nom ;
     }
 }
 

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class GestionnaireEnseignant {
 
     DAO<Enseignant> enseignantDao;
-    DAO<Statut> statutDao;
+
 
     private ArrayList<Enseignant> listeEnseignants;
     private ArrayList<Statut> listeStatuts;

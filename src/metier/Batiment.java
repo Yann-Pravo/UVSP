@@ -8,56 +8,43 @@ package metier;
 public class Batiment{
 
     //Attributs
-	private String code;
+	private int idBat;
     private String lib;
     
-    /**
-     * Constructeur d'un objet Batiment prenant en compte ses 2 attributs
-     * @param lib Libellé de la salle
-     * @param code Code de la salle
-     */
-    public Batiment(String lib, String code) {
+    public Batiment(int id) {
+        this.idBat = id;
+    }
+    
+    public Batiment(int id, String lib) {
+        this.idBat = id;
         this.lib = lib;
-        this.code = code;
     }
 
-    /**
-     * Constructeur d'un objet Batiment ne prenant en compte que son attribut code
-     * @param code Code du batiment
-     */
-    public Batiment(String code) {
-        this.code = code;
+  
+    public Batiment(String lib) {
+        this.lib = lib;
     }
 
-    /**
-     * Accesseur du libellé d'un objet Salle
-     * @return String - Libellé de la salle
-     */
+ 
     public String getLibelle() {
         return lib;
     }
 
-    /**
-     * Accesseur du code d'un objet Salle
-     * @return String - Code de la salle
-     */
-    public String getCode() {
-        return this.code;
-    }
-
-    /**
-     * Modifieur du libellé d'un objet Salle
-     * @param lib - Chaîne de caractères définissant le nouveau nom de l'objet Salle
-     */
+  
+   public int getIdBat()
+   {
+	   return this.idBat;
+   }
+    
+   public void setIdBat(int id)
+   {
+	   this.idBat = id;
+   }
+    
+    
     public void setLibelle(String lib) {
         this.lib = lib;
     }
 
-    /**
-     * Modifieur de la capacité d'un objet Salle
-     * @param code Code de la salle Salle
-     */
-    public void setCode(String code) {
-        this.code = code;
-    }
+   
 }

@@ -1,5 +1,7 @@
 package metier;
 
+
+
 /**
  * Classe métier permettant la définition et la gestion des objets 'Enseignant'
  * @authors Ahardane Abdeslam, Balestrat Clément, Pravossoudovitch Yann
@@ -13,6 +15,11 @@ public class Enseignant {
 	private String prenom;
 	private String mdp;
 	private int su;
+	
+	public Enseignant(int id)
+	{
+		this.idEns = id;
+	}
 	
 	public Enseignant(int id, String n, String p, String pwd, int supUser)
 	{
@@ -83,5 +90,17 @@ public class Enseignant {
     public void setSu(int s)
     {
     	this.su = s;
-    }   
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

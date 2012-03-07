@@ -13,14 +13,21 @@ public class UE {
 	//Attributs associations
 	private Enseignant ens;
 
-
+    public UE(int id) {
+        this.idUE = id;
+    }
 	
     public UE(int id, String nom) {
         this.idUE = id;
         this.nomUE = nom;
-       
     }
-
+    
+    public UE(int id, String nom, Enseignant ens)
+    {
+    	this.idUE = id;
+    	this.nomUE = nom;
+    	this.ens = ens;
+    }
  
     public UE(){}
 
