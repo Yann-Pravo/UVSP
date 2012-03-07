@@ -30,8 +30,7 @@ public class TypeCoursDAO extends DAO<TypeCours> {
     public boolean create(TypeCours instance) {
     	boolean ok = false;
     	try {
-    		// Si le statut n'existe pas en base on le crée
-    		PreparedStatement prepare = this.connect.prepareStatement("INSERT INTO TYPECOURS(ID_TYPE_DE_COURS, LIBELLE_TYPE_DE_COURS) VALUES(?,?,?,?,?)");
+    		PreparedStatement prepare = this.connect.prepareStatement("INSERT INTO TYPECOURS(ID_TYPE_DE_COURS, LIBELLE_TYPE_DE_COURS) VALUES(?,?)");
     		prepare.setString(1, "seqEnseignant.nextval");
     		prepare.setString(2, instance.getNomTypeCours());
     		prepare.executeUpdate();
