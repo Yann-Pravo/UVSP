@@ -43,20 +43,20 @@ public class CreneauDAO extends DAO<Creneau> {
             return ok;
     }
 
-	public Creneau find(Creneau instance) {
+	public Creneau find(Creneau c) {
 		try {
 			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY)
-					.executeQuery("select * from CRENAUX where ID_CRENAU = " + instance.getIdCreneau() );
+					.executeQuery("select * from CRENAUX where ID_CRENEAU = " + c.getIdCreneau() );
 			if(result.first())
 			{
-				instance.setHeureDeb(result.getString("HEURE_DEBUT"));
-				instance.setHeureFin(result.getString("HEURE_FIN"));
+				c.setHeureDeb(result.getString("HEURE_DEBUT"));
+				c.setHeureFin(result.getString("HEURE_FIN"));
 			}
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return instance;
+		return c;
 	}
 
 	public boolean update(Creneau creneau) {
