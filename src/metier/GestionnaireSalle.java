@@ -27,7 +27,6 @@ public class GestionnaireSalle {
        listeSalles = salleDAO.getListe();
     }
 
-
     /**
      * Méthode permettant de renvoyer un objet unique de type GestionnaireSalle
      * @return GestionnaireSalle - Instance unique de l'objet GestionnaireSalle
@@ -43,13 +42,12 @@ public class GestionnaireSalle {
      * @param capacite la capacité de la salle
      * @return l'objet salle créé
      */
-    public Salle addSalle(String id, String lib, Batiment bat) {
-        Salle salle = new Salle(id, lib, bat);
+    public Salle addSalle(int id, String lib, Batiment bat, ArrayList<Caracteristique> c) {
+        Salle salle = new Salle(id, lib, bat, c);
         salleDAO.create(salle);
         listeSalles.add(salle);
         return salle;
     }
-
 
     /**
      * Méthode qui supprime l'objet salle de la liste des salles
@@ -72,9 +70,9 @@ public class GestionnaireSalle {
      * @param nom le nom de la salle
      * @param capacite la capacité de la salle
      */
-    public void updateSalle(String id, String lib, Batiment bat)
+    public void updateSalle(int id, String lib, Batiment bat, ArrayList<Caracteristique> c)
     {
-        Salle salle = new Salle(id, lib, bat);
+        Salle salle = new Salle(id, lib, bat, c);
         salleDAO.update(salle);
         listeSalles = salleDAO.getListe();
     }

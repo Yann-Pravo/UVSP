@@ -1,14 +1,5 @@
 import metier.*;
-import jdbc.*;
 import persistance.*;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
-
 
 public class test 
 {
@@ -16,9 +7,11 @@ public class test
 	{
 		
 		DAO<Enseignant> ens = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY).getEnseignantDAO();
-		Enseignant e = new Enseignant(1);
+		Enseignant e = new Enseignant(2);
 		
 		e = ens.find(e);
+		
+		System.out.println(e.getNom());
 		
 		
 		

@@ -15,9 +15,7 @@ public class GestionnaireEnseignant {
 
     DAO<Enseignant> enseignantDao;
 
-
     private ArrayList<Enseignant> listeEnseignants;
-    private ArrayList<Statut> listeStatuts;
     private static GestionnaireEnseignant ges_ens;
 
     /**
@@ -26,9 +24,7 @@ public class GestionnaireEnseignant {
      */
     private GestionnaireEnseignant() {
         enseignantDao = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY).getEnseignantDAO();
-        statutDao = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY).getStatutDAO();
         listeEnseignants = enseignantDao.getListe();
-        listeStatuts = statutDao.getListe();
     }
 
     /**
@@ -55,29 +51,11 @@ public class GestionnaireEnseignant {
     }
 
     /**
-     * Mthode qui permet de supprimer un statut
-     * @param statut Statut ˆ supprimer
-     */
-    public void deleteStatut(Statut statut) {
-        Boolean ok= statutDao.delete(statut);
-        if ( ok )
-            listeStatuts.remove(statut);
-    }
-
-    /**
      * Accesseur de la liste des enseignants du gestionnaire
      * @return listeEnseignants - Liste des enseignants
      */
      public ArrayList<Enseignant> getListeEnseignants(){
         return listeEnseignants;
-    }
-
-     /**
-      * Accesseur de la liste des statuts du gestionnaire
-      * @return listeEnseignants - Liste des enseignants
-      */
-    public ArrayList<Statut> getListeStatuts() {
-        return listeStatuts;
     }
 
     /**
@@ -90,23 +68,11 @@ public class GestionnaireEnseignant {
      * @param adresse Adresse de l'enseignant
      * @param ville Ville de l'enseignant
      */
-    public void ajouterEnseignant(String statut,String code,String titre,String nom, String prenom,String adresse, String ville) {
-        Enseignant enseignant = new Enseignant(statut,code,titre,nom,prenom,adresse,ville);
+    public void ajouterEnseignant(String nom, String prenom, String mdp, int su) {
+        Enseignant enseignant = new Enseignant(nom, prenom, mdp, su);
         Boolean ok= enseignantDao.create(enseignant);
         if ( ok )
             listeEnseignants.add(enseignant);
-    }
-
-    /**
-     * Mthode qui permet l'ajout d'un statut
-     * @param s Nom du statut
-     * @param h Nombres d'heures du statut
-     */
-    public void ajouterStatut(String s, Integer h) {
-        Statut statut = new Statut(s,h);
-        Boolean ok= statutDao.create(statut);
-        if ( ok )
-            listeStatuts.add(statut);
     }
 
     /**
@@ -119,14 +85,12 @@ public class GestionnaireEnseignant {
      * @param adresse Adresse de l'enseignant
      * @param ville Ville de l'enseignant
      */
-    public void modifierEnseignant(Enseignant ens, String statut, String titre, String nom, String prenom, String adresse, String ville) {
+    public void modifierEnseignant(Enseignant ens, String nom, String prenom, String mdp, int su) {
         listeEnseignants.remove(ens);
-        ens.setNomStatut(statut);
-        ens.setTitre(titre);
         ens.setNom(nom);
         ens.setPrenom(prenom);
-        ens.setAdresse(adresse);
-        ens.setVille(ville);
+        ens.setMdp(mdp);
+        ens.setSu(su);
 
         Boolean ok= enseignantDao.update(ens);
         if ( ok )

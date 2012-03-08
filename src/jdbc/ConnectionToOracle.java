@@ -17,7 +17,7 @@ public class ConnectionToOracle{
 	/**
 	 * URL de connection
 	 */
-	private static String url = "jdbc:oracle:thin:v240.ig.polytech.univ-montp2.fr:1521:ORA10";
+	private static String url = "jdbc:oracle:thin:@v240.ig.polytech.univ-montp2.fr:1521:ORA10";
 	/**
 	 * Nom du user
 	 */
@@ -39,9 +39,10 @@ public class ConnectionToOracle{
 	public static Connection getInstance(){
 		if(connect == null){
 			try {
+				Class.forName("oracle.jdbc.driver.OracleDriver");
 				connect = DriverManager.getConnection(url, user, passwd);
-                                System.out.println("Connection effective !");
-			} catch (SQLException e) {
+                                System.out.println("Connection effectuée !");
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
@@ -71,9 +72,7 @@ public class ConnectionToOracle{
 			System.out.println("Voici les tables presentes");
                         System.out.println("\n----------------------------------------------------");
 			while(result.next()){
-                                
-                                    for(int i = 2; i <=  resultMeta.getColumnCount(); i++)
-                                        System.out.print("\t" + result.getObject(i).toString() + "\t |");
+				System.out.print("\t" + result.getObject(1).toString() + "\t |");
 
 			}
                         System.out.println("\n----------------------------------------------------\n");

@@ -33,7 +33,18 @@ public class Salle {
         this.bat = bat;
         this.car = c;
     }
-
+    
+    /**
+     * Constructeur d'un objet Salle prenant en compte ses 2 attributs
+     * @param lib Libellé de la salle
+     * @param code Code de la salle
+     * @param bat Batiment de la salle
+     */
+    public Salle(int id, String lib, Batiment bat) {
+    	this.idSalle = id;
+    	this.lib = lib;
+        this.bat = bat;
+    }
 
     public Salle(String lib, Batiment bat, ArrayList<Caracteristique> c) {
         this.lib = lib;
