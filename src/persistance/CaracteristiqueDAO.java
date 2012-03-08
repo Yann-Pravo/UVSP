@@ -61,20 +61,21 @@ public class CaracteristiqueDAO extends DAO<Caracteristique>{
 	@Override
 	public Caracteristique find(Caracteristique ca) {
 		
-		Caracteristique c;
 		try {
             
-            ResultSet result = this.connect.createStatement().executeQuery(
-                    "SELECT * from CARACTERISTIQUE"+
-                	"WHERE id_caracteristique = "+ca.getIdCar());
+			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY)
+					.executeQuery("select * from CARACTERISTIQUE where ID_CARACTERISTIQUE = " + ca.getIdCar() );
                     
-            c = new Caracteristique(result.getInt("id_caracteristique"), result.getString("libelle_caracteristique"));
+			if(result.first())
+			{
+				ca.setLibelle(result.getString("LIBELLE_CARACTERISTIQUE"));
+			}
              
         } catch (SQLException ex) {
             
-            c = ca;
+            
         }
-        return c;
+        return ca;
 	}
 
 	@Override

@@ -55,9 +55,8 @@ public class EnseignementDAO extends DAO<Enseignement> {
 
     public Enseignement find(Enseignement Enseig) {
         try {
-            ResultSet result = this.connect.createStatement().executeQuery(
-                "SELECT * FROM ENSEIGNEMENT WHERE ID_ENSEIGNEMENT = '"
-                + Enseig.getIdEnseignement() + "';");
+        	ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY)
+					.executeQuery("select * from ENSEIGNEMENT where ID_ENSEIGNEMENT = " + Enseig.getIdEnseignement() );
             if(result.first()){
             	CoursDAO coursDAO = new CoursDAO();
                 Cours cours = new Cours(result.getInt("ID_COURS"));

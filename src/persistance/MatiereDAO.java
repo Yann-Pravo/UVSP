@@ -84,7 +84,9 @@ public class MatiereDAO extends DAO<Matiere> {
     public Matiere find(Matiere m) {
         Matiere mat = new Matiere(m.getIdMat());
         try {
-            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM MATIERE " + "WHERE ID_MATIERE = '" + m.getIdMat() + "'");
+            ResultSet result = this.connect.createStatement().executeQuery(
+            		"SELECT * FROM MATIERE " +
+            "WHERE ID_MATIERE = " + m.getIdMat());
             if (result.first()) {
             	UEDAO ueDAO = new UEDAO();
                 UE ue = new UE(result.getInt("ID_UE"));

@@ -61,22 +61,23 @@ public class BatimentDAO extends DAO<Batiment>{
 	@Override
 	public Batiment find(Batiment bat) 
 	{
-		
-		Batiment batiment;
+	
 		try
 		{
-			ResultSet result = this.connect.createStatement().executeQuery(
-	                 "SELECT * from BATIMENT" +
-	                 "WHERE id_batiment = " + bat.getIdBat());
-			batiment = new Batiment(result.getInt("id_batiment"), result.getString("libelle_batiment"));
+			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY)
+					.executeQuery("select * from BATIMENT where ID_BATIMENT = " + bat.getIdBat() );
+			if(result.first())
+			{
+				bat.setLibelle(result.getString("LIBELLE_BATIMENT"));
+			}
 		}
 		
 		catch(SQLException ex)
 		{
-			batiment = bat;
+			
 		}
 		
-		return batiment;
+		return bat;
 		
 	}
 

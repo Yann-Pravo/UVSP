@@ -82,9 +82,11 @@ public class CoursDAO extends DAO<Cours> {
      * @return Cours - Objet Cours créé à partir des résultats trouvés dans la base
      */
     public Cours find(Cours c) {
-        Cours cou = new Cours(c.getIdCours());
+       
         try {
-            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM COURS " + "WHERE ID_COURS = '" + c.getIdCours() + "'");
+        	ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY)
+					.executeQuery("SELECT * FROM COURS WHERE ID_COURS =" + c.getIdCours() );
+        	
             if (result.first()) {
             	MatiereDAO matDAO = new MatiereDAO();
                 Matiere mat = new Matiere(result.getInt("ID_MATIERE"));
@@ -94,15 +96,15 @@ public class CoursDAO extends DAO<Cours> {
                 TypeCours type = new TypeCours(result.getInt("ID_TYPE_DE_COURS"));
                 type = typeDAO.find(type);
                 
-                cou.setLibelle(result.getString("LIBELLE_MATIERE"));
-                cou.setMatiere(mat);
-                cou.setTypeCours(type);
+                c.setLibelle(result.getString("LIBELLE_COURS"));
+                c.setMatiere(mat);
+                c.setTypeCours(type);
             }
         }
         catch (SQLException ex) {
-            cou = c;
+       
         }
-        return cou;
+        return c;
     }
 
     /**
