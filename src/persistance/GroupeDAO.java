@@ -54,24 +54,29 @@ public class GroupeDAO extends DAO<Groupe> {
      * @param grp le Groupe a chercher
      * @return vrai si la modification s'est bien deroulee
      */
-    public Groupe find(Groupe grp) {
-        Groupe groupe = new Groupe(grp.getIdGroupe());
+    public Groupe find(Groupe grp)
+    {
+    	Groupe pere;
+    	GroupeDAO p = new GroupeDAO();
+       
         try {
-            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM GROUPE " + "WHERE ID_GROUPE = '" + groupe.getIdGroupe() + "'");
-            if (result.first()) {
-                GroupeDAO groupeDAO = new GroupeDAO();
-                Groupe pere = new Groupe(result.getInt("ID_GROUPE"));
-                pere = groupeDAO.find(pere);
-                
-                groupe.setLibelle(result.getString("LIBELLE_GROUPE"));
-                groupe.setPere(pere);
-
-            }
+        	
+        	ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY)
+					.executeQuery("select * from GROUPE where ID_GROUPE = " +grp.getIdGroupe() );
+			if(result.first())
+			{
+				pere = new Groupe(result.getInt("ID_GROUPE_A_POUR_PERE"));
+				pere = p.find(pere);
+				grp.setLibelle(result.getString("LIBELLE_GROUPE"));
+				grp.setPere(pere);
+			
+			}
+            
         }
         catch (SQLException ex) {
-            groupe = grp;
+            
         }
-        return groupe;
+        return grp;
     }
 
 

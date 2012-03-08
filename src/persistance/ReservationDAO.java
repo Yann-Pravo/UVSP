@@ -4,6 +4,7 @@ import metier.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 
@@ -91,14 +92,12 @@ public class ReservationDAO extends DAO<Reservation>
 		ArrayList<Caracteristique> car;
 		
 		try {
-            
+		     System.out.println("sss");
 			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY)
 					.executeQuery(
-            		"SELECT r.id_reservation, id_salle, id_creneau, id_enseignement, rc.id_caracteristique, r.date_reservation"+
-            		"FROM reservation r, reservation_caracteristique rc"+
-            		"WHERE id_reservation =" +res.getIdResa()+
-            		"AND r.id_reservation = rc.id_reservation");
-           
+            		"SELECT * FROM RESERVATION WHERE id_reservation =" +res.getIdResa());
+            	
+      
 			if(result.first())
 			{
 				s = new Salle(result.getInt("id_salle"));
@@ -112,25 +111,37 @@ public class ReservationDAO extends DAO<Reservation>
 	            ens = new Enseignement(result.getInt("id_enseignement"));
 	            ensDAO = new EnseignementDAO();
 	            ens = ensDAO.find(ens);
-	                     
-	            car = new ArrayList<Caracteristique>();
-	            while(result.next())
-	            {
-	            	CaracteristiqueDAO caDAO= new CaracteristiqueDAO();
-	            	Caracteristique ca = new Caracteristique(result.getInt("rc.id_caracteristique"));
-	            	ca = caDAO.find(ca);
-	            	car.add(ca);	
-	            }
-	            
+	          
+	          
+	           
 	            res.setSalle(s);
 	            res.setCreneau(c);
 	            res.setEns(ens);
-	            res.setCarResa(car);
 	            
-			}
+			} 
+			
+			
+			 result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY)
+					.executeQuery(
+							"select rc.id_caracteristique from reservation r, reservation_caracteristique rc where r.id_reservation ="+ res.getIdResa()+" and r.id_reservation = rc.id_reservation");
+            	
+			 car = new ArrayList<Caracteristique>();
+	           
+	            while(result.next())
+	            {
+	            	CaracteristiqueDAO caDAO= new CaracteristiqueDAO();
+	            	Caracteristique ca = new Caracteristique(result.getInt("id_caracteristique"));
+	            	ca = caDAO.find(ca);
+	            	car.add(ca);	
+	            }
+	      
+	          res.setCarResa(car);
+	            
+			
  
              
-        } catch (SQLException ex) {
+        } catch (SQLException ex) 
+        {
             
       
         }
