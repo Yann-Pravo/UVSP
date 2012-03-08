@@ -55,21 +55,21 @@ public class UEDAO extends DAO<UE> {
      * @return UE - Objet UE créé à partir des résultats trouvés dans la base
      */
     public UE find(UE u) {
-        UE nu = new UE(u.getIdUE());
         try {
-        	ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM UE" +"WHERE ID_UE = '" + u.getIdUE() + "'");
+        	ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY)
+					.executeQuery("select * from UE where ID_UE = " + u.getIdUE() );
         	if (result.first()) {
         		EnseignantDAO ensDAO = new EnseignantDAO();
         		Enseignant ens = new Enseignant(result.getInt("ID_ENSEIGNANT"));
         		ens = ensDAO.find(ens);
-                nu.setNomUE(result.getString("LIBELLE_UE"));
-                nu.setEnseignant(ens);
+                u.setNomUE(result.getString("LIBELLE_UE"));
+                u.setEnseignant(ens);
         	}
         }
         catch (SQLException ex) {
-            nu = u;
+        	ex.printStackTrace();
         }
-        return nu;
+        return u;
     }
 
     /**
