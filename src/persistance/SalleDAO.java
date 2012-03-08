@@ -75,17 +75,23 @@ public class SalleDAO extends DAO<Salle>{
             }
             
             result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY)
-    				.executeQuery("SELECT s.ID_SALLE, s.NUMERO_SALLE, s.ID_BATIMENT, c.id_caracteristique from salle s, caracteristique_salle cs, caracteristique c WHERE s.id_salle = " + sal.getIdSalle() +" and s.id_salle = cs.id_salle");
+    				.executeQuery("SELECT ID_CARACTERISTIQUE from salle s, caracteristique_salle cs WHERE s.id_salle = " + sal.getIdSalle() +" and s.id_salle = cs.id_salle");
             
             car = new ArrayList<Caracteristique>();
-            while(result.next())
-            {
-            	System.out.println(result.getInt("ID_CARACTERISTIQUE"));
+            if (result.first()) {
             	CaracteristiqueDAO cDAO= new CaracteristiqueDAO();
             	Caracteristique c = new Caracteristique(result.getInt("ID_CARACTERISTIQUE"));
             	c = cDAO.find(c);
             	
             	car.add(c);	
+            	while(result.next())
+                {
+                	cDAO= new CaracteristiqueDAO();
+                	c = new Caracteristique(result.getInt("ID_CARACTERISTIQUE"));
+                	c = cDAO.find(c);
+                	
+                	car.add(c);	
+                }
             }
             sal.setCarSalle(car);
         } catch (SQLException ex) {
