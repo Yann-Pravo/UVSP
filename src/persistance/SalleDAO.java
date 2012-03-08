@@ -59,38 +59,39 @@ public class SalleDAO extends DAO<Salle>{
 
 	@Override
 	public Salle find(Salle sal) {
-		Salle salle;
 		BatimentDAO batDAO;
 		Batiment bat;
 		ArrayList<Caracteristique> car;
 		try {
             
-            ResultSet result = this.connect.createStatement().executeQuery(
-                    "SELECT s.id_salle, numero_salle, id_batiment, id_caracteristique" +
-                	"from salle s, caracteristique_salle cs, caracteristique c" +
-                    "WHERE id_salle = '" + sal.getIdSalle() +"' and s.id_salle = cs.id_salle"+
-                    "and cs.id_caracteristique = c.id_caracteristique");
-            batDAO = new BatimentDAO();
-            bat = new Batiment(result.getInt("id_batiment"));
-            bat = batDAO.find(bat);
+            ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY)
+					.executeQuery("select * from SALLE where ID_SALLE = " + sal.getIdSalle());
+            if (result.first()) {
+            	batDAO = new BatimentDAO();
+            	bat = new Batiment(result.getInt("ID_BATIMENT"));
+            	bat = batDAO.find(bat);
+            	sal.setIdSalle(result.getInt("ID_SALLE"));
+            	sal.setLibelle(result.getString("NUMERO_SALLE"));
+            }
+            
+            result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY)
+    				.executeQuery("SELECT s.ID_SALLE, s.NUMERO_SALLE, s.ID_BATIMENT, c.id_caracteristique from salle s, caracteristique_salle cs, caracteristique c WHERE s.id_salle = " + sal.getIdSalle() +" and s.id_salle = cs.id_salle");
             
             car = new ArrayList<Caracteristique>();
             while(result.next())
             {
+            	System.out.println(result.getInt("ID_CARACTERISTIQUE"));
             	CaracteristiqueDAO cDAO= new CaracteristiqueDAO();
-            	Caracteristique c = new Caracteristique(result.getInt("id_caracteristique"));
+            	Caracteristique c = new Caracteristique(result.getInt("ID_CARACTERISTIQUE"));
             	c = cDAO.find(c);
             	
             	car.add(c);	
             }
-            
-           salle = new Salle (result.getInt("s.id_salle"), result.getString("numero_salle"), bat, car);
-             
+            sal.setCarSalle(car);
         } catch (SQLException ex) {
-            
-            salle = sal;
+        	ex.printStackTrace();
         }
-        return salle;
+        return sal;
 	}
 
 	@Override
