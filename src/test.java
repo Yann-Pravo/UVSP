@@ -50,7 +50,7 @@ public class test
 		System.out.println(r.getCarResa().get(2).getLibelle());
 	
 		
-		// CECI EST UN TEST
+	
 		
 		
 		
