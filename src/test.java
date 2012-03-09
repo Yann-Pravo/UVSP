@@ -33,6 +33,7 @@ public class test
 		Matiere m = new Matiere(1);
 		
 		
+		
 		g = grp.find(g);
 		creneau = cr.find(creneau);
 		cara = ca.find(cara);
@@ -47,9 +48,9 @@ public class test
 		System.out.println(r.getCarResa().get(0).getLibelle());
 		System.out.println(r.getCarResa().get(1).getLibelle());
 		System.out.println(r.getCarResa().get(2).getLibelle());
-		//System.out.println(c.getMatiere().getNomMat());
+	
 		
-		
+		// CECI EST UN TEST
 		
 		
 		
