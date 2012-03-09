@@ -45,6 +45,13 @@ public class Matiere {
        this.ue = u;
        this.resp = ens;
     }
+    
+    public Matiere (String libelle, UE u, Enseignant ens)
+    {
+       this.nomMat = libelle;
+       this.ue = u;
+       this.resp = ens;
+    }
 
 
     public int getIdMat() {

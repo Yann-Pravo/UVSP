@@ -28,6 +28,12 @@ public class UE {
     	this.nomUE = nom;
     	this.ens = ens;
     }
+    
+    public UE(String nom, Enseignant ens)
+    {
+    	this.nomUE = nom;
+    	this.ens = ens;
+    }
  
     public UE(){}
 

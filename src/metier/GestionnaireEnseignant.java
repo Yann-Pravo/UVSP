@@ -68,7 +68,7 @@ public class GestionnaireEnseignant {
      * @param adresse Adresse de l'enseignant
      * @param ville Ville de l'enseignant
      */
-    public void ajouterEnseignant(String nom, String prenom, String mdp, int su) {
+    public void addEnseignant(String nom, String prenom, String mdp, int su) {
         Enseignant enseignant = new Enseignant(nom, prenom, mdp, su);
         Boolean ok= enseignantDao.create(enseignant);
         if ( ok )
@@ -85,7 +85,7 @@ public class GestionnaireEnseignant {
      * @param adresse Adresse de l'enseignant
      * @param ville Ville de l'enseignant
      */
-    public void modifierEnseignant(Enseignant ens, String nom, String prenom, String mdp, int su) {
+    public void updateEnseignant(Enseignant ens, String nom, String prenom, String mdp, int su) {
         listeEnseignants.remove(ens);
         ens.setNom(nom);
         ens.setPrenom(prenom);

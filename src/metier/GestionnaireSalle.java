@@ -70,10 +70,15 @@ public class GestionnaireSalle {
      * @param nom le nom de la salle
      * @param capacite la capacité de la salle
      */
-    public void updateSalle(int id, String lib, Batiment bat, ArrayList<Caracteristique> c)
+    public void updateSalle(Salle salle, int id, String lib, Batiment bat, ArrayList<Caracteristique> c)
     {
-        Salle salle = new Salle(id, lib, bat, c);
-        salleDAO.update(salle);
-        listeSalles = salleDAO.getListe();
+        listeSalles.remove(salle);
+        salle.setLibelle(lib);
+        salle.setBatiment(bat);
+        salle.setCarSalle(c);
+
+        Boolean ok= salleDAO.update(salle);
+        if ( ok )
+            listeSalles.add(salle);
     }
 }

@@ -33,79 +33,11 @@ public class GestionnaireEnseignement {
      *  l'instancie.
      *  @return Retourne le gestionnaire "GestionnaireEnseignement"
      */
-    public static GestionnaireEnseignement getGestionnaireEnseignement() {
+    public static GestionnaireEnseignement getInstance() {
         if (ges_Enseignement == null) {
             ges_Enseignement = new GestionnaireEnseignement();
         }
         return ges_Enseignement;
-    }
-
-    /** Méthode permettant de supprimer un type d'enseignement. Si la
-     *  suppression est réalisée sans problème, elle met à jour la liste des
-     *  types d'enseignement par la même occasion.
-     *  @param typeEns Le type d'enseignement à supprimer.
-     *  @return Renvoie VRAI si la suppression s'est réalisée. FAUX sinon.
-     */
-    public boolean deleteTypeEnseignement(TypeEnseignement typeEns) {
-        Boolean ok;
-        ok = typeEnseignementDAO.delete(typeEns);
-        if (ok) {
-            listeTypeEnseignements.remove(typeEns);
-        }
-        return ok;
-    }
-
-    /** Méthode permettant d'obtenir la liste des types d'enseignement.
-     *
-     *  @return Renvoie une liste contenant les types d'enseignement.
-     */
-    public ArrayList<TypeEnseignement> getListeTypeEnseignement() {
-        return this.listeTypeEnseignements;
-    }
-
-    /** Méthode permettant d'ajouter un nouveau type d'enseignement.
-     *
-     * @param nom Nom du nouveau type d'enseignement.
-     * @param heureTypeEns Nombre d'heure du nouveau type d'enseignement.
-     * @param heureEquiTD Nombre d'heure de TD équivalent du nouveau type
-     * d'enseignement.
-     * @return Renvoie VRAI si l'ajout a réussi. FAUX sinon.
-     */
-    public boolean ajouterTypeEnseignement(String nom, Double heureTypeEns,
-            Double heureEquiTD) {
-
-        Boolean ok;
-        TypeEnseignement typeEns = new TypeEnseignement(nom, heureTypeEns,
-                heureEquiTD);
-        ok = typeEnseignementDAO.create(typeEns);
-        if (ok) {
-            listeTypeEnseignements.add(typeEns);
-        }
-        return ok;
-    }
-
-    /** Méthode permmettant de modifier un type d'enseignement.
-     *
-     * @param nom Le nom modifié du type.
-     * @param heureTypeEns Le nombre d'heure d'enseignement modifié du type.
-     * @param heureEquiTD Le nombre d'heure de TD équivalent modifié du type.
-     * @param typeEns Le type d'enseignement concerné par la modification.
-     * @return Renvoie VRAI si la modification a réussi. FAUX sinon.
-     */
-    public boolean modifierTypeEnseignement(String nom, Double heureTypeEns,
-            Double heureEquiTD, TypeEnseignement ancien) {
-
-        Boolean ok;
-        int index;
-        TypeEnseignement nouveau = new TypeEnseignement(nom, heureTypeEns,
-                heureEquiTD);
-        ok = typeEnseignementDAO.update(ancien, nouveau);
-        if (ok) {
-            index = listeTypeEnseignements.indexOf(ancien);
-            listeTypeEnseignements.remove(ancien);
-            listeTypeEnseignements.add(index, nouveau);
-        }
-        return ok;
     }
 
     /** Méthode permettant de supprimer un enseignement. Si la
@@ -137,11 +69,10 @@ public class GestionnaireEnseignement {
      * @param nbHeure Le nombre d'heures réel de l'enseignement.
      * @return Renvoie VRAI si l'ajout a réussi. FAUX sinon.
      */
-    public boolean ajouterEnseignement(TypeEnseignement typeEns,
-            Matiere mat, TypeGroupe tGpe, double nbHeure) {
+    public boolean addEnseignement(Matiere mat,Cours cours, Groupe groupe, Enseignant enseignant, double nbHeure) {
 
         Boolean ok;
-        Enseignement ens = new Enseignement(mat, typeEns, nbHeure, tGpe);
+        Enseignement ens = new Enseignement(groupe, nbHeure, enseignant, cours);
         ok = enseignementDAO.create(ens);
         if (ok) {
             listeEnseignements.add(ens);
@@ -157,18 +88,15 @@ public class GestionnaireEnseignement {
      * @param ancien L'enseignement à modifier.
      * @return Renvoie VRAI si la modification a réussi. FAUX sinon.
      */
-    public boolean modifierEnseignement(TypeEnseignement typeEns,
-            Matiere mat, TypeGroupe tGpe, double nbHeure,
-            Enseignement ancien) {
-        Boolean ok;
-        int index;
-        Enseignement nouveau = new Enseignement(mat, typeEns, nbHeure, tGpe);
-        ok = enseignementDAO.update(ancien, nouveau);
-        if (ok) {
-            index = listeEnseignements.indexOf(ancien);
-            listeEnseignements.remove(ancien);
-            listeEnseignements.add(index, nouveau);
-        }
-        return ok;
+    public void updateEnseignement(Enseignement ens, Cours cours, Groupe groupe, Enseignant enseignant, double nbHeure) {
+        listeEnseignements.remove(ens);
+        ens.setCours(cours);
+        ens.setGroupe(groupe);
+        ens.setEnseignant(enseignant);
+        ens.setNbHeureReel(nbHeure);
+
+        Boolean ok= enseignementDAO.update(ens);
+        if ( ok )
+            listeEnseignements.add(ens);
     }
 }
