@@ -47,7 +47,7 @@ public class test
 		
 		System.out.println(r.getCarResa().get(0).getLibelle());
 		System.out.println(r.getCarResa().get(1).getLibelle());
-		System.out.println(r.getCarResa().get(2).getLibelle());
+		//System.out.println(r.getCarResa().get(2).getLibelle());
 	
 		
 	
