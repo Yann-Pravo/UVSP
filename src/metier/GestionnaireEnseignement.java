@@ -14,9 +14,7 @@ import java.util.ArrayList;
 public class GestionnaireEnseignement {
 
     //Attributs
-    DAO<TypeEnseignement> typeEnseignementDAO;
     DAO<Enseignement> enseignementDAO;
-    private ArrayList<TypeEnseignement> listeTypeEnseignements;
     private ArrayList<Enseignement> listeEnseignements;
     private static GestionnaireEnseignement ges_Enseignement;
 
