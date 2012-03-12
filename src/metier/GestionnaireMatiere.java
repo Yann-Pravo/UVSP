@@ -14,8 +14,7 @@ public class GestionnaireMatiere {
 
 	//Attributs
     DAO<Matiere> matiereDao;
-    ArrayList<Matiere> listeMat;
-    ArrayList<Matiere> listeMatAE;
+    ArrayList<Matiere> listeMatieres;
     private static final GestionnaireMatiere instance = new GestionnaireMatiere();
 
     /**
@@ -24,14 +23,14 @@ public class GestionnaireMatiere {
      */
     private GestionnaireMatiere() {
         matiereDao = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY).getMatiereDAO();
-        listeMat = matiereDao.getListe();
+        listeMatieres = matiereDao.getListe();
     }
 
     /**
      * Mthode permettant de renvoyer un objet unique de type GestionnaireMatiere
      * @return GestionnaireMatiere - Instance unique de l'objet GestionnaireMatiere
      */
-    public final static GestionnaireMatiere getGestionnaireMatiere() {
+    public final static GestionnaireMatiere getInstance() {
         return instance;
     }
 
@@ -49,61 +48,48 @@ public class GestionnaireMatiere {
      * @return listeMat - Liste de matires
      */
     public ArrayList<Matiere> getListeMatiere() {
-        return listeMat;
+        return listeMatieres;
     }
-
+    
     /**
-     * Accesseur de la liste des annes d'tude du gestionnaire
-     * @return ArrayList<AnneeEtude> - Liste des annes d'tudes du gestionnaire
+     * Mthode qui permet l'ajout d'une matire
+     * @param nom Nom de la matire
+     * @param ue UE correspondant ˆ la matire
+     * @param resp Enseignant responsable de la matire
      */
-    public ArrayList<Matiere> getListeMatiere(AnneeEtude a) {
-        listeMatAE = listeMat; // copie partielle ou pas?
-        for (int i=0; i<listeMatAE.size(); i++)
-            if (! listeMatAE.get(i).getUE().getSem().getAnneeEtude().getNomAnnee()
-                .equalsIgnoreCase(a.getNomAnnee()))
-                listeMatAE.remove(i);
-        return listeMatAE;
+    public void addMatiere(String nom, UE ue, Enseignant resp) {
+        Matiere matiere = new Matiere(nom, ue, resp);
+        Boolean ok= matiereDao.create(matiere);
+        if ( ok )
+            listeMatieres.add(matiere);
+    }
+    
+    /**
+     * Mthode qui permet la modification d'une matire
+     * @param nom Nom de la matire
+     * @param ue UE correspondant ˆ la matire
+     * @param resp Enseignant responsable de la matire
+     */
+    public void updateMatiere(Matiere matiere, String nom, UE ue, Enseignant resp) {
+        listeMatieres.remove(matiere);
+        matiere.setNomMat(nom);
+        matiere.setUEMat(ue);
+        matiere.setResponsable(resp);
+
+        Boolean ok= matiereDao.update(matiere);
+        if ( ok )
+            listeMatieres.add(matiere);
     }
 
     /**
      * Mthode qui permet de supprimer une matiere
-     * @param m Matiere Ã  supprimer
+     * @param m Matiere ˆ supprimer
      */
     public void deleteMatiere(Matiere m) {
         Boolean ok = matiereDao.delete(m);
         if (ok) {
-            listeMat.remove(m);
+            listeMatieres.remove(m);
         }
     }
 
-    /**
-     * Mthode qui permet de mettre ˆ jour l'annee d'etude
-     * @param nom Nom de la matire
-     * @param descr Description de la matire
-     * @param coeff Coefficient de la matire dans l'UE
-     * @param nomUE Nom de l'UE associ ˆ la matiere
-     */
-    public void updateAnneeEtude(String code, String nom, String descr, Integer coeff, String nomUE) {
-        UE u = new UE(nomUE);
-        Matiere m = new Matiere(code, nom, descr, coeff, u);
-        Boolean ok = matiereDao.update(m);
-        if (ok) {
-            listeMat.add(m);
-        }
-    }
-
-    /**
-     * Mthode qui permet l'ajout de l'anne d'etude
-     * @param descr Description de la matire
-     * @param coeff Coefficient de la matire dans l'UE
-     * @param nomUE Nom de l'UE associ ˆ la matiere
-     */
-    public void ajouterAnneeEtude(String code, String lib, String nomUE, Enseignant resp) {
-        UE u = new UE(nomUE);
-        Matiere m = new Matiere(code, lib, u, resp);
-        Boolean ok = matiereDao.create(m);
-        if (ok) {
-            listeMat.add(m);
-        }
-    }
 }

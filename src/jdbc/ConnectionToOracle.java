@@ -3,8 +3,6 @@ package jdbc;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
@@ -66,7 +64,7 @@ public class ConnectionToOracle{
 			Statement state = con.createStatement();
 			//L'objet ResultSet contient le résultat de la requête SQL
 			ResultSet result = state.executeQuery("SELECT * from user_tables");
-			ResultSetMetaData resultMeta = result.getMetaData();
+			//ResultSetMetaData resultMeta = result.getMetaData();
 
 
 			System.out.println("Voici les tables presentes");
