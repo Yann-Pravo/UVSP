@@ -18,6 +18,8 @@ import javax.swing.JPopupMenu;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JMenu;
+
 
 public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 	
@@ -27,8 +29,11 @@ public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 	public MainFrame() 
 	{
 		
+		
 		initComponents();
-
+		displayConnexion();
+        this.setSize(log.getWidth()+10,log.getHeight()+50);
+        
 		
 
 
@@ -38,8 +43,24 @@ public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 	
 	private void initComponents()
 	{
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		setBounds(100, 100, 450, 300);
+		setTitle("UVSP 1.0");
+		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu mnFichier = new JMenu("Fichier");
+		menuBar.add(mnFichier);
+		
+		JMenuItem mntmSeLogguer = new JMenuItem("Connexion");
+		mnFichier.add(mntmSeLogguer);
+		
+		JMenu mnAbout = new JMenu("About");
+		menuBar.add(mnAbout);
+		
+		JMenuItem mntmAProposDe = new JMenuItem("A propos de UVSP");
+		mnAbout.add(mntmAProposDe);
 	}
 
 
@@ -48,8 +69,21 @@ public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 		log = new Login(this);
 		getContentPane().add(log);
 		log.setVisible(true);
+		this.setSize(511,318);
+		
 	}
 
+	public void displayHome()
+	{
+		
+		getContentPane().setLayout(null);		
+		JLabel lblVoustesConnect = new JLabel("Bonjour "+ enseignant.getPrenom()+" !");
+		lblVoustesConnect.setBounds(126, 48, 171, 16);
+		getContentPane().add(lblVoustesConnect);
+		
+	}
+	
+	
 
 	public void setEnseignant(Enseignant e)
 	{
@@ -58,9 +92,11 @@ public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 
 
 	@Override
-	public void displayError(String Error) 
+	public void displayError(String errorMsg) 
 	{
-		// TODO Auto-generated method stub
+		ErrorPopup err = ErrorPopup.getInstance(this, true);
+        err.setErrorMsg(errorMsg);
+        err.setVisible(true);
 	
 	}
 

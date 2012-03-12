@@ -49,9 +49,17 @@ public class test
 		cara = ca.find(cara);
 		r = res.find(r);
 		c = cours.find(c);
-		enseignement = ense.find(enseignement);
 		
-		System.out.println(u.getEnseignant().getNom());
+		if(ens.login(e))
+		{
+			System.out.println("c'est ok");
+		}
+		else
+			System.out.println("c'est pas ok");
+		
+		
+		
+		System.out.println(e.getSu());
 		
 		
 		
