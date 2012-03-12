@@ -2,5 +2,5 @@ package ProgrammePrincipal;
 
 public interface ErrorInterface {
 	
-	public void displayError(String Error);
+	public void displayError(String errorMsg);
 }

@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
+
+import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
@@ -34,6 +36,7 @@ public class Login extends JInternalFrame {
 	public Login(MainFrame m) 
 	{
 		this.main = m;
+		this.setDefaultCloseOperation(JInternalFrame.EXIT_ON_CLOSE);
 		this.initComponents();
 		this.missing.setVisible(false);
 		
@@ -56,6 +59,7 @@ public class Login extends JInternalFrame {
 		mdpLabel = new JLabel("Mot de passe : ");
 		
 		setTitle("UVSP 1.0");
+	
 		missing.setVisible(false);
 		
 		setBounds(100, 100, 450, 300);
@@ -88,6 +92,8 @@ public class Login extends JInternalFrame {
 			public void actionPerformed(ActionEvent evt) 
 			{
 				connexionButtonActionPerformed(evt);
+
+				
 			}
 		
 		});
@@ -105,6 +111,12 @@ public class Login extends JInternalFrame {
 
 	private void connexionButtonActionPerformed(ActionEvent e)
 	{
+		
+
+		
+		
+		
+		
 		if(loginField.getText().length() == 0 || passwordField.getPassword().length == 0)
 		{
 			missing.setVisible(true);
@@ -116,18 +128,24 @@ public class Login extends JInternalFrame {
 			
 			if(ens.login(user))
 			{
-				this.setVisible(false);
+		
+				
 				main.setEnseignant(user);
+				setVisible(false);
+				main.displayHome();
 				
 			}
 			else
 			{
-				
+				missing.setText("           Login ou mot de passe incorrect !");
+				missing.setVisible(true);
 			}
+		
 		}
 	}
-
-
-
 }
+
+
+
+
 

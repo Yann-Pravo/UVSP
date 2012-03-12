@@ -9,7 +9,7 @@ public class Planner {
 	{
 		MainFrame mf = new MainFrame();
 		mf.setVisible(true);
-
+		
 	}
 
 }

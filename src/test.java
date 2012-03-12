@@ -51,8 +51,8 @@ public class test
 		cara = ca.find(cara);
 		r = res.find(r);
 		c = cours.find(c);
-		enseignement = ense.find(enseignement);
 		
+<<<<<<< HEAD
 		//System.out.println(u.getEnseignant().getNom());
 		
 		GestionnaireSalle Gsal = GestionnaireSalle.getGestionnaireSalle();
@@ -63,6 +63,18 @@ public class test
 		liste = gest_salle.getListeSalles();
 		
 		System.out.println(liste.get(0).toString());
+=======
+		if(ens.login(e))
+		{
+			System.out.println("c'est ok");
+		}
+		else
+			System.out.println("c'est pas ok");
+		
+		
+		
+		System.out.println(e.getSu());
+>>>>>>> 9ed6b1199e5216c759b206bbb06a9bb113f73ac6
 		
 		
 		
