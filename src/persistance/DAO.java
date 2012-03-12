@@ -17,6 +17,8 @@ public abstract class DAO<T> {
 	
 	public abstract T find(T obj);
 	
+	public abstract boolean login(T obj);
+	
 	public abstract boolean delete(T obj);
 	
 	public abstract ArrayList<T> getListe();

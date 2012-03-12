@@ -22,6 +22,16 @@ public class test
 		
 		DAO<Groupe> grp = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY).getGroupeDAO();
 		
+		DAO<Salle> s = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY).getSalleDAO();
+		
+		DAO<UE> ue = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY).getUEDAO();
+		
+		
+		
+		UE u = new UE(1);
+		u = ue.find(u);
+		
+		Salle salle = new Salle(1);
 		Groupe g = new Groupe(1);
 		Creneau creneau = new Creneau(1);
 		Caracteristique cara = new Caracteristique(1);
@@ -29,25 +39,21 @@ public class test
 		Cours c = new Cours(1);
 		Enseignement enseignement = new Enseignement(1);
 		Batiment batiment = new Batiment(1);
-		Enseignant e = new Enseignant(2);
-		Matiere m = new Matiere(1);
+		Enseignant e = new Enseignant("Bourdon", "isabelle");
+		Matiere m = new Matiere(2);
 		
 		
+		salle = s.find(salle);
 		g = grp.find(g);
 		creneau = cr.find(creneau);
 		cara = ca.find(cara);
 		r = res.find(r);
 		c = cours.find(c);
 		enseignement = ense.find(enseignement);
-		e = ens.find(e);
-		m = mat.find(m);
-		batiment = bat.find(batiment);
+		
+		System.out.println(u.getEnseignant().getNom());
 		
 		
-		System.out.println(r.getCarResa().get(0).getLibelle());
-		System.out.println(r.getCarResa().get(1).getLibelle());
-		System.out.println(r.getCarResa().get(2).getLibelle());
-		//System.out.println(c.getMatiere().getNomMat());
 		
 		
 		

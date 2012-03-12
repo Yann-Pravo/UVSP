@@ -37,6 +37,12 @@ public class Enseignant {
 		this.mdp = pwd;
 		this.su = supUser;
 	}
+	
+	public Enseignant(String n, String pwd)
+	{
+		this.nom = n;
+		this.mdp = pwd;
+	}
 
     public int getIdEns()
     {

@@ -64,6 +64,36 @@ public class EnseignantDAO extends DAO<Enseignant> {
 		return instance;
 	}
 
+	public boolean login (Enseignant ens)
+	{
+		boolean find = false;
+		try {
+			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY)
+					.executeQuery("select * from ENSEIGNANT where MDP = '" + ens.getMdp() + "' and NOM = '" +ens.getNom() + "'" );
+			if(result.first())
+			{
+				ens.setNom(result.getString("NOM"));
+				ens.setPrenom(result.getString("PRENOM"));
+				ens.setMdp(result.getString("MDP"));
+				ens.setSu(result.getInt("SUPER_USER"));
+				find = true;
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		return find;
+		
+	}
+	
+	
+	
+	
+	
+	
 	public boolean update(Enseignant enseignant) {
 		boolean resultat = false;
 		try {

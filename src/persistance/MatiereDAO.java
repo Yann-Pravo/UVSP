@@ -82,12 +82,13 @@ public class MatiereDAO extends DAO<Matiere> {
      * @return Matiere - Objet Matiere créé à partir des résultats trouvés dans la base
      */
     public Matiere find(Matiere m) {
-        Matiere mat = new Matiere(m.getIdMat());
+ 
         try {
-            ResultSet result = this.connect.createStatement().executeQuery(
+        	ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY).executeQuery(
             		"SELECT * FROM MATIERE " +
-            "WHERE ID_MATIERE = " + m.getIdMat());
+            "WHERE ID_MATIERE =" + m.getIdMat());
             if (result.first()) {
+          
             	UEDAO ueDAO = new UEDAO();
                 UE ue = new UE(result.getInt("ID_UE"));
                 ue = ueDAO.find(ue);
@@ -102,9 +103,10 @@ public class MatiereDAO extends DAO<Matiere> {
             }
         }
         catch (SQLException ex) {
-            mat = m;
+    
+        	
         }
-        return mat;
+        return m;
     }
 
     /**
