@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import metier.*;
 import persistance.*;
 
@@ -51,7 +53,16 @@ public class test
 		c = cours.find(c);
 		enseignement = ense.find(enseignement);
 		
-		System.out.println(u.getEnseignant().getNom());
+		//System.out.println(u.getEnseignant().getNom());
+		
+		GestionnaireSalle Gsal = GestionnaireSalle.getGestionnaireSalle();
+		
+	     
+		GestionnaireSalle gest_salle = GestionnaireSalle.getGestionnaireSalle();
+		ArrayList<Salle> liste = new ArrayList<Salle>();
+		liste = gest_salle.getListeSalles();
+		
+		System.out.println(liste.get(0).toString());
 		
 		
 		
