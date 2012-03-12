@@ -58,7 +58,7 @@ public class Login extends JInternalFrame {
 		loginLabel = new JLabel("Login : ");
 		mdpLabel = new JLabel("Mot de passe : ");
 		
-		setTitle("UVSP 1.0");
+		
 	
 		missing.setVisible(false);
 		
@@ -119,6 +119,8 @@ public class Login extends JInternalFrame {
 		
 		if(loginField.getText().length() == 0 || passwordField.getPassword().length == 0)
 		{
+			missing.setVisible(false);
+			missing.setText("Un des champs n'a pas été correctement rempli !");
 			missing.setVisible(true);
 		}
 		else
@@ -137,6 +139,7 @@ public class Login extends JInternalFrame {
 			}
 			else
 			{
+				missing.setVisible(false);
 				missing.setText("           Login ou mot de passe incorrect !");
 				missing.setVisible(true);
 			}

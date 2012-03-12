@@ -25,6 +25,11 @@ public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 	
 	Login log;
 	private Enseignant enseignant;
+	private JMenuBar menuBar;
+	private JMenu mnAbout;
+	private JMenuItem itemSalle;
+	private JLabel texte;
+	private JMenu mnGestion;
 
 	public MainFrame() 
 	{
@@ -32,7 +37,7 @@ public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 		
 		initComponents();
 		displayConnexion();
-        this.setSize(log.getWidth()+10,log.getHeight()+50);
+        this.setSize(461,292);
         
 		
 
@@ -47,7 +52,7 @@ public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 		setBounds(100, 100, 450, 300);
 		setTitle("UVSP 1.0");
 		
-		JMenuBar menuBar = new JMenuBar();
+		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
 		JMenu mnFichier = new JMenu("Fichier");
@@ -56,7 +61,11 @@ public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 		JMenuItem mntmSeLogguer = new JMenuItem("Connexion");
 		mnFichier.add(mntmSeLogguer);
 		
-		JMenu mnAbout = new JMenu("About");
+		JMenuItem mntmQuitter = new JMenuItem("Quitter");
+		mnFichier.add(mntmQuitter);
+		
+		
+		mnAbout = new JMenu("About");
 		menuBar.add(mnAbout);
 		
 		JMenuItem mntmAProposDe = new JMenuItem("A propos de UVSP");
@@ -77,9 +86,32 @@ public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 	{
 		
 		getContentPane().setLayout(null);		
-		JLabel lblVoustesConnect = new JLabel("Bonjour "+ enseignant.getPrenom()+" !");
-		lblVoustesConnect.setBounds(126, 48, 171, 16);
-		getContentPane().add(lblVoustesConnect);
+		 texte = new JLabel("Bonjour "+ enseignant.getPrenom()+" !");
+		texte.setBounds(126, 48, 171, 16);
+		getContentPane().add(texte);
+		mnGestion = new JMenu("Gestion");
+		menuBar.add(mnGestion);
+		menuBar.remove(mnAbout);
+		
+		JMenuItem itemSalle = new JMenuItem("Gestion des salles");
+		itemSalle.addActionListener(this);
+		mnGestion.add(itemSalle);
+		
+	
+		
+		JMenuItem mntmGestionDesRservations = new JMenuItem("Gestion des r\u00E9servations");
+		mnGestion.add(mntmGestionDesRservations);
+		
+		JMenu mnAffichage = new JMenu("Affichage");
+		menuBar.add(mnAffichage);
+		
+		JMenuItem mntmAfficherLeCalendrier = new JMenuItem("Afficher le calendrier");
+		mnAffichage.add(mntmAfficherLeCalendrier);
+		
+		menuBar.add(mnAbout);
+		
+		
+		
 		
 	}
 	
@@ -102,8 +134,35 @@ public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+	public void actionPerformed(ActionEvent ae) 
+	{
+
+		
+		if(ae.getActionCommand().equals("Gestion des salles"))
+		{
+			GestionSalle gs = new GestionSalle();
+			this.getContentPane().setLayout(new BorderLayout());
+			this.getContentPane().remove(log);
+			this.getContentPane().remove(texte);
+			this.getContentPane().add(gs, BorderLayout.CENTER);
+			this.validate();
+			
+			gs.setVisible(true);
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 	}
 	private static void addPopup(Component component, final JPopupMenu popup) {
