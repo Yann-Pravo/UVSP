@@ -35,9 +35,12 @@ public class Login extends JInternalFrame {
 	
 	public Login(MainFrame m) 
 	{
+		super("Connexion", true, true, true, true);
 		this.main = m;
-		this.setDefaultCloseOperation(JInternalFrame.EXIT_ON_CLOSE);
+		//this.setBounds(100, 100, 100, 300);
+		this.setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
 		this.initComponents();
+		
 		this.missing.setVisible(false);
 		
 	}
@@ -62,7 +65,7 @@ public class Login extends JInternalFrame {
 	
 		missing.setVisible(false);
 		
-		setBounds(100, 100, 450, 300);
+		
 		frameTitle.setFont(new Font("Verdana", Font.BOLD, 18));
 		frameTitle.setBounds(78, 30, 290, 22);
 		frameSubTitle.setBounds(136, 64, 183, 16);
@@ -105,7 +108,7 @@ public class Login extends JInternalFrame {
 		missing.setForeground(Color.RED);
 		missing.setBounds(63, 184, 316, 16);
 		getContentPane().add(missing);
-
+		pack();
 	}
 
 
