@@ -31,10 +31,18 @@ public class GestionnaireSalle {
      * MŽthode permettant de renvoyer un objet unique de type GestionnaireSalle
      * @return GestionnaireSalle - Instance unique de l'objet GestionnaireSalle
      */
-    public final static GestionnaireSalle getGestionnaireSalle () {
+    public final static GestionnaireSalle getInstance () {
         return instance;
     }
 
+    /**
+     * Accesseur de la liste des salles du gestionnaire
+     * @return listeSalles - Liste des salles
+     */
+     public ArrayList<Salle> getListeSalles(){
+        return listeSalles;
+    }
+     
     /**
      * MŽthode qui enregistre les informations d'un nouvel objet salle
      * et rajoute ˆ la liste des salles

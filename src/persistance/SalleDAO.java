@@ -13,6 +13,8 @@ public class SalleDAO extends DAO<Salle>{
 	{
 		return instance;
 	}
+	
+	public boolean login(Salle sal){ return false;}
 
 	@Override
 	public boolean create(Salle sal)
@@ -121,20 +123,19 @@ public class SalleDAO extends DAO<Salle>{
 	@Override
 	public ArrayList<Salle> getListe() 
 	{
-        Salle s;
-        SalleDAO sDAO;
+		BatimentDAO batDAO;
+		Batiment bat;
 		 ArrayList<Salle> list = new ArrayList<Salle>();
 		 
 	        try {
-	           
-	            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM Salle");
+	            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM SALLE ORDER BY NUMERO_SALLE ASC");
 
 	            while (result.next())
 	            {
-	            	  s = new Salle(result.getInt("id_salle"));
-	            	  sDAO = new SalleDAO();
-	            	  s = sDAO.find(s);
-	            	  list.add(s);
+	            	batDAO = new BatimentDAO();
+	            	bat = new Batiment(result.getInt("ID_BATIMENT"));
+	            	bat = batDAO.find(bat);
+	            	list.add(new Salle(result.getInt("ID_SALLE"), result.getString("NUMERO_SALLE"), bat));
 	            }
 	        }
 	        catch (SQLException e) {

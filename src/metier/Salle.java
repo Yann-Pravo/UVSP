@@ -57,7 +57,11 @@ public class Salle {
     	this.lib = lib;
     }
     
-    
+    public Salle(int idSalle, String lib)
+    {
+    	this.idSalle = idSalle;
+    	this.lib = lib;
+    }
     
     
     
@@ -103,9 +107,7 @@ public class Salle {
     	this.car = c;
     }
     
-    
-    
-    
-    
-    
+    public String toString() {
+    	return lib;
+    }
 }
