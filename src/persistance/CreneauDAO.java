@@ -52,6 +52,8 @@ public class CreneauDAO extends DAO<Creneau> {
 				c.setHeureDeb(result.getString("HEURE_DEBUT"));
 				c.setHeureFin(result.getString("HEURE_FIN"));
 			}
+			result.getStatement().close();
+	          result.close();
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -102,9 +104,12 @@ public class CreneauDAO extends DAO<Creneau> {
 				Creneau creneau = new Creneau(result.getInt("ID_CRENAU"), result.getString("HEURE_DEBUT"), result.getString("HEURE_FIN"));
 				list.add(creneau);
 			}
+			result.getStatement().close();
+	          result.close();
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
+			
 		}
 		return list;
 	}

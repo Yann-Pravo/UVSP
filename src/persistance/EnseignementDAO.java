@@ -76,6 +76,8 @@ public class EnseignementDAO extends DAO<Enseignement> {
                 Enseig.setEnseignant(ens);
                 Enseig.setGroupe(groupe);
             }
+            result.getStatement().close();
+	        result.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -152,6 +154,8 @@ public class EnseignementDAO extends DAO<Enseignement> {
                 Enseignement enseig = new Enseignement(result.getInt("ID_ENSEIGNEMENT"), groupe, result.getDouble("NB_HEURE_PREVUE"), ens, cours);
                 
                 list.add(enseig);
+                result.getStatement().close();
+    	        result.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();

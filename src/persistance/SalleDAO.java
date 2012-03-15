@@ -75,7 +75,8 @@ public class SalleDAO extends DAO<Salle>{
             	sal.setIdSalle(result.getInt("ID_SALLE"));
             	sal.setLibelle(result.getString("NUMERO_SALLE"));
             }
-            
+            result.getStatement().close();
+	          result.close();
             result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY)
     				.executeQuery("SELECT ID_CARACTERISTIQUE from salle s, caracteristique_salle cs WHERE s.id_salle = " + sal.getIdSalle() +" and s.id_salle = cs.id_salle");
             
@@ -96,6 +97,8 @@ public class SalleDAO extends DAO<Salle>{
                 }
             }
             sal.setCarSalle(car);
+            result.getStatement().close();
+	          result.close();
         } catch (SQLException ex) {
         	ex.printStackTrace();
         }
@@ -137,6 +140,8 @@ public class SalleDAO extends DAO<Salle>{
 	            	bat = batDAO.find(bat);
 	            	list.add(new Salle(result.getInt("ID_SALLE"), result.getString("NUMERO_SALLE"), bat));
 	            }
+	            result.getStatement().close();
+		          result.close();
 	        }
 	        catch (SQLException e) {
 	            e.printStackTrace();

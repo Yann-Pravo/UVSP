@@ -70,7 +70,8 @@ public class CaracteristiqueDAO extends DAO<Caracteristique>{
 			{
 				ca.setLibelle(result.getString("LIBELLE_CARACTERISTIQUE"));
 			}
-             
+			result.getStatement().close();
+	          result.close();
         } catch (SQLException ex) {
             
             
@@ -114,6 +115,8 @@ public class CaracteristiqueDAO extends DAO<Caracteristique>{
 	            	
 	            	list.add(c);	
 	            }
+	            result.getStatement().close();
+		          result.close();
 	        }
 	        catch (SQLException e) {
 	            e.printStackTrace();

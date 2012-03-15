@@ -28,6 +28,14 @@ public class Reservation {
 		this.caract = car;
 	}
 	
+	public Reservation(Date d, Salle s, Creneau c, Enseignement e, ArrayList<Caracteristique> car)
+	{
+		this.date = d;
+		this.salle = s;
+		this.creneau = c;
+		this.ens = e;
+		this.caract = car;
+	}
 	
 	public int getIdResa()
 	{

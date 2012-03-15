@@ -1,4 +1,7 @@
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import metier.*;
 import persistance.*;
@@ -7,7 +10,8 @@ public class test
 {
 	public static void main(String [] args)
 	{
-		DAO<Enseignant> ens = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY).getEnseignantDAO();
+	
+	/*	DAO<Enseignant> ens = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY).getEnseignantDAO();
 		DAO<Matiere> mat = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY).getMatiereDAO();
 		
 		DAO<Batiment> bat = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY).getBatimentDAO();
@@ -54,26 +58,50 @@ public class test
 		
 		//System.out.println(u.getEnseignant().getNom());
 		
-		GestionnaireSalle Gsal = GestionnaireSalle.getGestionnaireSalle();
+		//GestionnaireSalle Gsal = GestionnaireSalle.getGestionnaireSalle();
 		
 	     
-		GestionnaireSalle gest_salle = GestionnaireSalle.getGestionnaireSalle();
+		//GestionnaireSalle gest_salle = GestionnaireSalle.getGestionnaireSalle();
 		ArrayList<Salle> liste = new ArrayList<Salle>();
-		liste = gest_salle.getListeSalles();
+	//	liste = gest_salle.getListeSalles();
 		
-		System.out.println(liste.get(0).toString());
+		//System.out.println(liste.get(0).toString());
 		
-		
-		
-		
-		
+		*/
+	
 		
 		
+	/*	
+		GestionnaireReservation gr = GestionnaireReservation.getInstance();
+		ArrayList<Reservation> resa = gr.getListeReservation();
+		
+		System.out.println(resa.size());
+		
+		for(int i = 0; i<resa.size(); i++)
+		{
+		System.out.println("ID: "+ resa.get(i).getIdResa());			
+			System.out.println("NumŽro de la salle: "+resa.get(i).getSalle().getLibelle());
+		
+			System.out.println("CrŽneau: "+ resa.get(i).getCreneau().getHeureDeb());		
+			System.out.println("Enseignement: "+resa.get(i).getEns().getCours().getMatiere().getNomMat());	
+			
+			ArrayList<Caracteristique> carac = resa.get(i).getCarResa();
+			for(int j=0; j<carac.size(); j++)
+			{
+				System.out.println("CaractŽristiques: "+carac.get(j).getLibelle());
+			}
+			System.out.println("Date: "+resa.get(i).getDateResa());
+			System.out.println("\n");
+			
+		}*/
 		
 		
 		
+		DAO<Reservation> res = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY).getReservationDAO();
+		Reservation r = new Reservation(4);
+		r = res.find(r);
 		
-		
+		System.out.println(r.getDateResa());
 		
 		
 		
