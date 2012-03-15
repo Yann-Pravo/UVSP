@@ -12,9 +12,18 @@ import javax.swing.border.EmptyBorder;
 import metier.Enseignant;
 import javax.swing.JLabel;
 import java.awt.Font;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -32,6 +41,7 @@ public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 	private JMenuItem itemLog;
 	private JMenuItem itemDelog;
 	private JLabel texte;
+	private JLabel titre;
 	private JMenu mnGestion;
 
 	public MainFrame() 
@@ -89,11 +99,20 @@ public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 
 	public void displayHome()
 	{
-		setBounds(350, 200, 600, 400);
-		getContentPane().setLayout(null);		
-		 texte = new JLabel("Bonjour "+ enseignant.getPrenom()+" !");
-		texte.setBounds(126, 48, 171, 16);
+		this.getContentPane().setLayout(null);
+		setBounds(50, 50, 1200, 700);
+		//getContentPane().setLayout(null);		
+		
+		texte = new JLabel("Connecté en tant que "+ enseignant.getPrenom()+" "+enseignant.getNom());
+		texte.setFont(new Font("Lucida Grande", Font.ITALIC, 12));
+		texte.setBounds(30, 10, 250, 16);
 		getContentPane().add(texte);
+		
+		titre = new JLabel("Emploi du temps IG4");
+		titre.setBounds(350, 50, 250, 25);
+		titre.setFont(new Font("Lucida Grande", Font.BOLD, 18));
+		getContentPane().add(titre);
+		
 		mnGestion = new JMenu("Gestion");
 		menuBar.add(mnGestion);
 	
@@ -127,7 +146,51 @@ public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 		mnAbout.add(itemAbout);
 		
 		
+		JButton nextButton = new JButton();
+		nextButton.setIcon(new ImageIcon("/Users/clementbalestrat/Desktop/projetJava/UVSP/suivant.png"));
+		nextButton.setBounds(1000, 40, 79, 44);
+		add(nextButton);
 		
+		JButton backButton = new JButton("");
+		backButton.setIcon(new ImageIcon("/Users/clementbalestrat/Desktop/projetJava/UVSP/precedent.png"));
+		backButton.setBounds(700, 40, 79, 44);
+		add(backButton);
+		
+		JLabel weekLabel = new JLabel();
+		weekLabel.setBounds(815, 40, 200, 44);
+		weekLabel.setText("01/01/12 au 07/01/12");
+		weekLabel.setBorder(BorderFactory.createCompoundBorder());
+		weekLabel.setFont(new Font("Lucida Grande", Font.BOLD, 12));
+		add(weekLabel);
+	
+		
+	    //Les données du tableau
+			Object[][] data = {	{" ", " ", " ", " ", " ", " "},
+					{" ", " ", " ", " ", " ", " "},
+					{" ", " ", " ", " ", " ", " "},
+					{" ", " ", " ", " ", " ", " "},
+					{" ", " ", " ", " ", " ", " "},
+					{" ", " ", " ", " ", " ", " "},
+			};
+		        //Les titres des colonnes
+			String  title[] = {"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
+			JTable tableau = new JTable(data, title);
+		
+		
+	                //On ajoute notre tableau à notre contentPane dans un scroll
+	                //Sinon les titres des colonnes ne s'afficheront pas ! !	
+		
+			JScrollPane js = new JScrollPane(tableau);
+		
+			js.setBounds(350, 100, 800, 500);
+			
+			this.getContentPane().add(js);
+		
+			
+		
+
+			
+			
 		
 	}
 	
@@ -199,6 +262,5 @@ public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 		
 		
 	}
-	private static void addPopup(Component component, final JPopupMenu popup) {
-	}
+	
 }

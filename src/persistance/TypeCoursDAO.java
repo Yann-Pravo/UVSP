@@ -107,4 +107,10 @@ public class TypeCoursDAO extends DAO<TypeCours> {
 	public boolean update(TypeCours ancien, TypeCours nouveau) {
 		return false;
 	}
+
+	@Override
+	public boolean login(TypeCours obj) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

@@ -1,5 +1,4 @@
 package persistance;
-
 import metier.Enseignant;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +11,7 @@ import java.util.ArrayList;
  * @authors Ahardane Abdeslam, Balestrat Clément, Pravossoudovitch Yann
  * @version 1.0
  */
-public class EnseignantDAO extends DAO<Enseignant> {
+public class EnseignantDAO extends DAO<Enseignant>{
 
     private static final EnseignantDAO instance = new EnseignantDAO();
 
@@ -64,35 +63,6 @@ public class EnseignantDAO extends DAO<Enseignant> {
 		return instance;
 	}
 
-	public boolean login (Enseignant ens)
-	{
-		boolean find = false;
-		try {
-			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY)
-					.executeQuery("select * from ENSEIGNANT where MDP = '" + ens.getMdp() + "' and NOM = '" +ens.getNom() + "'" );
-			if(result.first())
-			{
-				ens.setNom(result.getString("NOM"));
-				ens.setPrenom(result.getString("PRENOM"));
-				ens.setMdp(result.getString("MDP"));
-				ens.setSu(result.getInt("SUPER_USER"));
-				find = true;
-			}
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		
-		
-		return find;
-		
-	}
-	
-	
-	
-	
-	
 	
 	public boolean update(Enseignant enseignant) {
 		boolean resultat = false;
@@ -147,4 +117,38 @@ public class EnseignantDAO extends DAO<Enseignant> {
 	public boolean update(Enseignant ancien, Enseignant nouveau) {
 		return false;
 	}
+
+	@Override
+	public boolean login(Enseignant ens) {
+		boolean find = false;
+		try {
+			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY)
+					.executeQuery("select * from ENSEIGNANT where MDP = '" + ens.getMdp() + "' and NOM = '" +ens.getNom() + "'" );
+			if(result.first())
+			{
+				ens.setNom(result.getString("NOM"));
+				ens.setPrenom(result.getString("PRENOM"));
+				ens.setMdp(result.getString("MDP"));
+				ens.setSu(result.getInt("SUPER_USER"));
+				find = true;
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		return find;
+		
+	}
+
+
+
+
+
+
+
+
+
 }

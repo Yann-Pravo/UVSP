@@ -156,4 +156,10 @@ public class GroupeDAO extends DAO<Groupe> {
         }
         return list;
     }
+
+	@Override
+	public boolean login(Groupe obj) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

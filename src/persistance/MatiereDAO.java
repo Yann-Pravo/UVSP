@@ -1,6 +1,7 @@
 package persistance;
 
 import metier.*;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -191,4 +192,10 @@ public class MatiereDAO extends DAO<Matiere> {
     public boolean update(Matiere ancien, Matiere nouveau) {
         return false;
     }
+
+	@Override
+	public boolean login(Matiere obj) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

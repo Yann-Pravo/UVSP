@@ -191,5 +191,11 @@ public class ReservationDAO extends DAO<Reservation>
 	        return list;
 		
 		
+	}
+
+	@Override
+	public boolean login(Reservation obj) {
+		// TODO Auto-generated method stub
+		return false;
 	}	
 }

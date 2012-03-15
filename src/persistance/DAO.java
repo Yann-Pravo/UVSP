@@ -3,6 +3,8 @@ package persistance;
 import java.sql.Connection;
 
 import java.util.ArrayList;
+
+import metier.Enseignant;
 import jdbc.ConnectionToOracle;
 
 public abstract class DAO<T> {
@@ -17,9 +19,11 @@ public abstract class DAO<T> {
 	
 	public abstract T find(T obj);
 	
-	public abstract boolean login(T obj);
-	
 	public abstract boolean delete(T obj);
 	
 	public abstract ArrayList<T> getListe();
+	
+	public abstract boolean login(T obj);
+
+
 }

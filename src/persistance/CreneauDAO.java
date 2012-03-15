@@ -112,4 +112,10 @@ public class CreneauDAO extends DAO<Creneau> {
 	public boolean update(Creneau ancien, Creneau nouveau) {
 		return false;
 	}
+
+	@Override
+	public boolean login(Creneau obj) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

@@ -119,5 +119,13 @@ public class CaracteristiqueDAO extends DAO<Caracteristique>{
 	            e.printStackTrace();
 	        }
 	        return list;	
+	}
+
+
+
+	@Override
+	public boolean login(Caracteristique obj) {
+		// TODO Auto-generated method stub
+		return false;
 	}	
 }

@@ -143,4 +143,10 @@ public class UEDAO extends DAO<UE> {
         }
         return list;
     }
+
+	@Override
+	public boolean login(UE obj) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

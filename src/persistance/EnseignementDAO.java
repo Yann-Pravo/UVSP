@@ -158,4 +158,10 @@ public class EnseignementDAO extends DAO<Enseignement> {
         }
         return list;
     }
+
+	@Override
+	public boolean login(Enseignement obj) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

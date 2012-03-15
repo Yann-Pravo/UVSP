@@ -1,6 +1,7 @@
 package persistance;
 
 import metier.*;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -189,4 +190,10 @@ public class CoursDAO extends DAO<Cours> {
     public boolean update(Cours ancien, Cours nouveau) {
         return false;
     }
+
+	@Override
+	public boolean login(Cours obj) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

@@ -127,4 +127,10 @@ public class BatimentDAO extends DAO<Batiment>{
 			
 	}
 
+	@Override
+	public boolean login(Batiment obj) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
