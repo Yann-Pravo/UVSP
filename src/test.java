@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import GraphicalUI.Timetable;
+
 import metier.*;
 import persistance.*;
 
@@ -97,11 +99,8 @@ public class test
 		
 		
 		
-		DAO<Reservation> res = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY).getReservationDAO();
-		Reservation r = new Reservation(4);
-		r = res.find(r);
-		
-		System.out.println(r.getDateResa());
+		WeekDate w = new WeekDate();
+		Timetable t = new Timetable(w);
 		
 		
 		

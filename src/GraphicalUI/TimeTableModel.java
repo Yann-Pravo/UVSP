@@ -1,37 +1,52 @@
 package GraphicalUI;
-
 import javax.swing.table.AbstractTableModel;
 
-public class TimeTableModel extends AbstractTableModel{
 
-	private final String[] entetes = {"Lundi","Mardi","Mercredi","Jeudi", "Vendredi", "Samedi"};
+public class TimetableModel extends AbstractTableModel {
 	
+	private Object[][] data  = {	{" ", " ", " ", " ", " ", " "},
+									{" ", " ", " ", " ", " ", " "},
+									{" ", " ", " ", " ", " ", " "},
+									{" ", " ", " ", " ", " ", " "},
+									{" ", " ", " ", " ", " ", " "},	
+									{" ", " ", " ", " ", " ", " "},
+								};
+	private String[] title = {"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
+	/**
+	 * Constructeur
+	 * @param data
+	 * @param title
+	 */
+	public TimetableModel(){
+
+			super();
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	@Override
+	/**
+	 * Retourne le nombre de colonnes
+	 */
 	public int getColumnCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.title.length;
 	}
-
-	@Override
+	
+	/**
+	 * Retourne le nombre de lignes
+	 */
 	public int getRowCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.data.length;
 	}
+	
+	/**
+	 * Retourne la valeur à l'emplacement spécifié
+	 */
+	public Object getValueAt(int row, int col) {
+		return this.data[row][col];
+	}
+			
+	public String getColumnName(int col) {
+		  return this.title[col];
+		}
 
-	@Override
-	public Object getValueAt(int arg0, int arg1) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 }

@@ -182,31 +182,18 @@ public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 		add(weekLabel);
 	
 		
-	    //Les données du tableau
-			Object[][] data = {	{" ", " ", " ", " ", " ", " "},
-					{" ", " ", " ", " ", " ", " "},
-					{" ", " ", " ", " ", " ", " "},
-					{" ", " ", " ", " ", " ", " "},
-					{" ", " ", " ", " ", " ", " "},
-					{" ", " ", " ", " ", " ", " "},
-			};
-		        //Les titres des colonnes
-			String  title[] = {"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
-			JTable tableau = new JTable(data, title);
-		
-		
-	                //On ajoute notre tableau à notre contentPane dans un scroll
-	                //Sinon les titres des colonnes ne s'afficheront pas ! !	
-		
+
+			
+			TimetableModel t = new TimetableModel();
+			JTable tableau = new JTable(t);
 			JScrollPane js = new JScrollPane(tableau);
 		
 			js.setBounds(350, 100, 800, 500);
 			
 			this.getContentPane().add(js);
-		
 			
 		
-
+		
 			
 			
 		
