@@ -54,12 +54,12 @@ public class test
 		
 		//System.out.println(u.getEnseignant().getNom());
 		
-		GestionnaireSalle Gsal = GestionnaireSalle.getGestionnaireSalle();
+		//GestionnaireSalle Gsal = GestionnaireSalle.getGestionnaireSalle();
 		
 	     
-		GestionnaireSalle gest_salle = GestionnaireSalle.getGestionnaireSalle();
+		//GestionnaireSalle gest_salle = GestionnaireSalle.getGestionnaireSalle();
 		ArrayList<Salle> liste = new ArrayList<Salle>();
-		liste = gest_salle.getListeSalles();
+		//liste = gest_salle.getListeSalles();
 		
 		System.out.println(liste.get(0).toString());
 		

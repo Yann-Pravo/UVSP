@@ -126,7 +126,9 @@ public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 		itemSalle.addActionListener(this);
 		mnGestion.add(itemSalle);
 		
-	
+		JMenuItem itemEnseignant = new JMenuItem("Gestion des enseignants");
+		itemEnseignant.addActionListener(this);
+		mnGestion.add(itemEnseignant);
 		
 		JMenuItem mntmGestionDesRservations = new JMenuItem("Gestion des r\u00E9servations");
 		mnGestion.add(mntmGestionDesRservations);
@@ -220,6 +222,16 @@ public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 		if(ae.getActionCommand().equals("Gestion des salles"))
 		{
 			GestionSalle gs = new GestionSalle();
+			this.getContentPane().setLayout(new BorderLayout());
+			this.getContentPane().remove(log);
+			this.getContentPane().remove(texte);
+			this.getContentPane().add(gs, BorderLayout.CENTER);
+			this.validate();			
+			gs.setVisible(true);			
+		}
+		if(ae.getActionCommand().equals("Gestion des enseignants"))
+		{
+			GestionEnseignant gs = new GestionEnseignant();
 			this.getContentPane().setLayout(new BorderLayout());
 			this.getContentPane().remove(log);
 			this.getContentPane().remove(texte);

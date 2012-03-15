@@ -27,20 +27,14 @@ public class EnseignantDAO extends DAO<Enseignant>{
      * Méthode permettant de créer un enseignant en base de donnée
      */
     public boolean create(Enseignant instance) {
-    	boolean ok = false;
+    	boolean ok = true;
     	try {
     		// Si le statut n'existe pas en base on le cr√©e
-    		PreparedStatement prepare = this.connect.prepareStatement("INSERT INTO enseignant(ID_ENSEIGNANT, NOM, PRENOM, MDP, SUPER_USER) VALUES(?,?,?,?,?)");
-    		prepare.setString(1, "seqEnseignant.nextval");
-    		prepare.setString(2, instance.getNom());
-    		prepare.setString(3, instance.getPrenom());
-    		prepare.setString(4, instance.getMdp());
-    		prepare.setInt(5, instance.getSu());
-    		prepare.executeUpdate();
-    		ok = true;
+    		this.connect.createStatement().executeUpdate("INSERT INTO enseignant(ID_ENSEIGNANT, NOM, PRENOM, MDP, SUPER_USER) VALUES(seqEnseignant.nextval, '" + instance.getNom() + "', '" + instance.getPrenom() + "', '" + instance.getMdp() + "', " + instance.getSu() + ")");
     	}
     	catch (SQLException e) {
     		e.printStackTrace();
+    		ok = false;
 	    }
             return ok;
     }

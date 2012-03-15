@@ -50,8 +50,8 @@ public class GestionnaireSalle {
      * @param capacite la capacité de la salle
      * @return l'objet salle créé
      */
-    public Salle addSalle(int id, String lib, Batiment bat, ArrayList<Caracteristique> c) {
-        Salle salle = new Salle(id, lib, bat, c);
+    public Salle addSalle(String lib, Batiment bat, ArrayList<Caracteristique> c) {
+        Salle salle = new Salle(lib, bat, c);
         salleDAO.create(salle);
         listeSalles.add(salle);
         return salle;
@@ -64,7 +64,7 @@ public class GestionnaireSalle {
     public void deleteSalle(Salle salle)
     {
         int i = 0;
-        while (!salle.getLibelle().equals((listeSalles.get(i)).getLibelle()))
+        while (salle.getIdSalle() != listeSalles.get(i).getIdSalle())
         {
                 i++;
         }
@@ -80,13 +80,22 @@ public class GestionnaireSalle {
      */
     public void updateSalle(Salle salle, int id, String lib, Batiment bat, ArrayList<Caracteristique> c)
     {
-        listeSalles.remove(salle);
+    	salle = salleDAO.find(salle);
+    	
+        int i = 0;
+        while (salle.getIdSalle() != listeSalles.get(i).getIdSalle())
+        {
+                i++;
+        }
+        
+        listeSalles.remove(i);
         salle.setLibelle(lib);
         salle.setBatiment(bat);
-        salle.setCarSalle(c);
+        //salle.setCarSalle(c);
 
         Boolean ok= salleDAO.update(salle);
-        if ( ok )
+        if ( ok ) {
             listeSalles.add(salle);
+        }
     }
 }

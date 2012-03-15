@@ -125,17 +125,38 @@ public class SalleDAO extends DAO<Salle>{
 	{
 		BatimentDAO batDAO;
 		Batiment bat;
-		 ArrayList<Salle> list = new ArrayList<Salle>();
+		ArrayList<Salle> list = new ArrayList<Salle>(); 
+		ArrayList<Caracteristique> car;
 		 
 	        try {
 	            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM SALLE ORDER BY NUMERO_SALLE ASC");
+	            ResultSet result2;
 
 	            while (result.next())
 	            {
+	            	result2 = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY)
+	        				.executeQuery("SELECT ID_CARACTERISTIQUE from salle s, caracteristique_salle cs WHERE s.id_salle = " + result.getInt("ID_SALLE") +" and s.id_salle = cs.id_salle");
+	                
+	                car = new ArrayList<Caracteristique>();
+	                if (result2.first()) {
+	                	CaracteristiqueDAO cDAO= new CaracteristiqueDAO();
+	                	Caracteristique c = new Caracteristique(result2.getInt("ID_CARACTERISTIQUE"));
+	                	c = cDAO.find(c);
+	                	
+	                	car.add(c);	
+	                	while(result2.next())
+	                    {
+	                    	cDAO= new CaracteristiqueDAO();
+	                    	c = new Caracteristique(result2.getInt("ID_CARACTERISTIQUE"));
+	                    	c = cDAO.find(c);
+	                    	
+	                    	car.add(c);	
+	                    }
+	                }
 	            	batDAO = new BatimentDAO();
 	            	bat = new Batiment(result.getInt("ID_BATIMENT"));
 	            	bat = batDAO.find(bat);
-	            	list.add(new Salle(result.getInt("ID_SALLE"), result.getString("NUMERO_SALLE"), bat));
+	            	list.add(new Salle(result.getInt("ID_SALLE"), result.getString("NUMERO_SALLE"), bat, car));
 	            }
 	        }
 	        catch (SQLException e) {

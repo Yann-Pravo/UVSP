@@ -43,6 +43,10 @@ public class Enseignant {
 		this.nom = n;
 		this.mdp = pwd;
 	}
+	
+	public String toString() {
+		return nom + " " + prenom;
+	}
 
     public int getIdEns()
     {
