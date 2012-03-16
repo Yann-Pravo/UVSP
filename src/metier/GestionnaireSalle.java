@@ -88,7 +88,7 @@ public class GestionnaireSalle {
                 i++;
         }
         listeSalles.remove(i);
-        
+
         salle.setLibelle(lib);
         salle.setBatiment(bat);
         //salle.setCarSalle(c);

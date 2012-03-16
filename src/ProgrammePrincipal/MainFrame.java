@@ -1,6 +1,7 @@
 package ProgrammePrincipal;
 import GraphicalUI.*;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import metier.Enseignant;
+import metier.WeekDate;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 
@@ -27,6 +30,8 @@ import javax.swing.JTextArea;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Calendar;
+
 import javax.swing.JMenu;
 
 
@@ -42,7 +47,12 @@ public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 	private JMenuItem itemDelog;
 	private JLabel texte;
 	private JLabel titre;
+	private JLabel weekLabel;
 	private JMenu mnGestion;
+	private Calendar today;
+	private WeekDate currentWeek;
+	private JButton nextButton;
+	private JButton backButton;
 
 	public MainFrame() 
 	{
@@ -103,7 +113,7 @@ public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 		setBounds(50, 50, 1200, 700);
 		//getContentPane().setLayout(null);		
 		
-		texte = new JLabel("Connecté en tant que "+ enseignant.getPrenom()+" "+enseignant.getNom());
+		texte = new JLabel("Connecté(e) en tant que "+ enseignant.getPrenom()+" "+enseignant.getNom());
 		texte.setFont(new Font("Lucida Grande", Font.ITALIC, 12));
 		texte.setBounds(30, 10, 250, 16);
 		getContentPane().add(texte);
@@ -148,49 +158,52 @@ public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 		mnAbout.add(itemAbout);
 		
 		
-		JButton nextButton = new JButton();
+		nextButton = new JButton();
 		nextButton.setIcon(new ImageIcon("/Users/clementbalestrat/Desktop/projetJava/UVSP/suivant.png"));
 		nextButton.setBounds(1000, 40, 79, 44);
+		nextButton.addActionListener(this);
 		add(nextButton);
 		
-		JButton backButton = new JButton("");
+		backButton = new JButton("");
 		backButton.setIcon(new ImageIcon("/Users/clementbalestrat/Desktop/projetJava/UVSP/precedent.png"));
 		backButton.setBounds(700, 40, 79, 44);
+		backButton.addActionListener(this);
 		add(backButton);
 		
-		JLabel weekLabel = new JLabel();
-		weekLabel.setBounds(815, 40, 200, 44);
-		weekLabel.setText("01/01/12 au 07/01/12");
-		weekLabel.setBorder(BorderFactory.createCompoundBorder());
+		
+		
+		today = Calendar.getInstance();
+		today.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+		today.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+		
+		currentWeek = new WeekDate();
+
+		weekLabel = new JLabel();
+		weekLabel.setBounds(800, 40, 200, 44);
+		updateLabelWeek();
 		weekLabel.setFont(new Font("Lucida Grande", Font.BOLD, 12));
 		add(weekLabel);
 	
 		
-	    //Les données du tableau
-			Object[][] data = {	{" ", " ", " ", " ", " ", " "},
-					{" ", " ", " ", " ", " ", " "},
-					{" ", " ", " ", " ", " ", " "},
-					{" ", " ", " ", " ", " ", " "},
-					{" ", " ", " ", " ", " ", " "},
-					{" ", " ", " ", " ", " ", " "},
-			};
-		        //Les titres des colonnes
-			String  title[] = {"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
-			JTable tableau = new JTable(data, title);
-		
-		
-	                //On ajoute notre tableau à notre contentPane dans un scroll
-	                //Sinon les titres des colonnes ne s'afficheront pas ! !	
-		
+
+			
+			TimetableModel t = new TimetableModel();
+			JTable tableau = new JTable(t);
+			
+			tableau.setShowHorizontalLines(true);
 			JScrollPane js = new JScrollPane(tableau);
-		
-			js.setBounds(350, 100, 800, 500);
+			
+			tableau.setGridColor(Color.black);
+			tableau.setRowHeight(50);
+			js.setViewportView(tableau);
+			js.setBounds(350, 100, 800, 370);
+			
+			
 			
 			this.getContentPane().add(js);
-		
 			
 		
-
+		
 			
 			
 		
@@ -262,17 +275,24 @@ public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 			texte.setVisible(false);
 			initComponents();
 			displayConnexion();
-			
-			
+		}
+		if(ae.getSource().equals(nextButton))
+		{
+			currentWeek.setNextWeek();
+			updateLabelWeek();
 		}
 		
-		
-		
-		
-		
-		
-		
-		
+		if(ae.getSource().equals(backButton))
+		{
+			currentWeek.setPreviousWeek();
+			updateLabelWeek();
+		}
+			
+	}
+	
+	public void updateLabelWeek()
+	{
+		weekLabel.setText(currentWeek.getMonday()+" au "+currentWeek.getSaturday());
 	}
 	
 }

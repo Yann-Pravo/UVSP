@@ -126,21 +126,23 @@ public class CaracteristiqueDAO extends DAO<Caracteristique> {
 		CaracteristiqueDAO cDAO;
 		ArrayList<Caracteristique> list = new ArrayList<Caracteristique>();
 		try {
-            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM Caracteristique");
-            while (result.next())
-            {
-            	c = new Caracteristique(result.getInt("id_caracteristique"));
-            	cDAO = new CaracteristiqueDAO();
-            	c = cDAO.find(c);
-            	
-            	list.add(c);	
-            }
-            result.getStatement().close();
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return list;	
+	            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM Caracteristique");
+
+	            while (result.next())
+	            {
+	            	c = new Caracteristique(result.getInt("id_caracteristique"));
+	            	cDAO = new CaracteristiqueDAO();
+	            	c = cDAO.find(c);
+	            	
+	            	list.add(c);	
+	            }
+	            result.getStatement().close();
+		          result.close();
+	        }
+	        catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        return list;	
 	}
 
 	@Override

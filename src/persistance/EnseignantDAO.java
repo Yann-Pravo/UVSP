@@ -50,6 +50,8 @@ public class EnseignantDAO extends DAO<Enseignant>{
 				instance.setMdp(result.getString("MDP"));
 				instance.setSu(result.getInt("SUPER_USER"));
 			}
+			result.getStatement().close();
+	          result.close();
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -101,6 +103,8 @@ public class EnseignantDAO extends DAO<Enseignant>{
 				Enseignant ens = new Enseignant(result.getInt("ID_ENSEIGNANT"),result.getString("NOM"),result.getString("PRENOM"),result.getString("MDP"),result.getInt("SUPER_USER"));
 				list.add(ens);
 			}
+			result.getStatement().close();
+	          result.close();
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -126,6 +130,8 @@ public class EnseignantDAO extends DAO<Enseignant>{
 				ens.setSu(result.getInt("SUPER_USER"));
 				find = true;
 			}
+			result.getStatement().close();
+	          result.close();
 		}
 		catch (SQLException e) {
 			e.printStackTrace();

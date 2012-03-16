@@ -4,6 +4,7 @@ import metier.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 
@@ -88,13 +89,13 @@ public class ReservationDAO extends DAO<Reservation>
 		CreneauDAO cDAO;
 		Enseignement ens;
 		EnseignementDAO ensDAO;
+		Date d;
 		ArrayList<Caracteristique> car;
 		
 		try {
-		     System.out.println("sss");
 			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY)
 					.executeQuery(
-            		"SELECT * FROM RESERVATION WHERE id_reservation =" +res.getIdResa());
+            		"SELECT * FROM Reservation WHERE id_reservation =" +res.getIdResa());
             	
       
 			if(result.first())
@@ -111,18 +112,20 @@ public class ReservationDAO extends DAO<Reservation>
 	            ensDAO = new EnseignementDAO();
 	            ens = ensDAO.find(ens);
 	          
-	          
+	            d = (result.getDate("date_reservation"));
 	           
 	            res.setSalle(s);
 	            res.setCreneau(c);
 	            res.setEns(ens);
-	            
+	            res.setDateResa(d);
+	            result.getStatement().close();
+	           result.close(); 
 			} 
 			
 			
 			 result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY)
 					.executeQuery(
-							"select rc.id_caracteristique from reservation r, reservation_caracteristique rc where r.id_reservation ="+ res.getIdResa()+" and r.id_reservation = rc.id_reservation");
+							"select rc.id_caracteristique from Reservation r, reservation_caracteristique rc where r.id_reservation ="+ res.getIdResa()+" and r.id_reservation = rc.id_reservation");
             	
 			 car = new ArrayList<Caracteristique>();
 	           
@@ -136,8 +139,8 @@ public class ReservationDAO extends DAO<Reservation>
 	      
 	          res.setCarResa(car);
 	            
-			
- 
+	          result.getStatement().close();
+	          result.close();
              
         } catch (SQLException ex) 
         {
@@ -175,7 +178,7 @@ public class ReservationDAO extends DAO<Reservation>
 		 
 	        try {
 	           
-	            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM Salle");
+	            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM Reservation");
 
 	            while (result.next())
 	            {
@@ -184,6 +187,8 @@ public class ReservationDAO extends DAO<Reservation>
 	            	  res = resDAO.find(res);
 	            	  list.add(res);
 	            }
+	            result.getStatement().close();
+		          result.close();
 	        }
 	        catch (SQLException e) {
 	            e.printStackTrace();
