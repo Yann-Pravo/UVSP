@@ -1,1 +1,5 @@
-
+bin/
+.DS_Store
+src/.DS_Store
+src/metier/.DS_Store
+forms*
