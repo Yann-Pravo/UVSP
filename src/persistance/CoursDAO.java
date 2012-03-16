@@ -27,7 +27,7 @@ public class CoursDAO extends DAO<Cours> {
      * Méthode qui exécute une requête d'ajout d'une nouvelle matière dans la base de données.
      * Cette méthode redéfinit la méthode create(T obj) de la superclasse DAO.
      * @exception SQLException
-     * @param m Objet Matière qui doit être mappé dans la base
+     * @param c Objet Cours qui doit être mappé dans la base
      * @return Boolean - Vrai si l'insertion s'est déroulée correctement, Faux sinon
      */
     public boolean create(Cours c) {
@@ -78,8 +78,8 @@ public class CoursDAO extends DAO<Cours> {
 
     /**
      * Méthode qui recherche dans la base de données l'enregistrement correspondant
-     * à la cours m en paramêtre et retourne les résultats sous forme d'un objet Cours.
-     * @param m Objet Cours à rechercher dans la base de données
+     * au cours c en paramêtre et retourne les résultats sous forme d'un objet Cours.
+     * @param c Objet Cours à rechercher dans la base de données
      * @return Cours - Objet Cours créé à partir des résultats trouvés dans la base
      */
     public Cours find(Cours c) {
@@ -109,7 +109,7 @@ public class CoursDAO extends DAO<Cours> {
     }
 
     /**
-     * Méthode qui exécute une requête de suppression d'une cours dans la base de données.
+     * Méthode qui exécute une requête de suppression d'un cours dans la base de données.
      * Cette méthode redéfinit la méthode find(T obj) de la superclasse DAO.
      * @exception SQLException
      * @param m Objet Cours dont l'enregistrement correspondant dans la base doit être supprimé
@@ -128,11 +128,11 @@ public class CoursDAO extends DAO<Cours> {
 
     /**
      * Méthode qui :
-     *      1) récupère l'ensemble des matières de la table correspondante dans la base
-     *      2) les mappe en objet java Matiere
-     *      3) les stocke dans une liste d'ojbets Matiere
+     *      1) récupère l'ensemble des cours de la table correspondante dans la base
+     *      2) les mappe en objet java Cours
+     *      3) les stocke dans une liste d'objets Cours
      * @exception SQLException
-     * @return ArrayList<Matiere> - Liste des matières stockées dans la base
+     * @return ArrayList<Cours> - Liste des cours stockées dans la base
      */
     public ArrayList<Cours> getListe() {
         ArrayList<Cours> list = new ArrayList<Cours>();

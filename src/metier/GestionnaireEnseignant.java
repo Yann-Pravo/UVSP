@@ -45,9 +45,13 @@ public class GestionnaireEnseignant {
      * @param ens Enseignant ˆ supprimer
      */
     public void deleteEnseignant(Enseignant ens) {
-        Boolean ok= enseignantDao.delete(ens);
-        if ( ok )
-            listeEnseignants.remove(ens);
+        int i = 0;
+        while (ens.getIdEns() != listeEnseignants.get(i).getIdEns())
+        {
+                i++;
+        }
+        listeEnseignants.remove(i);
+        enseignantDao.delete(ens);
     }
 
     /**
@@ -86,7 +90,12 @@ public class GestionnaireEnseignant {
      * @param ville Ville de l'enseignant
      */
     public void updateEnseignant(Enseignant ens, String nom, String prenom, String mdp, int su) {
-        listeEnseignants.remove(ens);
+        int i = 0;
+        while (ens.getIdEns() != listeEnseignants.get(i).getIdEns())
+        {
+                i++;
+        }
+        listeEnseignants.remove(i);
         ens.setNom(nom);
         ens.setPrenom(prenom);
         ens.setMdp(mdp);

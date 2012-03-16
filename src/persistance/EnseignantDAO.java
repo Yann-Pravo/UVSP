@@ -64,12 +64,12 @@ public class EnseignantDAO extends DAO<Enseignant>{
 		boolean resultat = false;
 		try {
 			PreparedStatement prepare = this.connect
-					.prepareStatement("update ENSEIGNANT set NOM=?, titre=?, PRENOM=?, MDP=?, SUPER_USER where ID_ENSEIGNANT=?");
+					.prepareStatement("update ENSEIGNANT set NOM=?, PRENOM=?, MDP=?, SUPER_USER=? where ID_ENSEIGNANT=?");
                         prepare.setString(1, enseignant.getNom());
-                        prepare.setString(4, enseignant.getPrenom());
-                        prepare.setString(5, enseignant.getMdp());
-                        prepare.setInt(6, enseignant.getSu());
-                        prepare.setInt(7, enseignant.getIdEns());
+                        prepare.setString(2, enseignant.getPrenom());
+                        prepare.setString(3, enseignant.getMdp());
+                        prepare.setInt(4, enseignant.getSu());
+                        prepare.setInt(5, enseignant.getIdEns());
                         prepare.executeUpdate();
                         resultat=true;
 		}
@@ -97,7 +97,7 @@ public class EnseignantDAO extends DAO<Enseignant>{
 		ArrayList<Enseignant> list = new ArrayList<Enseignant>();
 		try {
 			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY)
-					.executeQuery("select * from ENSEIGNANT");
+					.executeQuery("select * from ENSEIGNANT ORDER BY NOM ASC");
 			while (result.next())
 			{
 				Enseignant ens = new Enseignant(result.getInt("ID_ENSEIGNANT"),result.getString("NOM"),result.getString("PRENOM"),result.getString("MDP"),result.getInt("SUPER_USER"));

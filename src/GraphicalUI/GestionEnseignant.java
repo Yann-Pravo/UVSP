@@ -182,6 +182,7 @@ public class GestionEnseignant extends JPanel {
             	btnAjouter.setVisible(true);
             	btnAnnuler.setVisible(false);
             	
+<<<<<<< HEAD
             	if(textFieldID.getText().equals("")) {
             		int su = 0;
             		if(chckbxNewCheckBox.isSelected()) {
@@ -193,6 +194,25 @@ public class GestionEnseignant extends JPanel {
             	else {
             		//gSalle.updateSalle(new Salle(Integer.parseInt(textFieldID.getText())), Integer.parseInt(textFieldID.getText()), textFieldNom.getText(), new Batiment(1,textFieldPrenom.getText()), null);
             	}
+=======
+        		if(textFieldNom.getText().equals("") || textFieldPrenom.getText().equals("") || passwordField.getPassword().equals("")) {
+        			JOptionPane.showMessageDialog(null, "Un ou plusieurs champs n'ont pas ŽtŽ remplis", "Erreur remplissage champ", JOptionPane.ERROR_MESSAGE);
+        		}
+        		else {
+        			int su = 0;
+        			if(chckbxNewCheckBox.isSelected()) {
+        				su = 1;
+        			}
+        			if(textFieldID.getText().equals("")) {
+            			gEns.addEnseignant(textFieldNom.getText(), textFieldPrenom.getText(), new String(passwordField.getPassword()), su);
+        			}
+        			else
+        			{
+        				System.out.println("test");
+        				gEns.updateEnseignant(new Enseignant(Integer.parseInt(textFieldID.getText())), textFieldNom.getText(), textFieldPrenom.getText(), new String(passwordField.getPassword()), su);
+        			}
+        		}
+>>>>>>> c3985e2bc8a86d28ee64ac69d4277aa452789497
             	listeEnseignant();
 			}
 		});
@@ -206,7 +226,11 @@ public class GestionEnseignant extends JPanel {
 				btnAnnuler.setVisible(false);
 				
 				
+<<<<<<< HEAD
 				//gSalle.deleteSalle(new Salle(Integer.parseInt(textFieldID.getText())));
+=======
+				gEns.deleteEnseignant(new Enseignant(Integer.parseInt(textFieldID.getText())));
+>>>>>>> c3985e2bc8a86d28ee64ac69d4277aa452789497
 
 				comboBox.setSelectedIndex(0);
 				listeEnseignant();
@@ -222,6 +246,13 @@ public class GestionEnseignant extends JPanel {
 				btnAnnuler.setVisible(true);
 				
 				textFieldNom.setEditable(true);
+<<<<<<< HEAD
+=======
+				textFieldPrenom.setEditable(true);
+				passwordField.setEditable(true);
+				chckbxNewCheckBox.setEnabled(true);
+				
+>>>>>>> c3985e2bc8a86d28ee64ac69d4277aa452789497
 			}
 		});
 		comboBox.addItemListener(new ItemListener(){
@@ -259,6 +290,10 @@ public class GestionEnseignant extends JPanel {
             		
 	            	btnSupprimer.setVisible(false);
 	            	btnAjouter.setVisible(true);
+<<<<<<< HEAD
+=======
+	            	chckbxNewCheckBox.setSelected(false);
+>>>>>>> c3985e2bc8a86d28ee64ac69d4277aa452789497
             	}
             }               
 		});

@@ -43,24 +43,13 @@ public class CreneauDAO extends DAO<Creneau> {
             return ok;
     }
 
-	public Creneau find(Creneau c) {
-		try {
-			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY)
-					.executeQuery("select * from CRENAUX where ID_CRENEAU = " + c.getIdCreneau() );
-			if(result.first())
-			{
-				c.setHeureDeb(result.getString("HEURE_DEBUT"));
-				c.setHeureFin(result.getString("HEURE_FIN"));
-			}
-			result.getStatement().close();
-	          result.close();
-		}
-		catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return c;
-	}
-
+    /**
+     * Méthode qui exécute une requête de mise à jour d'un enregistrement de la table 'CRENEAU' dans la base de données.
+     * Cette méthode redéfint la méthode update(T obj) de la superclasse DAO.
+     * @exception SQLException
+     * @param creneau Objet Creneau qui doit être mappé pour mettre à jour la ligne correspondante dans la base
+     * @return Boolean - Vrai si la mise à jour s'est déroulée correctement, Faux sinon
+     */
 	public boolean update(Creneau creneau) {
 		boolean resultat = false;
 		try {
@@ -80,6 +69,37 @@ public class CreneauDAO extends DAO<Creneau> {
 		return resultat;
 	}
 
+    /**
+     * Méthode qui recherche dans la base de données l'enregistrement correspondant
+     * au créneau bat en paramêtre et retourne les résultats sous forme d'un objet Creneau.
+     * @param c Objet Creneau à rechercher dans la base de données
+     * @return Creneau - Objet Creneau créé à partir des résultats trouvés dans la base
+     */
+	public Creneau find(Creneau c) {
+		try {
+			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY)
+					.executeQuery("select * from CRENAUX where ID_CRENEAU = " + c.getIdCreneau() );
+			if(result.first())
+			{
+				c.setHeureDeb(result.getString("HEURE_DEBUT"));
+				c.setHeureFin(result.getString("HEURE_FIN"));
+			}
+			result.getStatement().close();
+			result.close();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return c;
+	}
+
+    /**
+     * Méthode qui exécute une requête de suppression d'un créneau dans la base de données.
+     * Cette méthode redéfinit la méthode find(T obj) de la superclasse DAO.
+     * @exception SQLException
+     * @param creneau Objet Creneau dont l'enregistrement correspondant dans la base doit être supprimé
+     * @return Boolean - Vrai si la suppression s'est bien déroulée, Faux sinon
+     */
 	public boolean delete(Creneau creneau) {
 		boolean resultat=false;
 		try {
@@ -94,6 +114,14 @@ public class CreneauDAO extends DAO<Creneau> {
 		return resultat;
 	}
 
+    /**
+     * Méthode qui :
+     *      1) récupère l'ensemble des créneaux de la table correspondante dans la base
+     *      2) les mappe en objet java Creneau
+     *      3) les stocke dans une liste d'objets Creneau
+     * @exception SQLException
+     * @return ArrayList<Creneau> - Liste des créneaux stockées dans la base
+     */
 	public ArrayList<Creneau> getListe() {
 		ArrayList<Creneau> list = new ArrayList<Creneau>();
 		try {
@@ -105,7 +133,7 @@ public class CreneauDAO extends DAO<Creneau> {
 				list.add(creneau);
 			}
 			result.getStatement().close();
-	          result.close();
+	        result.close();
 		}
 		catch (SQLException e) {
 			e.printStackTrace();

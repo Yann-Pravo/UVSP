@@ -101,32 +101,26 @@ public class DAOFactory extends AbstractDAOFactory {
 
     /**
      * Méthode instanciatrice d'un objet DAO pour les Groupes
-     * Cette m√©thode utilise le design pattern singleton : l'objet GroupeDAO est instanci√© une seule fois
-     * @author Fanny Couturier
-     * @return SEEDAO - Un nouvel objet GroupeDAO s'il n'a pas d√©j√† √©t√© instanci√©, l'objet existant sinon
-     * @version 1.0
+     * Cette méthode utilise le design pattern singleton : l'objet GroupeDAO est instancié une seule fois
+     * @return SEEDAO - Un nouvel objet GroupeDAO s'il n'a pas déjà été instancié, l'objet existant sinon
      */
     public DAO<Groupe> getGroupeDAO() {
     	return GroupeDAO.getInstance();
     }
 
      /**
-     * M√©thode instanciatrice d'un objet DAO pour les salles.
-     * Cette m√©thode utilise le design pattern singleton : l'objet SalleDAO est instanci√© une seule fois
-     * @author Maxime Vali√®re
-     * @return SalleDAO - Un nouvel objet SalleDAO s'il n'a pas d√©j√† √©t√© instanci√©, l'objet existant sinon
-     * @version 1.0
+     * Méthode instanciatrice d'un objet DAO pour les salles.
+     * Cette méthode utilise le design pattern singleton : l'objet SalleDAO est instancié une seule fois
+     * @return SalleDAO - Un nouvel objet SalleDAO s'il n'a pas déjà été instancié, l'objet existant sinon
      */
      public DAO<Salle> getSalleDAO() {
         return SalleDAO.getInstance();
      }
      
      /**
-     * M√©thode instanciatrice d'un objet DAO pour les enseignements.
-     * Cette m√©thode utilise le design pattern singleton : l'objet EnseignementDAO est instanci√© une seule fois
-     * @author Boris Kuete
-     * @return EnseignementDAO - Un nouvel objet EnseignementDAO s'il n'a pas d√©j√† √©t√© instanci√©, l'objet existant sinon
-     * @version 1.0
+     * Méthode instanciatrice d'un objet DAO pour les enseignements.
+     * Cette méthode utilise le design pattern singleton : l'objet EnseignementDAO est instancié une seule fois
+     * @return EnseignementDAO - Un nouvel objet EnseignementDAO s'il n'a pas déjà été instancié, l'objet existant sinon
      */
      public DAO<Enseignement> getEnseignementDAO() {
     	 return EnseignementDAO.getInstance();
