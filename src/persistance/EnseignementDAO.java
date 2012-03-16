@@ -135,8 +135,8 @@ public class EnseignementDAO extends DAO<Enseignement> {
     public ArrayList<Enseignement> getListe() {
         ArrayList<Enseignement> list = new ArrayList<Enseignement>();
         try {
-            ResultSet result = this.connect.createStatement().executeQuery(
-                    "SELECT * FROM ENSEIGNEMENT");
+        	ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY)
+					.executeQuery("SELECT * FROM ENSEIGNEMENT");
             while (result.next())
             {
             	CoursDAO coursDAO = new CoursDAO();
@@ -154,9 +154,9 @@ public class EnseignementDAO extends DAO<Enseignement> {
                 Enseignement enseig = new Enseignement(result.getInt("ID_ENSEIGNEMENT"), groupe, result.getDouble("NB_HEURE_PREVUE"), ens, cours);
                 
                 list.add(enseig);
-                result.getStatement().close();
-    	        result.close();
             }
+            result.getStatement().close();
+	        result.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

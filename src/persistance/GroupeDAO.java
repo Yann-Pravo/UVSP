@@ -69,9 +69,9 @@ public class GroupeDAO extends DAO<Groupe> {
 				pere = p.find(pere);
 				grp.setLibelle(result.getString("LIBELLE_GROUPE"));
 				grp.setPere(pere);
-			
 			}
-            
+			result.getStatement().close();
+	        result.close();
         }
         catch (SQLException ex) {
         }

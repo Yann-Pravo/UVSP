@@ -48,11 +48,11 @@ public class GestionnaireReservation {
 	}
 	
 	
-	public boolean addReservation(Salle s, Creneau c, Enseignement e, Date d, ArrayList<Caracteristique> car)
+	public boolean addReservation(Creneau c, Enseignement e, Date d, ArrayList<Caracteristique> car)
 	{
 		boolean ok;
 		
-		Reservation resa = new Reservation(d, s, c, e, car);
+		Reservation resa = new Reservation(d, c, e, car);
 		ok = resaDAO.create(resa);
 		if(ok)
 		{

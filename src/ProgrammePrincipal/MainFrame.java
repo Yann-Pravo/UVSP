@@ -141,6 +141,7 @@ public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 		mnGestion.add(itemEnseignant);
 		
 		JMenuItem mntmGestionDesRservations = new JMenuItem("Gestion des r\u00E9servations");
+		mntmGestionDesRservations.addActionListener(this);
 		mnGestion.add(mntmGestionDesRservations);
 		
 		JMenu mnAffichage = new JMenu("Affichage");
@@ -187,20 +188,20 @@ public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 		
 
 			
-			TimetableModel t = new TimetableModel();
-			JTable tableau = new JTable(t);
-			
-			tableau.setShowHorizontalLines(true);
-			JScrollPane js = new JScrollPane(tableau);
-			
-			tableau.setGridColor(Color.black);
-			tableau.setRowHeight(50);
-			js.setViewportView(tableau);
-			js.setBounds(350, 100, 800, 370);
-			
-			
-			
-			this.getContentPane().add(js);
+//			TimetableModel t = new TimetableModel();
+//			JTable tableau = new JTable(t);
+//			
+//			tableau.setShowHorizontalLines(true);
+//			JScrollPane js = new JScrollPane(tableau);
+//			
+//			tableau.setGridColor(Color.black);
+//			tableau.setRowHeight(50);
+//			js.setViewportView(tableau);
+//			js.setBounds(350, 100, 800, 370);
+//			
+//			
+//			
+//			this.getContentPane().add(js);
 			
 		
 		
@@ -244,13 +245,23 @@ public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 		}
 		if(ae.getActionCommand().equals("Gestion des enseignants"))
 		{
-			GestionEnseignant gs = new GestionEnseignant();
+			GestionEnseignant ge = new GestionEnseignant();
 			this.getContentPane().setLayout(new BorderLayout());
 			this.getContentPane().remove(log);
 			this.getContentPane().remove(texte);
-			this.getContentPane().add(gs, BorderLayout.CENTER);
+			this.getContentPane().add(ge, BorderLayout.CENTER);
 			this.validate();			
-			gs.setVisible(true);			
+			ge.setVisible(true);			
+		}
+		if(ae.getActionCommand().equals("Gestion des r\u00E9servations"))
+		{
+			GestionReservation gr = new GestionReservation(enseignant);
+			this.getContentPane().setLayout(new BorderLayout());
+			this.getContentPane().remove(log);
+			this.getContentPane().remove(texte);
+			this.getContentPane().add(gr, BorderLayout.CENTER);
+			this.validate();			
+			gr.setVisible(true);			
 		}
 		if(ae.getActionCommand().equals("A propos de UVSP"))
 		{

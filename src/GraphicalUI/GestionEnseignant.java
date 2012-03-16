@@ -195,7 +195,6 @@ public class GestionEnseignant extends JPanel {
         			}
         			else
         			{
-        				System.out.println("test");
         				gEns.updateEnseignant(new Enseignant(Integer.parseInt(textFieldID.getText())), textFieldNom.getText(), textFieldPrenom.getText(), new String(passwordField.getPassword()), su);
         			}
         			listeEnseignant();

@@ -101,6 +101,8 @@ public class CoursDAO extends DAO<Cours> {
                 c.setMatiere(mat);
                 c.setTypeCours(type);
             }
+            result.getStatement().close();
+	        result.close();
         }
         catch (SQLException ex) {
        
