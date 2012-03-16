@@ -28,6 +28,9 @@ public class Caracteristique {
 		this.lib = libelle;
 	}
 	
+	public String toString() {
+		return lib;
+	}
 	
 	public int getIdCar()
 	{

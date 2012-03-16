@@ -4,11 +4,12 @@ import javax.swing.table.AbstractTableModel;
 
 public class TimetableModel extends AbstractTableModel {
 	
-	private Object[][] data  = {	{" ", " ", " ", " ", " ", " "},
+	private Object[][] data  = {	{"coucou", " ", " ", " ", " ", " "},
 									{" ", " ", " ", " ", " ", " "},
 									{" ", " ", " ", " ", " ", " "},
 									{" ", " ", " ", " ", " ", " "},
 									{" ", " ", " ", " ", " ", " "},	
+									{" ", " ", " ", " ", " ", " "},
 									{" ", " ", " ", " ", " ", " "},
 								};
 	private String[] title = {"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"};
@@ -20,6 +21,7 @@ public class TimetableModel extends AbstractTableModel {
 	public TimetableModel(){
 
 			super();
+			
 	}
 	
 	/**
@@ -47,6 +49,23 @@ public class TimetableModel extends AbstractTableModel {
 		  return this.title[col];
 		}
 
+	  public boolean isCellEditable(int row, int col) {
+	        //Note that the data/cell address is constant,
+	        //no matter where the cell appears onscreen.
+	        if (col < 2) {
+	            return false;
+	        } else {
+	            return true;
+	        }
+	    }
 
+	    /*
+	     * Don't need to implement this method unless your table's
+	     * data can change.
+	     */
+	    public void setValueAt(Object value, int row, int col) {
+	        data[row][col] = value;
+	        fireTableCellUpdated(row, col);
+	    }
 
 }

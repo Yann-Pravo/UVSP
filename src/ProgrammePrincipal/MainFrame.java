@@ -1,6 +1,7 @@
 package ProgrammePrincipal;
 import GraphicalUI.*;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -135,7 +136,9 @@ public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 		itemSalle.addActionListener(this);
 		mnGestion.add(itemSalle);
 		
-	
+		JMenuItem itemEnseignant = new JMenuItem("Gestion des enseignants");
+		itemEnseignant.addActionListener(this);
+		mnGestion.add(itemEnseignant);
 		
 		JMenuItem mntmGestionDesRservations = new JMenuItem("Gestion des r\u00E9servations");
 		mnGestion.add(mntmGestionDesRservations);
@@ -186,9 +189,16 @@ public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 			
 			TimetableModel t = new TimetableModel();
 			JTable tableau = new JTable(t);
+			
+			tableau.setShowHorizontalLines(true);
 			JScrollPane js = new JScrollPane(tableau);
-		
-			js.setBounds(350, 100, 800, 500);
+			
+			tableau.setGridColor(Color.black);
+			tableau.setRowHeight(50);
+			js.setViewportView(tableau);
+			js.setBounds(350, 100, 800, 370);
+			
+			
 			
 			this.getContentPane().add(js);
 			
@@ -225,6 +235,16 @@ public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 		if(ae.getActionCommand().equals("Gestion des salles"))
 		{
 			GestionSalle gs = new GestionSalle();
+			this.getContentPane().setLayout(new BorderLayout());
+			this.getContentPane().remove(log);
+			this.getContentPane().remove(texte);
+			this.getContentPane().add(gs, BorderLayout.CENTER);
+			this.validate();			
+			gs.setVisible(true);			
+		}
+		if(ae.getActionCommand().equals("Gestion des enseignants"))
+		{
+			GestionEnseignant gs = new GestionEnseignant();
 			this.getContentPane().setLayout(new BorderLayout());
 			this.getContentPane().remove(log);
 			this.getContentPane().remove(texte);

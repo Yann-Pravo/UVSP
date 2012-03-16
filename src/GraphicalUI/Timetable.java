@@ -12,7 +12,7 @@ import metier.GestionnaireReservation;
 import metier.Reservation;
 import metier.WeekDate;
 
-public class Timetable extends JPanel {
+public class Timetable  {
 	private TimetableModel model;
 	GestionnaireReservation gr;
 	private WeekDate wd;
@@ -20,9 +20,10 @@ public class Timetable extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Timetable(WeekDate d) 
+	public Timetable(WeekDate d, TimetableModel m) 
 	{
 		this.wd = d;
+		this.model = m;
 		initComponents();
 	
 
@@ -45,8 +46,17 @@ public class Timetable extends JPanel {
 			m = dateM.format(resa.get(i).getDateResa());
 			if(m.compareTo(this.wd.getMonday()) >= 0 && m.compareTo(this.wd.getSaturday()) <=0)
 			{
-				System.out.println(resa.get(i).getDateResa());
+				System.out.println("Cours: "+resa.get(i).getEns().getCours().getMatiere().getNomMat()+
+									" Heure: "+ resa.get(i).getCreneau().getHeureDeb()+" Date: "+ resa.get(i).getDateResa());
 			}
 		}
+	
+	
+	
+	
+	
+	
+	
+	
 	}
 }
