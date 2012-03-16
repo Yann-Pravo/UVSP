@@ -165,14 +165,18 @@ public class GestionSalle extends JPanel {
 				btnEnregistrer.setVisible(false);
             	btnAjouter.setVisible(true);
             	btnAnnuler.setVisible(false);
-            	
-            	if(textFieldID.getText().equals("")) {
-            		gSalle.addSalle(textFieldLibelle.getText(), new Batiment(1,textFieldBatiment.getText()), null);
-            	}
-            	else {
-            		gSalle.updateSalle(new Salle(Integer.parseInt(textFieldID.getText())), Integer.parseInt(textFieldID.getText()), textFieldLibelle.getText(), new Batiment(1,textFieldBatiment.getText()), null);
-            	}
-            	listeSalle();
+        		if(textFieldLibelle.getText().equals("")) {
+        			JOptionPane.showMessageDialog(null, "Un ou plusieurs champs n'ont pas été remplis", "Erreur remplissage champ", JOptionPane.ERROR_MESSAGE);
+        		}
+        		else {
+	            	if(textFieldID.getText().equals("")) {
+	            		gSalle.addSalle(textFieldLibelle.getText(), new Batiment(1,textFieldBatiment.getText()), null);
+	            	}
+	            	else {
+	            		gSalle.updateSalle(new Salle(Integer.parseInt(textFieldID.getText())), Integer.parseInt(textFieldID.getText()), textFieldLibelle.getText(), new Batiment(1,textFieldBatiment.getText()), null);
+	            	}
+	            	listeSalle();
+        		}
 			}
 		});
 		
