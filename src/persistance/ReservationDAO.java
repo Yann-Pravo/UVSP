@@ -3,6 +3,8 @@ import metier.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -24,13 +26,18 @@ public class ReservationDAO extends DAO<Reservation>
 
 		boolean ok = true;
         try {
-       	 
-            this.connect.createStatement().executeUpdate(
-                        "INSERT INTO Reservation " +
-                        "(id_reservation, id_salle, id_creneau, id_enseignement, date_reservation) " +
-                        "VALUES (seqReservation.nextval, "+ res.getSalle().getIdSalle()+ ","
-                        + res.getCreneau().getIdCreneau()+","+res.getEns().getIdEnseignement()+",'"+
-                    	res.getDateResa()+"')");
+        	String d;
+        	if(res.getDateResa().getMonth() < 9)
+        		d = res.getDateResa().getDate() + "-" + "0" + (res.getDateResa().getMonth()+1) + "-" + (res.getDateResa().getYear()+1900);
+        	else
+        		d = res.getDateResa().getDate() + "-" + (res.getDateResa().getMonth()+1) + "-" + (res.getDateResa().getYear()+1900);
+        	
+        	System.out.println(d);
+    		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        	//Date d = res.getDateResa();
+        	//dateFormat.format(d);
+        	//System.out.println(d);
+            this.connect.createStatement().executeUpdate("INSERT INTO Reservation (id_reservation, id_salle, id_creneau, id_enseignement, date_reservation) VALUES (seqReservation.nextval, null, " + res.getCreneau().getIdCreneau()+","+res.getEns().getIdEnseignement()+",to_date('" + d + "', 'dd-mm-yyyy'))");
         }
         catch (SQLException e) 
         {
@@ -89,7 +96,8 @@ public class ReservationDAO extends DAO<Reservation>
 		CreneauDAO cDAO;
 		Enseignement ens;
 		EnseignementDAO ensDAO;
-		Date d;
+		Date d = new Date();
+
 		ArrayList<Caracteristique> car;
 		
 		try {
@@ -100,9 +108,15 @@ public class ReservationDAO extends DAO<Reservation>
       
 			if(result.first())
 			{
-				s = new Salle(result.getInt("id_salle"));
-	            sDAO = new SalleDAO();
-	            s = sDAO.find(s);
+				int i = result.getInt("id_salle");
+				if(!result.wasNull()) {
+					s = new Salle(result.getInt("id_salle"));
+					sDAO = new SalleDAO();
+					s = sDAO.find(s);
+				}
+				else {
+					s = null;
+				}
 	            
 	            c = new Creneau(result.getInt("id_creneau"));
 	            cDAO = new CreneauDAO();
@@ -178,7 +192,7 @@ public class ReservationDAO extends DAO<Reservation>
 		 
 	        try {
 	           
-	            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM Reservation");
+	            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM RESERVATION");
 
 	            while (result.next())
 	            {
@@ -186,6 +200,7 @@ public class ReservationDAO extends DAO<Reservation>
 	            	  resDAO = new ReservationDAO();
 	            	  res = resDAO.find(res);
 	            	  list.add(res);
+	            	  //System.out.println(res.getSalle().getLibelle());
 	            }
 	            result.getStatement().close();
 		          result.close();

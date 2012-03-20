@@ -45,6 +45,10 @@ public class Reservation {
 		this.caract = car;
 	}
 	
+	public String toString() {
+		return this.getEns().getEnseignant().getNom() + " " + this.getIdResa();
+	}
+	
 	public int getIdResa()
 	{
 		return this.idResa;

@@ -144,6 +144,10 @@ public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 		mntmGestionDesRservations.addActionListener(this);
 		mnGestion.add(mntmGestionDesRservations);
 		
+		JMenuItem mntmGestionDemande = new JMenuItem("Gestion des demandes");
+		mntmGestionDemande.addActionListener(this);
+		mnGestion.add(mntmGestionDemande);
+		
 		JMenu mnAffichage = new JMenu("Affichage");
 		menuBar.add(mnAffichage);
 		
@@ -262,6 +266,16 @@ public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 			this.getContentPane().add(gr, BorderLayout.CENTER);
 			this.validate();			
 			gr.setVisible(true);			
+		}
+		if(ae.getActionCommand().equals("Gestion des demandes"))
+		{
+			GestionDemande gd = new GestionDemande();
+			this.getContentPane().setLayout(new BorderLayout());
+			this.getContentPane().remove(log);
+			this.getContentPane().remove(texte);
+			this.getContentPane().add(gd, BorderLayout.CENTER);
+			this.validate();			
+			gd.setVisible(true);			
 		}
 		if(ae.getActionCommand().equals("A propos de UVSP"))
 		{

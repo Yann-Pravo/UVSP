@@ -22,10 +22,7 @@ public class GestionnaireReservation {
 	 
 	 public static GestionnaireReservation getInstance()
 	 {
-		 if(gestResa == null)
-		 {
-			 gestResa = new GestionnaireReservation();
-		 }
+		 gestResa = new GestionnaireReservation();
 		 return gestResa;
 	 }
 	 

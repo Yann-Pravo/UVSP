@@ -17,31 +17,24 @@ import metier.Creneau;
 import metier.Enseignant;
 import metier.Enseignement;
 import metier.GestionnaireCreneau;
-import metier.GestionnaireEnseignant;
 import metier.GestionnaireEnseignement;
 import metier.GestionnaireReservation;
-import metier.Reservation;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
-import javax.swing.JPasswordField;
-import javax.swing.JCheckBox;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 
 public class GestionReservation extends JPanel {
 
 	private GestionnaireReservation gRes;
-	private ArrayList<Reservation> listRes;
-	private Reservation res;
 	private GestionnaireCreneau gCreneau;
 	private ArrayList<Creneau> listCreneau;
 	private GestionnaireEnseignement gEns;
+	private Enseignement ens;
 	private ArrayList<Enseignement> listEns;
-	private JTextField textFieldDate;
-	private JButton btnEnregistrer;
-	private JButton btnAnnuler;
+	private JTextField textFieldDateJ;
 	private JLabel lblDate;
 	private JLabel lblCréneau;
 	private Enseignant enseignant;
@@ -50,6 +43,8 @@ public class GestionReservation extends JPanel {
 	private JTextField textFieldGroupe;
 	private JComboBox comboBoxCreneau;
 	private JComboBox comboBoxEnseignement;
+	private JButton btnAnnuler;
+	private JButton btnEnregistrer;
 	
 	/**
 	 * Create the panel.
@@ -70,32 +65,22 @@ public class GestionReservation extends JPanel {
 		lblCréneau.setBounds(19, 52, 76, 16);
 		add(lblCréneau);
 		
-		textFieldDate = new JTextField();
-		textFieldDate.setEditable(false);
-		textFieldDate.setBounds(94, 6, 157, 28);
-		add(textFieldDate);
-		textFieldDate.setColumns(10);
+		textFieldDateJ = new JTextField();
+		textFieldDateJ.setText("jj-MM-yyyy");
+		textFieldDateJ.setBounds(94, 6, 157, 28);
+		add(textFieldDateJ);
+		textFieldDateJ.setColumns(10);
 		
 		JLabel lblEnseignement = new JLabel("Enseignement :");
 		lblEnseignement.setBounds(19, 92, 119, 16);
 		add(lblEnseignement);
 		
-		btnEnregistrer = new JButton("Sauver");
-		btnEnregistrer.setIcon(new ImageIcon("./src/ProgrammePrincipal/save.png"));
-		btnEnregistrer.setBounds(141, 250, 110, 32);
-		add(btnEnregistrer);
-		
-		btnAnnuler = new JButton("Annuler");
-		btnAnnuler.setIcon(new ImageIcon("./src/ProgrammePrincipal/delete-icon.png"));
-		btnAnnuler.setBounds(19, 250, 110, 32);
-		add(btnAnnuler);
-		
 		comboBoxCreneau = new JComboBox();
-		comboBoxCreneau.setBounds(94, 48, 157, 27);
+		comboBoxCreneau.setBounds(94, 48, 232, 27);
 		add(comboBoxCreneau);
 		
 		comboBoxEnseignement = new JComboBox();
-		comboBoxEnseignement.setBounds(122, 88, 129, 27);
+		comboBoxEnseignement.setBounds(122, 88, 271, 27);
 		add(comboBoxEnseignement);
 		
 		JLabel lblMatiere = DefaultComponentFactory.getInstance().createLabel("Mati\u00E8re :");
@@ -104,7 +89,7 @@ public class GestionReservation extends JPanel {
 		
 		textFieldMatiere = new JTextField();
 		textFieldMatiere.setEditable(false);
-		textFieldMatiere.setBounds(94, 124, 157, 28);
+		textFieldMatiere.setBounds(94, 124, 299, 28);
 		add(textFieldMatiere);
 		textFieldMatiere.setColumns(10);
 		
@@ -114,7 +99,7 @@ public class GestionReservation extends JPanel {
 		
 		textFieldType = new JTextField();
 		textFieldType.setEditable(false);
-		textFieldType.setBounds(95, 149, 76, 28);
+		textFieldType.setBounds(95, 149, 177, 28);
 		add(textFieldType);
 		textFieldType.setColumns(10);
 		
@@ -124,13 +109,19 @@ public class GestionReservation extends JPanel {
 		
 		textFieldGroupe = new JTextField();
 		textFieldGroupe.setEditable(false);
-		textFieldGroupe.setBounds(95, 173, 76, 28);
+		textFieldGroupe.setBounds(95, 173, 177, 28);
 		add(textFieldGroupe);
 		textFieldGroupe.setColumns(10);
-		btnEnregistrer.setVisible(false);
-		btnAnnuler.setVisible(false);
 		
-
+		btnAnnuler = new JButton("Annuler");
+		btnAnnuler.setIcon(new ImageIcon(GestionReservation.class.getResource("/ProgrammePrincipal/delete-icon.png")));
+		btnAnnuler.setBounds(19, 242, 117, 29);
+		add(btnAnnuler);
+		
+		btnEnregistrer = new JButton("Sauver");
+		btnEnregistrer.setIcon(new ImageIcon(GestionReservation.class.getResource("/ProgrammePrincipal/save.png")));
+		btnEnregistrer.setBounds(158, 242, 117, 29);
+		add(btnEnregistrer);
 		
         initialize();
 
@@ -143,7 +134,7 @@ public class GestionReservation extends JPanel {
 		btnAnnuler.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-        		textFieldDate.setText("");
+        		textFieldDateJ.setText("");
         		textFieldMatiere.setText("");
         		textFieldType.setText("");
         		textFieldGroupe.setText("");
@@ -156,20 +147,19 @@ public class GestionReservation extends JPanel {
 		btnEnregistrer.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-        		if(textFieldDate.getText().equals("") || comboBoxCreneau.getSelectedIndex() == 0 || comboBoxEnseignement.getSelectedIndex() == 0) {
+        		if(textFieldDateJ.getText().equals("") || comboBoxCreneau.getSelectedIndex() == 0 || comboBoxEnseignement.getSelectedIndex() == 0) {
         			JOptionPane.showMessageDialog(null, "Un ou plusieurs champs n'ont pas été remplis", "Erreur remplissage champ", JOptionPane.ERROR_MESSAGE);
         		}
         		else {
         			Date date;
-        			//SimpleDateFormat date = new SimpleDateFormat("MM-dd-yyyy");
         			try {
-        				date = (new SimpleDateFormat( "dd-MM-yyyy" )).parse( textFieldDate.getText() );
+        				date = (new SimpleDateFormat( "dd-MM-yyyy" )).parse( textFieldDateJ.getText() );
         				gRes.addReservation((Creneau) comboBoxCreneau.getSelectedItem(), (Enseignement) comboBoxEnseignement.getSelectedItem(), date, null);
 					} catch (ParseException e1) {
 						e1.printStackTrace();
 					}
         			
-            		textFieldDate.setText("");
+            		textFieldDateJ.setText("");
             		textFieldMatiere.setText("");
             		textFieldType.setText("");
             		textFieldGroupe.setText("");
@@ -178,6 +168,23 @@ public class GestionReservation extends JPanel {
             		comboBoxCreneau.setSelectedIndex(0);
         		}
 			}
+		});
+		
+		comboBoxEnseignement.addItemListener(new ItemListener(){
+			 
+            public void itemStateChanged(ItemEvent e) {
+            	if(!e.getItem().equals(" -Sélectionnez un enseignement- ")) {
+	            	ens = (Enseignement) e.getItem();
+	        		textFieldMatiere.setText(ens.getCours().getMatiere().getNomMat());
+	        		textFieldType.setText(ens.getCours().getTypeCours().getNomTypeCours());
+	        		textFieldGroupe.setText(ens.getGroupe().getLibelle());
+            	}
+            	else {
+            		textFieldMatiere.setText("");
+	        		textFieldType.setText("");
+	        		textFieldGroupe.setText("");
+            	}
+            }               
 		});
 	}
 	
@@ -190,6 +197,9 @@ public class GestionReservation extends JPanel {
         {
             JOptionPane.showMessageDialog(null, "Erreur de récupération de la liste des créneaux dans la base de données", "Erreur BD", JOptionPane.ERROR_MESSAGE);
         }
+		
+		comboBoxCreneau.removeAllItems();
+		comboBoxCreneau.addItem(" -Sélectionnez un créneau- ");
 		int i = 0;
 		while(i < listCreneau.size()) {
 			comboBoxCreneau.addItem(listCreneau.get(i));
@@ -206,9 +216,14 @@ public class GestionReservation extends JPanel {
         {
             JOptionPane.showMessageDialog(null, "Erreur de récupération de la liste des enseignements dans la base de données", "Erreur BD", JOptionPane.ERROR_MESSAGE);
         }
+		
+		comboBoxEnseignement.removeAllItems();
+		comboBoxEnseignement.addItem(" -Sélectionnez un enseignement- ");
 		int i = 0;
 		while(i < listEns.size()) {
-			comboBoxEnseignement.addItem(listEns.get(i));
+			if (listEns.get(i).getEnseignant().getNom().compareTo(this.enseignant.getNom()) == 0 || this.enseignant.getSu() == 1) {
+				comboBoxEnseignement.addItem(listEns.get(i));
+			}
 			i++;
 		}
 	}

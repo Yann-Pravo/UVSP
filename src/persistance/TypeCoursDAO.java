@@ -50,6 +50,8 @@ public class TypeCoursDAO extends DAO<TypeCours> {
 			{
 				instance.setNomTypeCours(result.getString("LIBELLE_TYPE_DE_COURS"));
 			}
+			result.getStatement().close();
+	        result.close();
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
