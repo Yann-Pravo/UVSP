@@ -65,4 +65,12 @@ public class Groupe {
     public void setPere(Groupe pere) {
         this.pere = pere;
     }
+
+
+    public String toString()
+    {
+    	return this.getLibelle();
+    }
+
+
 }

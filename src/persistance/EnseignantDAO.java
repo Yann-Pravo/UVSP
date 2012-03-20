@@ -124,6 +124,7 @@ public class EnseignantDAO extends DAO<Enseignant>{
 					.executeQuery("select * from ENSEIGNANT where MDP = '" + ens.getMdp() + "' and NOM = '" +ens.getNom() + "'" );
 			if(result.first())
 			{
+				ens.setIdEns(result.getInt("id_enseignant"));
 				ens.setNom(result.getString("NOM"));
 				ens.setPrenom(result.getString("PRENOM"));
 				ens.setMdp(result.getString("MDP"));

@@ -1,17 +1,29 @@
 package ProgrammePrincipal;
 import GraphicalUI.*;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.TableCellRenderer;
 
+import metier.Creneau;
 import metier.Enseignant;
+import metier.GestionnaireGroupeEtudiant;
+import metier.GestionnaireReservation;
+import metier.Groupe;
+import metier.UE;
 import metier.WeekDate;
+import metier.Reservation;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -19,6 +31,7 @@ import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -30,12 +43,14 @@ import javax.swing.JTextArea;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
-
 import javax.swing.JMenu;
 
 
-public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
+
+public class MainFrame extends JFrame implements ActionListener, ItemListener, ErrorInterface{
 	
 	Login log;
 	private Enseignant enseignant;
@@ -53,6 +68,13 @@ public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 	private WeekDate currentWeek;
 	private JButton nextButton;
 	private JButton backButton;
+	private ArrayList<Reservation> listeResa;
+	private JTable tableau;
+	private Component cell;
+	private Groupe groupeCourant;
+	private JCheckBox myCourses;
+	private JComboBox comboBox;
+	private boolean profOnly;
 
 	public MainFrame() 
 	{
@@ -109,8 +131,10 @@ public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 
 	public void displayHome()
 	{
+		
+		
 		this.getContentPane().setLayout(null);
-		setBounds(50, 50, 1200, 700);
+		setBounds(30, 40, 1200, 750);
 		//getContentPane().setLayout(null);		
 		
 		texte = new JLabel("Connecté(e) en tant que "+ enseignant.getPrenom()+" "+enseignant.getNom());
@@ -119,7 +143,7 @@ public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 		getContentPane().add(texte);
 		
 		titre = new JLabel("Emploi du temps IG4");
-		titre.setBounds(350, 50, 250, 25);
+		titre.setBounds(150, 50, 250, 25);
 		titre.setFont(new Font("Lucida Grande", Font.BOLD, 18));
 		getContentPane().add(titre);
 		
@@ -159,14 +183,14 @@ public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 		
 		
 		nextButton = new JButton();
-		nextButton.setIcon(new ImageIcon("/Users/clementbalestrat/Desktop/projetJava/UVSP/suivant.png"));
-		nextButton.setBounds(1000, 40, 79, 44);
+		nextButton.setIcon(new ImageIcon("/Users/clementbalestrat/Desktop/projetJava/UVSP/src/ProgrammePrincipal/suivant.png"));
+		nextButton.setBounds(1070, 40, 79, 44);
 		nextButton.addActionListener(this);
 		add(nextButton);
 		
 		backButton = new JButton("");
-		backButton.setIcon(new ImageIcon("/Users/clementbalestrat/Desktop/projetJava/UVSP/precedent.png"));
-		backButton.setBounds(700, 40, 79, 44);
+		backButton.setIcon(new ImageIcon("/Users/clementbalestrat/Desktop/projetJava/UVSP/src/ProgrammePrincipal/precedent.png"));
+		backButton.setBounds(770, 40, 79, 44);
 		backButton.addActionListener(this);
 		add(backButton);
 		
@@ -179,28 +203,110 @@ public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 		currentWeek = new WeekDate();
 
 		weekLabel = new JLabel();
-		weekLabel.setBounds(800, 40, 200, 44);
+		weekLabel.setBounds(870, 40, 200, 44);
 		updateLabelWeek();
 		weekLabel.setFont(new Font("Lucida Grande", Font.BOLD, 12));
 		add(weekLabel);
 	
 		
+		
 
+		
+		comboBox = new JComboBox();
+		comboBox.setBounds(520, 50, 225, 27);
+		getContentPane().add(comboBox);
+		
+		comboBox.removeAllItems();
+		comboBox.addItem(" -Sélectionnez un groupe- ");
+		
+		GestionnaireGroupeEtudiant g = GestionnaireGroupeEtudiant.getInstance();
+		ArrayList<Groupe> gList = g.getListeGroupes();
+		for(int cpt=0; cpt<gList.size(); cpt++)
+		{
+			comboBox.addItem(gList.get(cpt));
+		}
+			
+		
+		comboBox.addItemListener(this);
+
+		
+		myCourses = new JCheckBox("Mes cours");
+		myCourses.setBounds(420, 50, 128, 23);
+		myCourses.addActionListener(this);
+		getContentPane().add(myCourses);
+		
+		
+	
+		
+		
+		
+		
+		
+		
+		JLabel c1 = new JLabel("8h00");
+		JLabel c2 = new JLabel("9h45");
+		JLabel c3 = new JLabel("11h30");
+		JLabel c4 = new JLabel("13h15");
+		JLabel c5 = new JLabel("15h00");
+		JLabel c6 = new JLabel("16h45");
+		JLabel c7 = new JLabel("18h30");
+		
+		c1.setFont(new Font("Lucida Grande", Font.ITALIC, 12));
+		c1.setBounds(90, 110, 250, 16);
+		getContentPane().add(c1);
+		
+		c2.setFont(new Font("Lucida Grande", Font.ITALIC, 12));
+		c2.setBounds(90, 185, 250, 16);
+		getContentPane().add(c2);
+		
+		c3.setFont(new Font("Lucida Grande", Font.ITALIC, 12));
+		c3.setBounds(90, 260, 250, 16);
+		getContentPane().add(c3);
+		
+		c4.setFont(new Font("Lucida Grande", Font.ITALIC, 12));
+		c4.setBounds(90, 335, 250, 16);
+		getContentPane().add(c4);
+		
+		c5.setFont(new Font("Lucida Grande", Font.ITALIC, 12));
+		c5.setBounds(90, 410, 250, 16);
+		getContentPane().add(c5);
+		
+		c6.setFont(new Font("Lucida Grande", Font.ITALIC, 12));
+		c6.setBounds(90, 485, 250, 16);
+		getContentPane().add(c6);
+		
+		c7.setFont(new Font("Lucida Grande", Font.ITALIC, 12));
+		c7.setBounds(90, 560, 250, 16);
+		getContentPane().add(c7);
+		
+		
+		
 			
 			TimetableModel t = new TimetableModel();
-			JTable tableau = new JTable(t);
+			tableau = new JTable(t);
 			
 			tableau.setShowHorizontalLines(true);
 			JScrollPane js = new JScrollPane(tableau);
 			
 			tableau.setGridColor(Color.black);
-			tableau.setRowHeight(50);
+			tableau.setRowHeight(75);
+			tableau.getColumnModel().getColumn(0).setPreferredWidth(120);
+			tableau.getColumnModel().getColumn(1).setPreferredWidth(120);
+			tableau.getColumnModel().getColumn(2).setPreferredWidth(120);
+			tableau.getColumnModel().getColumn(3).setPreferredWidth(120);
+			tableau.getColumnModel().getColumn(4).setPreferredWidth(120);
+			tableau.getColumnModel().getColumn(5).setPreferredWidth(120);
+			tableau.setCellSelectionEnabled(true);
 			js.setViewportView(tableau);
-			js.setBounds(350, 100, 800, 370);
+			js.setBounds(150, 100, 1000, 545);
 			
+			GestionnaireReservation gr = GestionnaireReservation.getInstance();
+			listeResa = gr.getListeReservation();
 			
 			
 			this.getContentPane().add(js);
+			
+			setTimetable(tableau, currentWeek, listeResa);
 			
 		
 		
@@ -280,19 +386,202 @@ public class MainFrame extends JFrame implements ActionListener, ErrorInterface{
 		{
 			currentWeek.setNextWeek();
 			updateLabelWeek();
+			setTimetable(tableau, currentWeek, listeResa);
 		}
 		
 		if(ae.getSource().equals(backButton))
 		{
 			currentWeek.setPreviousWeek();
 			updateLabelWeek();
+			setTimetable(tableau, currentWeek, listeResa);
 		}
+		if(ae.getSource().equals(myCourses))
+		{
+			if(myCourses.isSelected())
+			{
+				this.comboBox.setEnabled(false);
+				this.profOnly = true;
+				setTimetable(tableau, currentWeek, listeResa);
+				
+			}
+			else
+			{
+				this.comboBox.setEnabled(true);
+				this.profOnly = false;
+				setTimetable(tableau, currentWeek, listeResa);
+			}
 			
+		}
 	}
 	
 	public void updateLabelWeek()
 	{
 		weekLabel.setText(currentWeek.getMonday()+" au "+currentWeek.getSaturday());
 	}
+	
+	
+	public void setTimetable(JTable t, WeekDate w, ArrayList<Reservation> r)
+	{
+		resetTimetable(t);
+		String d;
+		SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
+
+		if(this.profOnly)
+		{
+			for(int i=0; i<r.size(); i++)
+			{
+			
+				d = date.format(r.get(i).getDateResa());
+				if(d.compareTo(w.getMonday()) == 0 &&  r.get(i).getSalle().getLibelle() != null && r.get(i).getEns().getEnseignant().getIdEns() == this.enseignant.getIdEns())
+				{	
+						t.setValueAt(r.get(i), getNumCreneau(r.get(i).getCreneau()), 0);
+	
+				}
+				else if(d.compareTo(w.getTuesday()) == 0 &&  r.get(i).getSalle().getLibelle() != null && r.get(i).getEns().getEnseignant().getIdEns() == this.enseignant.getIdEns())
+				{
+					t.setValueAt(r.get(i), getNumCreneau(r.get(i).getCreneau()), 1);
+				}
+				else if(d.compareTo(w.getWednesday()) == 0 &&  r.get(i).getSalle().getLibelle() != null && r.get(i).getEns().getEnseignant().getIdEns() == this.enseignant.getIdEns())
+				{
+					t.setValueAt(r.get(i), getNumCreneau(r.get(i).getCreneau()), 2);
+					
+				}
+				else if(d.compareTo(w.getThursday()) == 0 &&  r.get(i).getSalle().getLibelle() != null && r.get(i).getEns().getEnseignant().getIdEns() == this.enseignant.getIdEns())
+				{
+					t.setValueAt(r.get(i), getNumCreneau(r.get(i).getCreneau()), 3);
+				}
+				else if(d.compareTo(w.getFriday()) == 0 &&  r.get(i).getSalle().getLibelle() != null && r.get(i).getEns().getEnseignant().getIdEns() == this.enseignant.getIdEns())
+				{
+					t.setValueAt(r.get(i), getNumCreneau(r.get(i).getCreneau()), 4);
+				}
+				else if(d.compareTo(w.getSaturday()) == 0 &&  r.get(i).getSalle().getLibelle() != null && r.get(i).getEns().getEnseignant().getIdEns() == this.enseignant.getIdEns())
+				{	
+						t.setValueAt(r.get(i), getNumCreneau(r.get(i).getCreneau()), 5);	
+				}
+			}
+		}
+		else
+		{
+			for(int i=0; i<r.size(); i++)
+			{
+				d = date.format(r.get(i).getDateResa());
+				if(d.compareTo(w.getMonday()) == 0 &&  r.get(i).getSalle().getLibelle() != null && r.get(i).getEns().getGroupe().getIdGroupe() == this.groupeCourant.getIdGroupe())
+				{	
+						t.setValueAt(r.get(i), getNumCreneau(r.get(i).getCreneau()), 0);
+					
+					
+					
+				}
+				else if(d.compareTo(w.getTuesday()) == 0 &&  r.get(i).getSalle().getLibelle() != null && r.get(i).getEns().getGroupe().getIdGroupe() == this.groupeCourant.getIdGroupe())
+				{
+					t.setValueAt(r.get(i), getNumCreneau(r.get(i).getCreneau()), 1);
+				}
+				else if(d.compareTo(w.getWednesday()) == 0 &&  r.get(i).getSalle().getLibelle() != null && r.get(i).getEns().getGroupe().getIdGroupe() == this.groupeCourant.getIdGroupe())
+				{
+					t.setValueAt(r.get(i), getNumCreneau(r.get(i).getCreneau()), 2);
+					
+				}
+				else if(d.compareTo(w.getThursday()) == 0 &&  r.get(i).getSalle().getLibelle() != null && r.get(i).getEns().getGroupe().getIdGroupe() == this.groupeCourant.getIdGroupe())
+				{
+					t.setValueAt(r.get(i), getNumCreneau(r.get(i).getCreneau()), 3);
+				}
+				else if(d.compareTo(w.getFriday()) == 0 &&  r.get(i).getSalle().getLibelle() != null && r.get(i).getEns().getGroupe().getIdGroupe() == this.groupeCourant.getIdGroupe())
+				{
+					t.setValueAt(r.get(i), getNumCreneau(r.get(i).getCreneau()), 4);
+				}
+				else if(d.compareTo(w.getSaturday()) == 0 &&  r.get(i).getSalle().getLibelle() != null && r.get(i).getEns().getGroupe().getIdGroupe() == this.groupeCourant.getIdGroupe())
+				{	
+						t.setValueAt(r.get(i), getNumCreneau(r.get(i).getCreneau()), 5);	
+				}
+			}
+		}
+		
+		
+		
+		
+		TableCellRenderer renderer = new CustomCellFromTable();
+		t.setDefaultRenderer(Object.class, new MultiLineCellRenderer());
+	
+		
+		
+	}
+	
+	public int getNumCreneau(Creneau c)
+	{
+		int i = 0;
+		
+		if(c.getHeureDeb().compareTo("8h00") == 0)
+		{
+			i = 0;
+		}
+		if(c.getHeureDeb().compareTo("9h45") == 0)
+		{
+			i = 1;
+		}
+		if(c.getHeureDeb().compareTo("11h30") == 0)
+		{
+			i = 2;
+		}
+		if(c.getHeureDeb().compareTo("13h15") == 0)
+		{
+			i = 3;
+		}
+		if(c.getHeureDeb().compareTo("15h00") == 0)
+		{
+			i = 4;
+		}
+		if(c.getHeureDeb().compareTo("16h45") == 0)
+		{
+			i = 5;
+		}
+		if(c.getHeureDeb().compareTo("18h30") == 0)
+		{
+			i = 6;
+		}
+		
+		return i;
+			
+	}
+	
+	
+		public void resetTimetable(JTable t)
+		{
+			for(int i = 0; i< t.getRowCount(); i++)
+			{
+				for(int j = 0; j<t.getColumnCount(); j++)
+				{
+					t.setValueAt(" ", i, j);
+				}
+			}
+		}
+
+
+
+		public void itemStateChanged(ItemEvent e) 
+		{
+        	if(!e.getItem().equals(" -Sélectionnez une salle- ")) 
+        	{
+        		if(e.getItem() instanceof Groupe)
+        		{
+        			this.groupeCourant = (Groupe)e.getItem();
+        			setTimetable(tableau, currentWeek, listeResa);
+        		}
+        		
+        	}
+        	
+        }  
+	
+	
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

@@ -72,6 +72,8 @@ public class GroupeDAO extends DAO<Groupe> {
 			
 			}
             
+		result.getStatement().close();
+		result.close();
         }
         catch (SQLException ex) {
         }

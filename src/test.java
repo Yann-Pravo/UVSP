@@ -1,6 +1,7 @@
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 
 import GraphicalUI.Timetable;
@@ -68,14 +69,26 @@ public class test
 //		
 //		System.out.println(liste.get(0).toString());
 		
+		GestionnaireReservation gr = GestionnaireReservation.getInstance();
+		ArrayList<Reservation> a = gr.getListeReservation();
+		
+		for(int i = 0; i<a.size(); i++)
+		{
+			System.out.println(a.get(i).getIdResa());
+			System.out.println(a.get(i).getEns().getGroupe().getLibelle());
+			System.out.println(a.get(i).getEns().getGroupe().getLibelle());
+			System.out.println(a.get(i).getSalle().getLibelle());
+			System.out.println(a.get(i).getEns().getCours().getMatiere().getNomMat()+" ");
+			System.out.println(a.get(i).getCreneau().getHeureDeb()+" ");
+			System.out.println(a.get(i).getDateResa().toString());
+			System.out.println(a.get(i).getEns().getEnseignant());
+			System.out.println(" ");
+		}
 		
 		
 		
-		
-		
-		WeekDate w = new WeekDate();
-		Timetable t = new Timetable(w);
-		
+
+
 		
 		
 		

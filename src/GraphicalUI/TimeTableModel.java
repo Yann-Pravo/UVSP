@@ -4,7 +4,7 @@ import javax.swing.table.AbstractTableModel;
 
 public class TimetableModel extends AbstractTableModel {
 	
-	private Object[][] data  = {	{"coucou", " ", " ", " ", " ", " "},
+	private Object[][] data  = {	{" ", " ", " ", " ", " ", " "},
 									{" ", " ", " ", " ", " ", " "},
 									{" ", " ", " ", " ", " ", " "},
 									{" ", " ", " ", " ", " ", " "},

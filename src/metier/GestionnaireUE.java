@@ -97,4 +97,22 @@ public class GestionnaireUE {
         if ( ok )
             listeUEs.add(u);
     }
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

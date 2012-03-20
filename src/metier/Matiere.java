@@ -94,4 +94,23 @@ public class Matiere {
     }
 
 
+    public String toString()
+    {	
+    	String s;
+    	s = this.getNomMat();
+    	s = s.concat("\n");
+    	s = s.concat(this.getResponsable().getNom());
+    	
+		return s;
+    	
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

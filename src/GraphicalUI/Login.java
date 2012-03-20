@@ -15,6 +15,9 @@ import ProgrammePrincipal.MainFrame;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.Color;
 import persistance.*;
 import metier.*;
@@ -89,7 +92,7 @@ public class Login extends JInternalFrame {
 		passwordField = new JPasswordField();
 		passwordField.setBounds(219, 144, 134, 28);
 		getContentPane().add(passwordField);
-		
+
 		
 		connexionButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) 
@@ -100,6 +103,9 @@ public class Login extends JInternalFrame {
 			}
 		
 		});
+		
+			
+		
 		connexionButton.setBounds(149, 207, 117, 29);
 		getContentPane().add(connexionButton);
 		
@@ -148,7 +154,10 @@ public class Login extends JInternalFrame {
 			}
 		
 		}
+	
 	}
+	
+	
 }
 
 

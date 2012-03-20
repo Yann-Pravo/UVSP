@@ -3,7 +3,7 @@ package metier;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Reservation {
+public class Reservation   {
 
 	private int idResa;
 	private Date date;
@@ -104,6 +104,14 @@ public class Reservation {
 		this.caract = c;
 	}
 	
+	public String toString()
+	{
+		return this.getEns().getGroupe().getLibelle()+" "+this.getSalle().getLibelle()+"\n\r"+
+				
+				getEns().getCours().getMatiere().getNomMat()+"\n\r "+this.getEns().getEnseignant().getNom();
+				
+	}
+
 	
 	
 }
