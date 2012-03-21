@@ -13,13 +13,15 @@ import javax.swing.JComboBox;
 import metier.Batiment;
 import metier.Salle;
 import metier.GestionnaireSalle;
+
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JList;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 
-public class GestionSalle extends JPanel {
+public class GestionSalle extends JFrame {
 
 	private GestionnaireSalle gSalle;
 	private ArrayList<Salle> listSalle;
@@ -43,72 +45,73 @@ public class GestionSalle extends JPanel {
 	 * Create the panel.
 	 */
 	public GestionSalle() {
-		setLayout(null);
-		
+		getContentPane().setLayout(null);
+		this.setTitle("Gestion des salles");
+		this.setBounds(200, 200, 449, 429);
 		gSalle = GestionnaireSalle.getInstance();
 		
 		comboBox = new JComboBox();
-		comboBox.setBounds(6, 6, 222, 27);
-		add(comboBox);
+		comboBox.setBounds(107, 48, 222, 27);
+		getContentPane().add(comboBox);
 		
 		lblId = new JLabel("ID : ");
-		lblId.setBounds(19, 63, 61, 16);
-		add(lblId);
+		lblId.setBounds(32, 131, 61, 16);
+		getContentPane().add(lblId);
 		
 		lblLibell = new JLabel("Libell\u00E9 : ");
-		lblLibell.setBounds(19, 103, 61, 16);
-		add(lblLibell);
+		lblLibell.setBounds(32, 171, 61, 16);
+		getContentPane().add(lblLibell);
 		
 		lblBatiment = new JLabel("Batiment : ");
-		lblBatiment.setBounds(19, 143, 76, 16);
-		add(lblBatiment);
+		lblBatiment.setBounds(32, 211, 76, 16);
+		getContentPane().add(lblBatiment);
 		
 		textFieldBatiment = new JTextField();
 		textFieldBatiment.setEditable(false);
-		textFieldBatiment.setBounds(94, 137, 157, 28);
-		add(textFieldBatiment);
+		textFieldBatiment.setBounds(163, 205, 204, 28);
+		getContentPane().add(textFieldBatiment);
 		textFieldBatiment.setColumns(10);
 		
 		textFieldLibelle = new JTextField();
 		textFieldLibelle.setEditable(false);
-		textFieldLibelle.setBounds(94, 97, 157, 28);
-		add(textFieldLibelle);
+		textFieldLibelle.setBounds(163, 165, 204, 28);
+		getContentPane().add(textFieldLibelle);
 		textFieldLibelle.setColumns(10);
 		
 		textFieldID = new JTextField();
 		textFieldID.setEditable(false);
-		textFieldID.setBounds(94, 57, 157, 28);
-		add(textFieldID);
+		textFieldID.setBounds(163, 125, 204, 28);
+		getContentPane().add(textFieldID);
 		textFieldID.setColumns(10);
 		
 		JLabel lblCaractristique = new JLabel("Caract\u00E9ristiques : ");
-		lblCaractristique.setBounds(19, 178, 119, 16);
-		add(lblCaractristique);
+		lblCaractristique.setBounds(32, 250, 119, 16);
+		getContentPane().add(lblCaractristique);
 		
 		btnAjouter = new JButton("Ajouter");
 		btnAjouter.setIcon(new ImageIcon("./src/ProgrammePrincipal/add.png"));
-		btnAjouter.setBounds(19, 308, 110, 32);
-		add(btnAjouter);
+		btnAjouter.setBounds(71, 346, 110, 32);
+		getContentPane().add(btnAjouter);
 		
 		btnSupprimer = new JButton("Supprimer");
 		btnSupprimer.setIcon(new ImageIcon("./src/ProgrammePrincipal/delete-icon.png"));
-		btnSupprimer.setBounds(141, 308, 110, 32);
-		add(btnSupprimer);
+		btnSupprimer.setBounds(265, 346, 110, 32);
+		getContentPane().add(btnSupprimer);
 		
 		btnModifier = new JButton("Modifier");
 		btnModifier.setIcon(new ImageIcon("./src/ProgrammePrincipal/update.png"));
-		btnModifier.setBounds(19, 308, 110, 32);
-		add(btnModifier);
+		btnModifier.setBounds(71, 346, 110, 32);
+		getContentPane().add(btnModifier);
 		
 		btnEnregistrer = new JButton("Sauver");
 		btnEnregistrer.setIcon(new ImageIcon("./src/ProgrammePrincipal/save.png"));
-		btnEnregistrer.setBounds(141, 308, 110, 32);
-		add(btnEnregistrer);
+		btnEnregistrer.setBounds(265, 346, 110, 32);
+		getContentPane().add(btnEnregistrer);
 		
 		btnAnnuler = new JButton("Annuler");
 		btnAnnuler.setIcon(new ImageIcon("./src/ProgrammePrincipal/delete-icon.png"));
-		btnAnnuler.setBounds(19, 308, 110, 32);
-		add(btnAnnuler);
+		btnAnnuler.setBounds(71, 346, 110, 32);
+		getContentPane().add(btnAnnuler);
 		
 		btnSupprimer.setVisible(false);
 		btnEnregistrer.setVisible(false);
@@ -210,8 +213,8 @@ public class GestionSalle extends JPanel {
 		
 		listCar = new JList();
 		listCar.setVisibleRowCount(4);
-		listCar.setBounds(47, 200, 204, 73);
-		add(listCar);
+		listCar.setBounds(163, 250, 204, 73);
+		getContentPane().add(listCar);
 		
 		comboBox.addItemListener(new ItemListener(){
 			 

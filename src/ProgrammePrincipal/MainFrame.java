@@ -362,11 +362,12 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 		
 		if(ae.getActionCommand().equals("Gestion des salles"))
 		{
-			removeComponents("gestionSalle");
+			
 			GestionSalle gs = new GestionSalle();
-			this.getContentPane().setLayout(new BorderLayout());
-			this.getContentPane().add(gs, BorderLayout.CENTER);
-			this.validate();			
+		
+		//	this.getContentPane().setLayout(new BorderLayout());
+			//this.getContentPane().add(gs, BorderLayout.CENTER);
+			//this.validate();			
 			gs.setVisible(true);			
 		}
 		if(ae.getActionCommand().equals("Gestion des enseignants"))
@@ -395,7 +396,7 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 			this.getContentPane().setLayout(new BorderLayout());
 			this.getContentPane().remove(log);
 			this.getContentPane().remove(texte);
-			this.getContentPane().add(gd, BorderLayout.CENTER);
+			this.getContentPane().add(gd, BorderLayout.SOUTH);
 			this.validate();			
 			gd.setVisible(true);			
 		}
