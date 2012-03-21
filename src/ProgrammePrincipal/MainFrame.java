@@ -187,10 +187,10 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 		mntmGestionDemande.addActionListener(this);
 		mnGestion.add(mntmGestionDemande);
 		
-		JMenu mnAffichage = new JMenu("Affichage");
+		JMenu mnAffichage = new JMenu("Exporter EDT");
 		menuBar.add(mnAffichage);
 		
-		JMenuItem mntmAfficherLeCalendrier = new JMenuItem("Afficher le calendrier");
+		JMenuItem mntmAfficherLeCalendrier = new JMenuItem("Exporter en PDF");
 		mnAffichage.add(mntmAfficherLeCalendrier);
 		
 		
@@ -363,11 +363,7 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 		if(ae.getActionCommand().equals("Gestion des salles"))
 		{
 			
-			GestionSalle gs = new GestionSalle();
-		
-		//	this.getContentPane().setLayout(new BorderLayout());
-			//this.getContentPane().add(gs, BorderLayout.CENTER);
-			//this.validate();			
+			GestionSalle gs = new GestionSalle();		
 			gs.setVisible(true);			
 		}
 		if(ae.getActionCommand().equals("Gestion des enseignants"))
