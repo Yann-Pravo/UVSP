@@ -77,6 +77,16 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 	private JComboBox comboBox;
 	private boolean profOnly;
 	private int verifGroupe;
+	private JMenuItem itemQuit;
+	private JScrollPane js;
+	private JLabel c1;
+	private JLabel c2;
+	private JLabel c3;
+	private JLabel c4;
+	private JLabel c5;
+	private JLabel c6;
+	private JLabel c7;
+	
 
 	public MainFrame() 
 	{
@@ -109,7 +119,12 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 		itemLog.addActionListener(this);
 		mnFichier.add(itemLog);
 		
-		JMenuItem itemQuit = new JMenuItem("Quitter");
+		itemDelog = new JMenuItem("D残onnexion");
+		itemDelog.addActionListener(this);
+		mnFichier.add(itemDelog);
+		itemDelog.setVisible(false);
+		
+		itemQuit = new JMenuItem("Quitter");
 		itemQuit.addActionListener(this);
 		mnFichier.add(itemQuit);
 		
@@ -153,10 +168,8 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 		menuBar.add(mnGestion);
 	
 		itemLog.setVisible(false);
-		
-		itemDelog = new JMenuItem("D残onnexion");
-		itemDelog.addActionListener(this);
-		mnFichier.add(itemDelog);
+		itemDelog.setVisible(true);
+
 		
 		JMenuItem itemSalle = new JMenuItem("Gestion des salles");
 		itemSalle.addActionListener(this);
@@ -250,13 +263,13 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 		
 		
 		
-		JLabel c1 = new JLabel("8h00");
-		JLabel c2 = new JLabel("9h45");
-		JLabel c3 = new JLabel("11h30");
-		JLabel c4 = new JLabel("13h15");
-		JLabel c5 = new JLabel("15h00");
-		JLabel c6 = new JLabel("16h45");
-		JLabel c7 = new JLabel("18h30");
+		c1 = new JLabel("8h00");
+		c2 = new JLabel("9h45");
+		c3 = new JLabel("11h30");
+		c4 = new JLabel("13h15");
+		c5 = new JLabel("15h00");
+		c6 = new JLabel("16h45");
+		c7 = new JLabel("18h30");
 		
 		c1.setFont(new Font("Lucida Grande", Font.ITALIC, 12));
 		c1.setBounds(90, 110, 250, 16);
@@ -294,7 +307,7 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 			tableau = new JTable(t);
 			
 			tableau.setShowHorizontalLines(true);
-			JScrollPane js = new JScrollPane(tableau);
+			js = new JScrollPane(tableau);
 			
 			tableau.setGridColor(Color.black);
 			tableau.setRowHeight(75);
@@ -349,10 +362,9 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 		
 		if(ae.getActionCommand().equals("Gestion des salles"))
 		{
+			removeComponents("gestionSalle");
 			GestionSalle gs = new GestionSalle();
 			this.getContentPane().setLayout(new BorderLayout());
-			this.getContentPane().remove(log);
-			this.getContentPane().remove(texte);
 			this.getContentPane().add(gs, BorderLayout.CENTER);
 			this.validate();			
 			gs.setVisible(true);			
@@ -405,9 +417,7 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 	
 		if(ae.getActionCommand().equals("D残onnexion"))
 		{
-			this.enseignant = null;
-			getContentPane().remove(texte);
-			texte.setVisible(false);
+			removeComponents("d残o");
 			initComponents();
 			displayConnexion();
 		}
@@ -654,6 +664,51 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 		}
 		
 	
+		public void removeComponents(String s)
+		{
+			if(s.compareTo("d残o") == 0)
+			{
+				this.enseignant = null;
+				getContentPane().remove(comboBox);
+				getContentPane().remove(backButton);
+				getContentPane().remove(myCourses);
+				getContentPane().remove(nextButton);
+				getContentPane().remove(tableau);
+				getContentPane().remove(texte);
+				getContentPane().remove(titre);
+				getContentPane().remove(weekLabel);	
+				getContentPane().remove(js);
+				getContentPane().remove(c1);
+				getContentPane().remove(c2);
+				getContentPane().remove(c3);
+				getContentPane().remove(c4);
+				getContentPane().remove(c5);
+				getContentPane().remove(c6);
+				getContentPane().remove(c7);
+				
+			}
+			else if(s.compareTo("gestionSalle") == 0)
+			{
+				getContentPane().remove(comboBox);
+				getContentPane().remove(backButton);
+				getContentPane().remove(myCourses);
+				getContentPane().remove(nextButton);
+				getContentPane().remove(tableau);
+				getContentPane().remove(texte);
+				getContentPane().remove(titre);
+				getContentPane().remove(weekLabel);	
+				getContentPane().remove(js);
+				getContentPane().remove(c1);
+				getContentPane().remove(c2);
+				getContentPane().remove(c3);
+				getContentPane().remove(c4);
+				getContentPane().remove(c5);
+				getContentPane().remove(c6);
+				getContentPane().remove(c7);
+			}
+			
+			
+		}
 	
 	
 	

@@ -11,7 +11,7 @@ import metier.*;
  */
 public abstract class AbstractDAOFactory {
 
-    public static final int DAO_FACTORY = 1;
+    public static final int DAO_FACTORY = 0;
     public static final int TXT_DAO_FACTORY = 1;
 
     /**
