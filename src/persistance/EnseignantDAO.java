@@ -51,7 +51,7 @@ public class EnseignantDAO extends DAO<Enseignant>{
 				instance.setSu(result.getInt("SUPER_USER"));
 			}
 			result.getStatement().close();
-	          result.close();
+	        result.close();
 		}
 		catch (SQLException e) {
 			e.printStackTrace();

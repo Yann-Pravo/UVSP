@@ -36,6 +36,8 @@ public class Creneau {
 		this.heureFin = heureFin;
 	}
 	
-	
+	public String toString() {
+		return heureDeb + " - " + heureFin;
+	}
 	
 }

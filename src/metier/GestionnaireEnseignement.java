@@ -23,8 +23,7 @@ public class GestionnaireEnseignement {
      * Son accès est privé afin de contrôler l'instanciation d'un objet unique (application du design pattern Singleton).
      */
     private GestionnaireEnseignement() {
-        enseignementDAO = AbstractDAOFactory.getFactory(
-        AbstractDAOFactory.DAO_FACTORY).getEnseignementDAO();
+        enseignementDAO = AbstractDAOFactory.getFactory(AbstractDAOFactory.DAO_FACTORY).getEnseignementDAO();
         listeEnseignements = enseignementDAO.getListe();
     }
 

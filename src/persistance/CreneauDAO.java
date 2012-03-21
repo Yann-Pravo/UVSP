@@ -103,7 +103,7 @@ public class CreneauDAO extends DAO<Creneau> {
 	public boolean delete(Creneau creneau) {
 		boolean resultat=false;
 		try {
-			PreparedStatement prepare = this.connect.prepareStatement("DELETE FROM CRENAUX where ID_CRENAU=?");
+			PreparedStatement prepare = this.connect.prepareStatement("DELETE FROM CRENAUX where ID_CRENEAU=?");
 			prepare.setInt(1, creneau.getIdCreneau());
 			prepare.executeUpdate();
 			resultat=true;
@@ -129,15 +129,14 @@ public class CreneauDAO extends DAO<Creneau> {
 					.executeQuery("select * from CRENAUX");
 			while (result.next())
 			{
-				Creneau creneau = new Creneau(result.getInt("ID_CRENAU"), result.getString("HEURE_DEBUT"), result.getString("HEURE_FIN"));
+				Creneau creneau = new Creneau(result.getInt("ID_CRENEAU"), result.getString("HEURE_DEBUT"), result.getString("HEURE_FIN"));
 				list.add(creneau);
 			}
 			result.getStatement().close();
 	        result.close();
 		}
 		catch (SQLException e) {
-			e.printStackTrace();
-			
+			e.printStackTrace();	
 		}
 		return list;
 	}

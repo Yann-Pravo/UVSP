@@ -110,4 +110,13 @@ public class Enseignement {
     public void setCours(Cours cours) {
         this.cours = cours;
     }
+    
+    public String toString() {
+    	if (cours != null) {
+    		return this.getCours().getMatiere().getNomMat() + " - " + this.getCours().getTypeCours().getNomTypeCours();
+    	}
+    	else {
+    		return String.valueOf(idEnseignement);
+    	}
+    }
 }

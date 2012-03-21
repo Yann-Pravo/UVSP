@@ -165,7 +165,12 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 		mnGestion.add(itemEnseignant);
 		
 		JMenuItem mntmGestionDesRservations = new JMenuItem("Gestion des r\u00E9servations");
+		mntmGestionDesRservations.addActionListener(this);
 		mnGestion.add(mntmGestionDesRservations);
+		
+		JMenuItem mntmGestionDemande = new JMenuItem("Gestion des demandes");
+		mntmGestionDemande.addActionListener(this);
+		mnGestion.add(mntmGestionDemande);
 		
 		JMenu mnAffichage = new JMenu("Affichage");
 		menuBar.add(mnAffichage);
@@ -282,6 +287,7 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 		
 		
 			
+
 			TimetableModel t = new TimetableModel();
 			tableau = new JTable(t);
 			
@@ -305,6 +311,7 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 			
 			
 			this.getContentPane().add(js);
+
 			
 			setTimetable(tableau, currentWeek, listeResa);
 			
@@ -350,13 +357,33 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 		}
 		if(ae.getActionCommand().equals("Gestion des enseignants"))
 		{
-			GestionEnseignant gs = new GestionEnseignant();
+			GestionEnseignant ge = new GestionEnseignant();
 			this.getContentPane().setLayout(new BorderLayout());
 			this.getContentPane().remove(log);
 			this.getContentPane().remove(texte);
-			this.getContentPane().add(gs, BorderLayout.CENTER);
+			this.getContentPane().add(ge, BorderLayout.CENTER);
 			this.validate();			
-			gs.setVisible(true);			
+			ge.setVisible(true);			
+		}
+		if(ae.getActionCommand().equals("Gestion des r\u00E9servations"))
+		{
+			GestionReservation gr = new GestionReservation(enseignant);
+			this.getContentPane().setLayout(new BorderLayout());
+			this.getContentPane().remove(log);
+			this.getContentPane().remove(texte);
+			this.getContentPane().add(gr, BorderLayout.CENTER);
+			this.validate();			
+			gr.setVisible(true);			
+		}
+		if(ae.getActionCommand().equals("Gestion des demandes"))
+		{
+			GestionDemande gd = new GestionDemande();
+			this.getContentPane().setLayout(new BorderLayout());
+			this.getContentPane().remove(log);
+			this.getContentPane().remove(texte);
+			this.getContentPane().add(gd, BorderLayout.CENTER);
+			this.validate();			
+			gd.setVisible(true);			
 		}
 		if(ae.getActionCommand().equals("A propos de UVSP"))
 		{
