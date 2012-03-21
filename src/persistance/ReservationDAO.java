@@ -3,7 +3,6 @@ import metier.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,9 +11,9 @@ import java.util.Date;
 
 public class ReservationDAO extends DAO<Reservation>
 {
-	
+
 	private static final ReservationDAO instance = new ReservationDAO();
-	
+
 	public final static ReservationDAO getInstance()
 	{
 		return instance;
@@ -26,25 +25,16 @@ public class ReservationDAO extends DAO<Reservation>
 
 		boolean ok = true;
         try {
-        	String d;
-        	if(res.getDateResa().getMonth() < 9)
-        		d = res.getDateResa().getDate() + "-" + "0" + (res.getDateResa().getMonth()+1) + "-" + (res.getDateResa().getYear()+1900);
-        	else
-        		d = res.getDateResa().getDate() + "-" + (res.getDateResa().getMonth()+1) + "-" + (res.getDateResa().getYear()+1900);
+        	SimpleDateFormat formatter = new SimpleDateFormat ("dd-MM-yyyy" ); 
+    		String dateString = formatter.format(res.getDateResa());
         	
-        	System.out.println(d);
-    		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        	//Date d = res.getDateResa();
-        	//dateFormat.format(d);
-        	//System.out.println(d);
-            this.connect.createStatement().executeUpdate("INSERT INTO Reservation (id_reservation, id_salle, id_creneau, id_enseignement, date_reservation) VALUES (seqReservation.nextval, null, " + res.getCreneau().getIdCreneau()+","+res.getEns().getIdEnseignement()+",to_date('" + d + "', 'dd-mm-yyyy'))");
+            this.connect.createStatement().executeUpdate("INSERT INTO Reservation (id_reservation, id_salle, id_creneau, id_enseignement, date_reservation) VALUES (seqReservation.nextval, null, " + res.getCreneau().getIdCreneau()+","+res.getEns().getIdEnseignement()+",to_date('" + dateString + "', 'dd-mm-yyyy'))");
         }
         catch (SQLException e) 
         {
        	 ok = false;
         }
         return ok;
-		
 	}
 
 	@Override
@@ -83,7 +73,7 @@ public class ReservationDAO extends DAO<Reservation>
 
 	@Override
 	public boolean update(Reservation ancien, Reservation nouveau) {
-		
+
 		return false;
 	}
 
@@ -96,10 +86,9 @@ public class ReservationDAO extends DAO<Reservation>
 		CreneauDAO cDAO;
 		Enseignement ens;
 		EnseignementDAO ensDAO;
-		Date d = new Date();
-
+		Date d;
 		ArrayList<Caracteristique> car;
-		
+
 		try {
 			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY)
 					.executeQuery(
@@ -108,26 +97,20 @@ public class ReservationDAO extends DAO<Reservation>
       
 			if(result.first())
 			{
-				int i = result.getInt("id_salle");
-				if(!result.wasNull()) {
-					s = new Salle(result.getInt("id_salle"));
-					sDAO = new SalleDAO();
-					s = sDAO.find(s);
-				}
-				else {
-					s = null;
-				}
-	            
+				s = new Salle(result.getInt("id_salle"));
+	            sDAO = new SalleDAO();
+	            s = sDAO.find(s);
+
 	            c = new Creneau(result.getInt("id_creneau"));
 	            cDAO = new CreneauDAO();
 	            c = cDAO.find(c);
-	            
+
 	            ens = new Enseignement(result.getInt("id_enseignement"));
 	            ensDAO = new EnseignementDAO();
 	            ens = ensDAO.find(ens);
-	          
+
 	            d = (result.getDate("date_reservation"));
-	           
+
 	            res.setSalle(s);
 	            res.setCreneau(c);
 	            res.setEns(ens);
@@ -135,14 +118,14 @@ public class ReservationDAO extends DAO<Reservation>
 	            result.getStatement().close();
 	           result.close(); 
 			} 
-			
-			
+
+
 			 result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY)
 					.executeQuery(
 							"select rc.id_caracteristique from Reservation r, reservation_caracteristique rc where r.id_reservation ="+ res.getIdResa()+" and r.id_reservation = rc.id_reservation");
             	
 			 car = new ArrayList<Caracteristique>();
-	           
+
 	            while(result.next())
 	            {
 	            	CaracteristiqueDAO caDAO= new CaracteristiqueDAO();
@@ -150,9 +133,9 @@ public class ReservationDAO extends DAO<Reservation>
 	            	ca = caDAO.find(ca);
 	            	car.add(ca);	
 	            }
-	      
+
 	          res.setCarResa(car);
-	            
+
 	          result.getStatement().close();
 	          result.close();
              
@@ -162,7 +145,7 @@ public class ReservationDAO extends DAO<Reservation>
       
         }
         return res;
-		
+
 	}
 
 	@Override
@@ -176,7 +159,7 @@ public class ReservationDAO extends DAO<Reservation>
 	                            "WHERE id_reservation =" + res.getIdResa());
 	        }
 	        catch (SQLException e) {
-	            
+
 	            ok = false;
 	        }
 
@@ -189,10 +172,10 @@ public class ReservationDAO extends DAO<Reservation>
 		Reservation res;
 		ReservationDAO resDAO;
 		 ArrayList<Reservation> list = new ArrayList<Reservation>();
-		 
+
 	        try {
-	           
-	            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM RESERVATION");
+
+	            ResultSet result = this.connect.createStatement().executeQuery("SELECT * FROM Reservation");
 
 	            while (result.next())
 	            {
@@ -200,7 +183,6 @@ public class ReservationDAO extends DAO<Reservation>
 	            	  resDAO = new ReservationDAO();
 	            	  res = resDAO.find(res);
 	            	  list.add(res);
-	            	  //System.out.println(res.getSalle().getLibelle());
 	            }
 	            result.getStatement().close();
 		          result.close();
@@ -209,8 +191,8 @@ public class ReservationDAO extends DAO<Reservation>
 	            e.printStackTrace();
 	        }
 	        return list;
-		
-		
+
+
 	}
 
 	@Override

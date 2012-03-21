@@ -3,6 +3,7 @@ package GraphicalUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
@@ -36,6 +37,8 @@ public class GestionDemande extends JPanel {
 	private JComboBox comboBoxSalle;
 	private JButton btnSupprimer;
 	private JButton btnEnregistrer;
+	private JTextField textFieldDate;
+	private JTextField textFieldCren;
 	
 	/**
 	 * Create the panel.
@@ -55,32 +58,32 @@ public class GestionDemande extends JPanel {
 		add(comboBoxSalle);
 		
 		JLabel lblMatiere = DefaultComponentFactory.getInstance().createLabel("Mati\u00E8re :");
-		lblMatiere.setBounds(6, 71, 61, 16);
+		lblMatiere.setBounds(6, 93, 61, 16);
 		add(lblMatiere);
 		
 		textFieldMatiere = new JTextField();
 		textFieldMatiere.setEditable(false);
-		textFieldMatiere.setBounds(81, 65, 299, 28);
+		textFieldMatiere.setBounds(81, 87, 299, 28);
 		add(textFieldMatiere);
 		textFieldMatiere.setColumns(10);
 		
 		JLabel lblType = DefaultComponentFactory.getInstance().createLabel("Type : ");
-		lblType.setBounds(7, 96, 61, 16);
+		lblType.setBounds(7, 118, 61, 16);
 		add(lblType);
 		
 		textFieldType = new JTextField();
 		textFieldType.setEditable(false);
-		textFieldType.setBounds(82, 90, 177, 28);
+		textFieldType.setBounds(82, 112, 177, 28);
 		add(textFieldType);
 		textFieldType.setColumns(10);
 		
 		JLabel lblGroupe = DefaultComponentFactory.getInstance().createLabel("Groupe :");
-		lblGroupe.setBounds(6, 120, 120, 16);
+		lblGroupe.setBounds(6, 142, 120, 16);
 		add(lblGroupe);
 		
 		textFieldGroupe = new JTextField();
 		textFieldGroupe.setEditable(false);
-		textFieldGroupe.setBounds(82, 114, 177, 28);
+		textFieldGroupe.setBounds(82, 136, 177, 28);
 		add(textFieldGroupe);
 		textFieldGroupe.setColumns(10);
 		
@@ -93,6 +96,26 @@ public class GestionDemande extends JPanel {
 		btnEnregistrer.setIcon(new ImageIcon(GestionDemande.class.getResource("/ProgrammePrincipal/save.png")));
 		btnEnregistrer.setBounds(142, 176, 117, 32);
 		add(btnEnregistrer);
+		
+		JLabel lblDate = new JLabel("Date :");
+		lblDate.setBounds(6, 55, 61, 16);
+		add(lblDate);
+		
+		textFieldDate = new JTextField();
+		textFieldDate.setEditable(false);
+		textFieldDate.setBounds(81, 47, 97, 28);
+		add(textFieldDate);
+		textFieldDate.setColumns(10);
+		
+		JLabel lblCrneau = new JLabel("Cr\u00E9neau :");
+		lblCrneau.setBounds(190, 55, 61, 16);
+		add(lblCrneau);
+		
+		textFieldCren = new JTextField();
+		textFieldCren.setEditable(false);
+		textFieldCren.setBounds(263, 47, 117, 28);
+		add(textFieldCren);
+		textFieldCren.setColumns(10);
 		
 		initialize();
 
@@ -107,6 +130,8 @@ public class GestionDemande extends JPanel {
         		textFieldMatiere.setText("");
         		textFieldType.setText("");
         		textFieldGroupe.setText("");
+        		textFieldDate.setText("");
+        		textFieldCren.setText("");
         		
         		comboBoxRes.setSelectedIndex(0);
         		comboBoxSalle.setSelectedIndex(0);
@@ -129,6 +154,8 @@ public class GestionDemande extends JPanel {
             		textFieldMatiere.setText("");
             		textFieldType.setText("");
             		textFieldGroupe.setText("");
+            		textFieldDate.setText("");
+            		textFieldCren.setText("");
 
             		gRes = GestionnaireReservation.getInstance();
             		
@@ -143,9 +170,15 @@ public class GestionDemande extends JPanel {
             public void itemStateChanged(ItemEvent e) {
             	if(!e.getItem().equals(" -Sélectionnez une réservation- ")) {
 	            	res = (Reservation) e.getItem();
+	            	
+                	SimpleDateFormat formatter = new SimpleDateFormat ("dd-MM-yyyy");
+            		String dateString = formatter.format(res.getDateResa());
+            		
 	        		textFieldMatiere.setText(res.getEns().getCours().getMatiere().getNomMat());
 	        		textFieldType.setText(res.getEns().getCours().getTypeCours().getNomTypeCours());
 	        		textFieldGroupe.setText(res.getEns().getGroupe().getLibelle());
+	        		textFieldDate.setText(dateString);
+	        		textFieldCren.setText(res.getCreneau().toString());
 	        		
 	        		listeSalle();
             	}
@@ -153,6 +186,8 @@ public class GestionDemande extends JPanel {
             		textFieldMatiere.setText("");
 	        		textFieldType.setText("");
 	        		textFieldGroupe.setText("");
+	        		textFieldDate.setText("");
+	        		textFieldCren.setText("");
             	}
             }               
 		});
@@ -181,7 +216,7 @@ public class GestionDemande extends JPanel {
 		comboBoxRes.addItem(" -Sélectionnez une réservation- ");
 		int i = 0;
 		while(i < listRes.size()) {
-			if(listRes.get(i).getSalle() == null) {
+			if(listRes.get(i).getSalle().getLibelle() == null) {
 				comboBoxRes.addItem(listRes.get(i));
 			}
 			i++;
@@ -206,7 +241,7 @@ public class GestionDemande extends JPanel {
 		for(int i = 0; i < listSalle.size(); i++) {
 			j = 0;
 			while(j < listRes.size() && dispo) {
-				if(listRes.get(j).getSalle() != null && res.getCreneau().getIdCreneau() == listRes.get(j).getCreneau().getIdCreneau() && res.getDateResa().equals(listRes.get(j).getDateResa())) {
+				if(listRes.get(j).getSalle().getLibelle() != null && res.getCreneau().getIdCreneau() == listRes.get(j).getCreneau().getIdCreneau() && res.getDateResa().equals(listRes.get(j).getDateResa())) {
 					if(listRes.get(j).getSalle().getIdSalle() == listSalle.get(i).getIdSalle()) {
 						dispo = false;
 					}
