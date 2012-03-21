@@ -76,7 +76,6 @@ public class test
 		{
 			System.out.println(a.get(i).getIdResa());
 			System.out.println(a.get(i).getEns().getGroupe().getLibelle());
-			System.out.println(a.get(i).getEns().getGroupe().getLibelle());
 			System.out.println(a.get(i).getSalle().getLibelle());
 			System.out.println(a.get(i).getEns().getCours().getMatiere().getNomMat()+" ");
 			System.out.println(a.get(i).getCreneau().getHeureDeb()+" ");

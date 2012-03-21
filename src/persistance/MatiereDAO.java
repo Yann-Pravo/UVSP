@@ -101,7 +101,10 @@ public class MatiereDAO extends DAO<Matiere> {
                 m.setNomMat(result.getString("LIBELLE_MATIERE"));
                 m.setUEMat(ue);
                 m.setResponsable(ens);
-            }
+            
+           }
+            result.getStatement().close();
+	          result.close();
         }
         catch (SQLException ex) {
     

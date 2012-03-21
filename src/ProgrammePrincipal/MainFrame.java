@@ -75,6 +75,7 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 	private JCheckBox myCourses;
 	private JComboBox comboBox;
 	private boolean profOnly;
+	private int verifGroupe;
 
 	public MainFrame() 
 	{
@@ -452,12 +453,14 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 		resetTimetable(t);
 		String d;
 		SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
-
+		
+	
 		if(this.profOnly)
 		{
+			
 			for(int i=0; i<r.size(); i++)
 			{
-			
+				
 				d = date.format(r.get(i).getDateResa());
 				if(d.compareTo(w.getMonday()) == 0 &&  r.get(i).getSalle().getLibelle() != null && r.get(i).getEns().getEnseignant().getIdEns() == this.enseignant.getIdEns())
 				{	
@@ -489,38 +492,76 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 		}
 		else
 		{
-			for(int i=0; i<r.size(); i++)
+			if(this.verifGroupe == 0)
 			{
-				d = date.format(r.get(i).getDateResa());
-				if(d.compareTo(w.getMonday()) == 0 &&  r.get(i).getSalle().getLibelle() != null && r.get(i).getEns().getGroupe().getIdGroupe() == this.groupeCourant.getIdGroupe())
-				{	
-						t.setValueAt(r.get(i), getNumCreneau(r.get(i).getCreneau()), 0);
-					
-					
-					
-				}
-				else if(d.compareTo(w.getTuesday()) == 0 &&  r.get(i).getSalle().getLibelle() != null && r.get(i).getEns().getGroupe().getIdGroupe() == this.groupeCourant.getIdGroupe())
+				for(int i=0; i<r.size(); i++)
 				{
-					t.setValueAt(r.get(i), getNumCreneau(r.get(i).getCreneau()), 1);
+					d = date.format(r.get(i).getDateResa());
+					if(d.compareTo(w.getMonday()) == 0 &&  r.get(i).getSalle().getLibelle() != null)
+					{	
+							t.setValueAt(r.get(i), getNumCreneau(r.get(i).getCreneau()), 0);	
+					}
+					else if(d.compareTo(w.getTuesday()) == 0 &&  r.get(i).getSalle().getLibelle() != null)
+					{
+						t.setValueAt(r.get(i), getNumCreneau(r.get(i).getCreneau()), 1);
+					}
+					else if(d.compareTo(w.getWednesday()) == 0 &&  r.get(i).getSalle().getLibelle() != null)
+					{
+						t.setValueAt(r.get(i), getNumCreneau(r.get(i).getCreneau()), 2);
+						
+					}
+					else if(d.compareTo(w.getThursday()) == 0 &&  r.get(i).getSalle().getLibelle() != null)
+					{
+						t.setValueAt(r.get(i), getNumCreneau(r.get(i).getCreneau()), 3);
+					}
+					else if(d.compareTo(w.getFriday()) == 0 &&  r.get(i).getSalle().getLibelle() != null)
+					{
+						t.setValueAt(r.get(i), getNumCreneau(r.get(i).getCreneau()), 4);
+					}
+					else if(d.compareTo(w.getSaturday()) == 0 &&  r.get(i).getSalle().getLibelle() != null)
+					{	
+							t.setValueAt(r.get(i), getNumCreneau(r.get(i).getCreneau()), 5);	
+					}
 				}
-				else if(d.compareTo(w.getWednesday()) == 0 &&  r.get(i).getSalle().getLibelle() != null && r.get(i).getEns().getGroupe().getIdGroupe() == this.groupeCourant.getIdGroupe())
+				
+				
+			}
+			else
+			{
+				for(int i=0; i<r.size(); i++)
 				{
-					t.setValueAt(r.get(i), getNumCreneau(r.get(i).getCreneau()), 2);
-					
-				}
-				else if(d.compareTo(w.getThursday()) == 0 &&  r.get(i).getSalle().getLibelle() != null && r.get(i).getEns().getGroupe().getIdGroupe() == this.groupeCourant.getIdGroupe())
-				{
-					t.setValueAt(r.get(i), getNumCreneau(r.get(i).getCreneau()), 3);
-				}
-				else if(d.compareTo(w.getFriday()) == 0 &&  r.get(i).getSalle().getLibelle() != null && r.get(i).getEns().getGroupe().getIdGroupe() == this.groupeCourant.getIdGroupe())
-				{
-					t.setValueAt(r.get(i), getNumCreneau(r.get(i).getCreneau()), 4);
-				}
-				else if(d.compareTo(w.getSaturday()) == 0 &&  r.get(i).getSalle().getLibelle() != null && r.get(i).getEns().getGroupe().getIdGroupe() == this.groupeCourant.getIdGroupe())
-				{	
-						t.setValueAt(r.get(i), getNumCreneau(r.get(i).getCreneau()), 5);	
+					d = date.format(r.get(i).getDateResa());
+					if(d.compareTo(w.getMonday()) == 0 &&  r.get(i).getSalle().getLibelle() != null && r.get(i).getEns().getGroupe().getIdGroupe() == this.groupeCourant.getIdGroupe())
+					{	
+							t.setValueAt(r.get(i), getNumCreneau(r.get(i).getCreneau()), 0);
+						
+						
+						
+					}
+					else if(d.compareTo(w.getTuesday()) == 0 &&  r.get(i).getSalle().getLibelle() != null && r.get(i).getEns().getGroupe().getIdGroupe() == this.groupeCourant.getIdGroupe())
+					{
+						t.setValueAt(r.get(i), getNumCreneau(r.get(i).getCreneau()), 1);
+					}
+					else if(d.compareTo(w.getWednesday()) == 0 &&  r.get(i).getSalle().getLibelle() != null && r.get(i).getEns().getGroupe().getIdGroupe() == this.groupeCourant.getIdGroupe())
+					{
+						t.setValueAt(r.get(i), getNumCreneau(r.get(i).getCreneau()), 2);
+						
+					}
+					else if(d.compareTo(w.getThursday()) == 0 &&  r.get(i).getSalle().getLibelle() != null && r.get(i).getEns().getGroupe().getIdGroupe() == this.groupeCourant.getIdGroupe())
+					{
+						t.setValueAt(r.get(i), getNumCreneau(r.get(i).getCreneau()), 3);
+					}
+					else if(d.compareTo(w.getFriday()) == 0 &&  r.get(i).getSalle().getLibelle() != null && r.get(i).getEns().getGroupe().getIdGroupe() == this.groupeCourant.getIdGroupe())
+					{
+						t.setValueAt(r.get(i), getNumCreneau(r.get(i).getCreneau()), 4);
+					}
+					else if(d.compareTo(w.getSaturday()) == 0 &&  r.get(i).getSalle().getLibelle() != null && r.get(i).getEns().getGroupe().getIdGroupe() == this.groupeCourant.getIdGroupe())
+					{	
+							t.setValueAt(r.get(i), getNumCreneau(r.get(i).getCreneau()), 5);	
+					}
 				}
 			}
+			
 		}
 		
 		
@@ -586,15 +627,25 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 
 		public void itemStateChanged(ItemEvent e) 
 		{
-        	if(!e.getItem().equals(" -SŽlectionnez une salle- ")) 
+        	if(!e.getItem().equals(" -SŽlectionnez un groupe- ")) 
         	{
         		if(e.getItem() instanceof Groupe)
         		{
+        			System.out.println("pourquoi");
         			this.groupeCourant = (Groupe)e.getItem();
+        			this.verifGroupe = 1;
         			setTimetable(tableau, currentWeek, listeResa);
         		}
-        		
         	}
+        	else
+        	{
+        	 	this.verifGroupe = 0;
+        		setTimetable(tableau, currentWeek, listeResa);
+        	}
+        	
+        		
+       
+        	
         	
         }  
 	
