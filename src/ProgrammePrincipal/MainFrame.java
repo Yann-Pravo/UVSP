@@ -68,6 +68,7 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 	private WeekDate currentWeek;
 	private JButton nextButton;
 	private JButton backButton;
+	private GestionnaireReservation gr;
 	private ArrayList<Reservation> listeResa;
 	private JTable tableau;
 	private Component cell;
@@ -307,7 +308,7 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 			js.setViewportView(tableau);
 			js.setBounds(150, 100, 1000, 545);
 			
-			GestionnaireReservation gr = GestionnaireReservation.getInstance();
+			gr = GestionnaireReservation.getInstance();
 			listeResa = gr.getListeReservation();
 			
 			
@@ -368,17 +369,17 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 		}
 		if(ae.getActionCommand().equals("Gestion des r\u00E9servations"))
 		{
-			GestionReservation gr = new GestionReservation(enseignant);
+			GestionReservation gre = new GestionReservation(enseignant, gr);
 			this.getContentPane().setLayout(new BorderLayout());
 			this.getContentPane().remove(log);
 			this.getContentPane().remove(texte);
-			this.getContentPane().add(gr, BorderLayout.CENTER);
+			this.getContentPane().add(gre, BorderLayout.CENTER);
 			this.validate();			
-			gr.setVisible(true);			
+			gre.setVisible(true);			
 		}
 		if(ae.getActionCommand().equals("Gestion des demandes"))
 		{
-			GestionDemande gd = new GestionDemande();
+			GestionDemande gd = new GestionDemande(this, gr);
 			this.getContentPane().setLayout(new BorderLayout());
 			this.getContentPane().remove(log);
 			this.getContentPane().remove(texte);
@@ -631,7 +632,6 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
         	{
         		if(e.getItem() instanceof Groupe)
         		{
-        			System.out.println("pourquoi");
         			this.groupeCourant = (Groupe)e.getItem();
         			this.verifGroupe = 1;
         			setTimetable(tableau, currentWeek, listeResa);
@@ -649,7 +649,9 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
         	
         }  
 	
-	
+		public void setGr(GestionnaireReservation gr) {
+			this.gr = gr;
+		}
 		
 	
 	

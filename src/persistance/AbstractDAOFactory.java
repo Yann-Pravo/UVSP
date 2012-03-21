@@ -11,8 +11,8 @@ import metier.*;
  */
 public abstract class AbstractDAOFactory {
 
-    public static final int DAO_FACTORY = 0;
-    public static final int XML_DAO_FACTORY = 1;
+    public static final int DAO_FACTORY = 1;
+    public static final int TXT_DAO_FACTORY = 1;
 
     /**
      * Méthode statique permettant de récupérer les Factory
@@ -21,8 +21,10 @@ public abstract class AbstractDAOFactory {
      */
     public static AbstractDAOFactory getFactory(int type){
         switch(type){
-            case DAO_FACTORY:
+            case 0:
                 return DAOFactory.getDAOFactory();
+            case 1:
+                return DAOTXTFactory.getDAOTXTFactory();
             default:
                 return null;
         }

@@ -1,0 +1,5 @@
+1|videoprojecteur
+2|grande
+3|moyenne
+4|petite
+5|TP

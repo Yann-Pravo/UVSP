@@ -1,0 +1,6 @@
+1|NULL|IG4
+2|1|IG4 G1
+3|1|IG4 G2
+4|1|IG4 anglais G1
+5|1|IG4 anglais G2
+6|1|IG4 anglais G3

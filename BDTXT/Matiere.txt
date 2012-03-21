@@ -1,0 +1,12 @@
+1|1|12|Conception par objets
+2|1|8|Bases de données relationnelles Objet et multidimensionnelles
+3|2|5|Système d exploitation
+4|2|7|Réseaux
+5|3|3|Simulation d entreprise
+6|3|4|Si et marketing
+7|3|2|Management des systèmes d information
+8|4|6|Technique de gestion de projets
+9|4|6|Méthodologie de gestion de projets
+10|5|9|Langue 1: anglais
+11|5|4|Insertion professionnelle
+12|5|13|Communication

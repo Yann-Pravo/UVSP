@@ -17,6 +17,8 @@ import metier.GestionnaireSalle;
 import metier.Reservation;
 import metier.Salle;
 
+import ProgrammePrincipal.MainFrame;
+
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 import java.awt.event.ItemListener;
 import javax.swing.JButton;
@@ -39,14 +41,16 @@ public class GestionDemande extends JPanel {
 	private JButton btnEnregistrer;
 	private JTextField textFieldDate;
 	private JTextField textFieldCren;
+	private MainFrame mainFrame;
 	
 	/**
 	 * Create the panel.
 	 */
-	public GestionDemande() {
+	public GestionDemande(MainFrame mainFrame, GestionnaireReservation gRes) {
 		setLayout(null);
 		
-		gRes = GestionnaireReservation.getInstance();
+		this.mainFrame = mainFrame;
+		this.gRes = gRes;
 		gSalle = GestionnaireSalle.getInstance();
 		
 		comboBoxRes = new JComboBox();
@@ -158,6 +162,7 @@ public class GestionDemande extends JPanel {
             		textFieldCren.setText("");
 
             		gRes = GestionnaireReservation.getInstance();
+            		mainFrame.setGr(gRes);
             		
             		listeReservation();
             		listeSalle();

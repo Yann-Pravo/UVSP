@@ -49,11 +49,11 @@ public class GestionReservation extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public GestionReservation(Enseignant enseignant) {
+	public GestionReservation(Enseignant enseignant, GestionnaireReservation gRes) {
 		setLayout(null);
 		this.enseignant = enseignant;
 		
-		gRes = GestionnaireReservation.getInstance();
+		this.gRes = gRes;
 		gCreneau = GestionnaireCreneau.getInstance();
 		gEns = GestionnaireEnseignement.getInstance();
 		
@@ -120,7 +120,7 @@ public class GestionReservation extends JPanel {
 		
 		btnEnregistrer = new JButton("Sauver");
 		btnEnregistrer.setIcon(new ImageIcon(GestionReservation.class.getResource("/ProgrammePrincipal/save.png")));
-		btnEnregistrer.setBounds(158, 242, 117, 29);
+		btnEnregistrer.setBounds(19, 286, 117, 29);
 		add(btnEnregistrer);
 		
         initialize();

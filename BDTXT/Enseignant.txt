@@ -1,0 +1,13 @@
+1|Laurent|Anne|anne|0
+2|Fallery|Bernard|bernard|0
+3|Bourdon|Isabelle|isabelle|0
+4|Buisson|Lysianne|lysianne|0
+5|Cart|Michelle|michelle|0
+6|Ruiz|Jacque|jacque|0
+7|Izard|Thomas|thomas|0
+8|Pacitti|Esther|esther|0
+9|Seguin|Corrine|corinne|0
+10|De Lauzun|Anne-laure|anne-laure|1
+11|Stratulat|Tiberiu|tiberiu|1
+12|Sala|Michel|michel|0
+13|Dulas|Marc|marc|0
