@@ -94,6 +94,7 @@ public class BatimentDAO extends DAO<Batiment>{
 				bat.setLibelle(result.getString("LIBELLE_BATIMENT"));
 			}
 			result.getStatement().close();
+			result.close();
 		}
 		catch(SQLException ex)
 		{
