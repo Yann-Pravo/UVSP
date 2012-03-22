@@ -3,7 +3,9 @@ import GraphicalUI.*;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -11,6 +13,7 @@ import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -33,6 +36,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -43,10 +47,19 @@ import javax.swing.JTextArea;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.JMenu;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.Date;
+
+
 
 
 
@@ -57,6 +70,7 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 	private JMenuBar menuBar;
 	private JMenu mnAbout;
 	private JMenu mnFichier;
+	private JMenu mnAffichage;
 	private JMenuItem itemSalle;
 	private JMenuItem itemLog;
 	private JMenuItem itemDelog;
@@ -187,10 +201,11 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 		mntmGestionDemande.addActionListener(this);
 		mnGestion.add(mntmGestionDemande);
 		
-		JMenu mnAffichage = new JMenu("Exporter EDT");
+		mnAffichage = new JMenu("Exporter EDT");
 		menuBar.add(mnAffichage);
 		
 		JMenuItem mntmAfficherLeCalendrier = new JMenuItem("Exporter en PDF");
+		mntmAfficherLeCalendrier.addActionListener(this);
 		mnAffichage.add(mntmAfficherLeCalendrier);
 		
 		
@@ -329,7 +344,7 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 
 			
 			setTimetable(tableau, currentWeek, listeResa);
-			
+	
 		
 		
 			
@@ -358,13 +373,22 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 	@Override
 	public void actionPerformed(ActionEvent ae) 
 	{
-
+		if(ae.getActionCommand().equals("Exporter en PDF"))
+		{
+			File f = new File("UVSP");
+			try {
+				printImage(this.js,f);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		if(ae.getActionCommand().equals("Gestion des salles"))
 		{
 			
 			GestionSalle gs = new GestionSalle();		
-			gs.setVisible(true);			
+			gs.setVisible(false);			
 		}
 		if(ae.getActionCommand().equals("Gestion des enseignants"))
 		{
@@ -448,6 +472,7 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 			}
 			
 		}
+	
 	}
 	
 	public void updateLabelWeek()
@@ -708,12 +733,13 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 		}
 	
 	
-	
-	
-	
-	
-	
-	
+		public void printImage(JComponent component,File location) throws IOException{
+	        BufferedImage image = new BufferedImage(component.getWidth(), component.getHeight(), BufferedImage.TYPE_INT_RGB);
+	        Graphics2D g = image.createGraphics();
+	        component.paint(g);
+	        ImageIO.write(image, "jpeg", new File(location.getPath()));
+	    
+	    } 
 	
 	
 }
