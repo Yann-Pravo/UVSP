@@ -100,18 +100,19 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 	private JLabel c5;
 	private JLabel c6;
 	private JLabel c7;
+	private GestionSalle gs;
+	private GestionEnseignant ge;
+	private GestionReservation gre;
+	private GestionDemande gd;
+	private JMenuItem itemAbout;
+	
 	
 
 	public MainFrame() 
 	{
-		
-		
+
 		initComponents();
 		displayConnexion();
-        //this.setSize(461,292);
-        
-		
-
 
 	}
 
@@ -142,6 +143,12 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 		itemQuit.addActionListener(this);
 		mnFichier.add(itemQuit);
 		
+		mnAbout = new JMenu("About");
+		menuBar.add(mnAbout);
+		
+		itemAbout = new JMenuItem("A propos de UVSP");
+		itemAbout.addActionListener(this);
+		mnAbout.add(itemAbout);
 		
 		
 	}
@@ -178,6 +185,9 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 		titre.setFont(new Font("Lucida Grande", Font.BOLD, 18));
 		getContentPane().add(titre);
 		
+		this.getContentPane().remove(mnAbout);
+		this.getContentPane().remove(itemAbout);
+		
 		mnGestion = new JMenu("Gestion");
 		menuBar.add(mnGestion);
 	
@@ -201,10 +211,10 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 		mntmGestionDemande.addActionListener(this);
 		mnGestion.add(mntmGestionDemande);
 		
-		mnAffichage = new JMenu("Exporter EDT");
+		mnAffichage = new JMenu("Emploi du temps");
 		menuBar.add(mnAffichage);
 		
-		JMenuItem mntmAfficherLeCalendrier = new JMenuItem("Exporter en PDF");
+		JMenuItem mntmAfficherLeCalendrier = new JMenuItem("Exporter en JPG");
 		mntmAfficherLeCalendrier.addActionListener(this);
 		mnAffichage.add(mntmAfficherLeCalendrier);
 		
@@ -373,9 +383,9 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 	@Override
 	public void actionPerformed(ActionEvent ae) 
 	{
-		if(ae.getActionCommand().equals("Exporter en PDF"))
+		if(ae.getActionCommand().equals("Exporter en JPG"))
 		{
-			File f = new File("UVSP");
+			File f = new File("output/edt.jpg");
 			try {
 				printImage(this.js,f);
 			} catch (IOException e) {
@@ -387,37 +397,22 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 		if(ae.getActionCommand().equals("Gestion des salles"))
 		{
 			
-			GestionSalle gs = new GestionSalle();		
-			gs.setVisible(false);			
+			gs = new GestionSalle();		
+			gs.setVisible(true);			
 		}
 		if(ae.getActionCommand().equals("Gestion des enseignants"))
 		{
-			GestionEnseignant ge = new GestionEnseignant();
-			this.getContentPane().setLayout(new BorderLayout());
-			this.getContentPane().remove(log);
-			this.getContentPane().remove(texte);
-			this.getContentPane().add(ge, BorderLayout.CENTER);
-			this.validate();			
+			ge = new GestionEnseignant();			
 			ge.setVisible(true);			
 		}
 		if(ae.getActionCommand().equals("Gestion des r\u00E9servations"))
 		{
-			GestionReservation gre = new GestionReservation(enseignant, gr);
-			this.getContentPane().setLayout(new BorderLayout());
-			this.getContentPane().remove(log);
-			this.getContentPane().remove(texte);
-			this.getContentPane().add(gre, BorderLayout.CENTER);
-			this.validate();			
+			gre = new GestionReservation(enseignant, gr);			
 			gre.setVisible(true);			
 		}
 		if(ae.getActionCommand().equals("Gestion des demandes"))
 		{
-			GestionDemande gd = new GestionDemande(this, gr);
-			this.getContentPane().setLayout(new BorderLayout());
-			this.getContentPane().remove(log);
-			this.getContentPane().remove(texte);
-			this.getContentPane().add(gd, BorderLayout.SOUTH);
-			this.validate();			
+			gd = new GestionDemande(this, gr);	
 			gd.setVisible(true);			
 		}
 		if(ae.getActionCommand().equals("A propos de UVSP"))
@@ -438,9 +433,15 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 	
 		if(ae.getActionCommand().equals("Déconnexion"))
 		{
-			removeComponents("déco");
+			
+		
+			
+			
+			removeComponents();
+			
 			initComponents();
 			displayConnexion();
+			
 		}
 		if(ae.getSource().equals(nextButton))
 		{
@@ -686,10 +687,9 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 		}
 		
 	
-		public void removeComponents(String s)
+		public void removeComponents()
 		{
-			if(s.compareTo("déco") == 0)
-			{
+			
 				this.enseignant = null;
 				getContentPane().remove(comboBox);
 				getContentPane().remove(backButton);
@@ -707,28 +707,6 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 				getContentPane().remove(c5);
 				getContentPane().remove(c6);
 				getContentPane().remove(c7);
-				
-			}
-			else if(s.compareTo("gestionSalle") == 0)
-			{
-				getContentPane().remove(comboBox);
-				getContentPane().remove(backButton);
-				getContentPane().remove(myCourses);
-				getContentPane().remove(nextButton);
-				getContentPane().remove(tableau);
-				getContentPane().remove(texte);
-				getContentPane().remove(titre);
-				getContentPane().remove(weekLabel);	
-				getContentPane().remove(js);
-				getContentPane().remove(c1);
-				getContentPane().remove(c2);
-				getContentPane().remove(c3);
-				getContentPane().remove(c4);
-				getContentPane().remove(c5);
-				getContentPane().remove(c6);
-				getContentPane().remove(c7);
-			}
-			
 			
 		}
 	

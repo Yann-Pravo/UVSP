@@ -12,6 +12,8 @@ import javax.swing.JComboBox;
 
 import metier.Enseignant;
 import metier.GestionnaireEnseignant;
+
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -19,7 +21,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPasswordField;
 import javax.swing.JCheckBox;
 
-public class GestionEnseignant extends JPanel {
+public class GestionEnseignant extends JFrame {
 
 	private GestionnaireEnseignant gEns;
 	private ArrayList<Enseignant> listEns;
@@ -43,87 +45,89 @@ public class GestionEnseignant extends JPanel {
 	 * Create the panel.
 	 */
 	public GestionEnseignant() {
-		setLayout(null);
-		
+		getContentPane().setLayout(null);
+		setTitle("Gestion des enseignants");
+		this.setBounds(200, 200, 449, 429);
 		gEns = GestionnaireEnseignant.getInstance();
 		
 		lblId = new JLabel("ID : ");
-		lblId.setBounds(19, 63, 61, 16);
-		add(lblId);
+		lblId.setBounds(51, 119, 61, 16);
+		getContentPane().add(lblId);
 		
 		lblNom = new JLabel("Nom : ");
-		lblNom.setBounds(19, 103, 61, 16);
-		add(lblNom);
+		lblNom.setBounds(51, 160, 61, 16);
+		getContentPane().add(lblNom);
 		
 		lblPrenom = new JLabel("Pr\u00E9nom :");
-		lblPrenom.setBounds(19, 143, 76, 16);
-		add(lblPrenom);
+		lblPrenom.setBounds(51, 200, 76, 16);
+		getContentPane().add(lblPrenom);
 		
 		textFieldPrenom = new JTextField();
 		textFieldPrenom.setEditable(false);
-		textFieldPrenom.setBounds(94, 137, 157, 28);
-		add(textFieldPrenom);
+		textFieldPrenom.setBounds(171, 194, 204, 28);
+		getContentPane().add(textFieldPrenom);
 		textFieldPrenom.setColumns(10);
 		
 		textFieldNom = new JTextField();
 		textFieldNom.setEditable(false);
-		textFieldNom.setBounds(94, 97, 157, 28);
-		add(textFieldNom);
+		textFieldNom.setBounds(171, 154, 204, 28);
+		getContentPane().add(textFieldNom);
 		textFieldNom.setColumns(10);
 		
 		textFieldID = new JTextField();
 		textFieldID.setEditable(false);
-		textFieldID.setBounds(94, 57, 157, 28);
-		add(textFieldID);
+		textFieldID.setBounds(171, 113, 204, 28);
+		getContentPane().add(textFieldID);
 		textFieldID.setColumns(10);
 		
 		JLabel lblMDP = new JLabel("Password :");
-		lblMDP.setBounds(19, 183, 119, 16);
-		add(lblMDP);
+		lblMDP.setBounds(51, 240, 119, 16);
+		getContentPane().add(lblMDP);
 		
 		btnAjouter = new JButton("Ajouter");
 		btnAjouter.setIcon(new ImageIcon("./src/ProgrammePrincipal/add.png"));
-		btnAjouter.setBounds(19, 250, 110, 32);
-		add(btnAjouter);
+		btnAjouter.setBounds(71, 346, 110, 32);
+		getContentPane().add(btnAjouter);
 		
 		btnSupprimer = new JButton("Supprimer");
 		btnSupprimer.setIcon(new ImageIcon("./src/ProgrammePrincipal/delete-icon.png"));
-		btnSupprimer.setBounds(141, 250, 110, 32);
-		add(btnSupprimer);
+		btnSupprimer.setBounds(265, 346, 110, 32);
+		getContentPane().add(btnSupprimer);
 		
 		btnModifier = new JButton("Modifier");
 		btnModifier.setIcon(new ImageIcon("./src/ProgrammePrincipal/update.png"));
-		btnModifier.setBounds(19, 250, 110, 32);
-		add(btnModifier);
+		btnModifier.setBounds(71, 346, 110, 32);
+		getContentPane().add(btnModifier);
 		
 		btnEnregistrer = new JButton("Sauver");
 		btnEnregistrer.setIcon(new ImageIcon("./src/ProgrammePrincipal/save.png"));
-		btnEnregistrer.setBounds(141, 250, 110, 32);
-		add(btnEnregistrer);
+		btnEnregistrer.setBounds(265, 346, 110, 32);
+		getContentPane().add(btnEnregistrer);
 		
 		btnAnnuler = new JButton("Annuler");
 		btnAnnuler.setIcon(new ImageIcon("./src/ProgrammePrincipal/delete-icon.png"));
-		btnAnnuler.setBounds(19, 250, 110, 32);
-		add(btnAnnuler);
+		btnAnnuler.setBounds(71, 346, 110, 32);
+		getContentPane().add(btnAnnuler);
 		
 		passwordField = new JPasswordField();
 		passwordField.setEditable(false);
-		passwordField.setBounds(94, 177, 157, 28);
-		add(passwordField);
+		passwordField.setBounds(171, 234, 204, 28);
+		getContentPane().add(passwordField);
 		
 		chckbxNewCheckBox = new JCheckBox("Super-Utilisateur");
 		chckbxNewCheckBox.setEnabled(false);
-		chckbxNewCheckBox.setBounds(94, 216, 157, 23);
-		add(chckbxNewCheckBox);
+		chckbxNewCheckBox.setBounds(137, 288, 157, 23);
+		getContentPane().add(chckbxNewCheckBox);
 		
 		comboBox = new JComboBox();
-		comboBox.setBounds(19, 6, 252, 27);
-		add(comboBox);
+		comboBox.setBounds(103, 47, 222, 27);
+		getContentPane().add(comboBox);
 		
 		btnSupprimer.setVisible(false);
 		btnEnregistrer.setVisible(false);
 		btnModifier.setVisible(false);
 		btnAnnuler.setVisible(false);
+		
 		
 
 		

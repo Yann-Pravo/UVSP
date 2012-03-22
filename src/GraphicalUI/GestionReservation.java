@@ -20,13 +20,14 @@ import metier.GestionnaireCreneau;
 import metier.GestionnaireEnseignement;
 import metier.GestionnaireReservation;
 
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 
-public class GestionReservation extends JPanel {
+public class GestionReservation extends JFrame {
 
 	private GestionnaireReservation gRes;
 	private GestionnaireCreneau gCreneau;
@@ -51,77 +52,78 @@ public class GestionReservation extends JPanel {
 	 */
 	public GestionReservation(Enseignant enseignant, GestionnaireReservation gRes) {
 		setLayout(null);
+		getContentPane().setLayout(null);
 		this.enseignant = enseignant;
-		
+		this.setBounds(200, 200, 449, 429);
 		this.gRes = gRes;
 		gCreneau = GestionnaireCreneau.getInstance();
 		gEns = GestionnaireEnseignement.getInstance();
 		
 		lblDate = new JLabel("Date : ");
-		lblDate.setBounds(19, 12, 61, 16);
-		add(lblDate);
+		lblDate.setBounds(19, 38, 61, 16);
+		getContentPane().add(lblDate);
 		
 		lblCr始eau = new JLabel("Cr\u00E9neau :");
-		lblCr始eau.setBounds(19, 52, 76, 16);
-		add(lblCr始eau);
+		lblCr始eau.setBounds(19, 87, 76, 16);
+		getContentPane().add(lblCr始eau);
 		
 		textFieldDateJ = new JTextField();
 		textFieldDateJ.setText("jj-MM-yyyy");
-		textFieldDateJ.setBounds(94, 6, 157, 28);
-		add(textFieldDateJ);
+		textFieldDateJ.setBounds(183, 32, 157, 28);
+		getContentPane().add(textFieldDateJ);
 		textFieldDateJ.setColumns(10);
 		
 		JLabel lblEnseignement = new JLabel("Enseignement :");
-		lblEnseignement.setBounds(19, 92, 119, 16);
-		add(lblEnseignement);
+		lblEnseignement.setBounds(19, 127, 119, 16);
+		getContentPane().add(lblEnseignement);
 		
 		comboBoxCreneau = new JComboBox();
-		comboBoxCreneau.setBounds(94, 48, 232, 27);
-		add(comboBoxCreneau);
+		comboBoxCreneau.setBounds(138, 83, 271, 27);
+		getContentPane().add(comboBoxCreneau);
 		
 		comboBoxEnseignement = new JComboBox();
-		comboBoxEnseignement.setBounds(122, 88, 271, 27);
-		add(comboBoxEnseignement);
+		comboBoxEnseignement.setBounds(138, 123, 271, 27);
+		getContentPane().add(comboBoxEnseignement);
 		
 		JLabel lblMatiere = DefaultComponentFactory.getInstance().createLabel("Mati\u00E8re :");
-		lblMatiere.setBounds(19, 130, 61, 16);
-		add(lblMatiere);
+		lblMatiere.setBounds(37, 189, 61, 16);
+		getContentPane().add(lblMatiere);
 		
 		textFieldMatiere = new JTextField();
 		textFieldMatiere.setEditable(false);
-		textFieldMatiere.setBounds(94, 124, 299, 28);
-		add(textFieldMatiere);
+		textFieldMatiere.setBounds(110, 183, 299, 28);
+		getContentPane().add(textFieldMatiere);
 		textFieldMatiere.setColumns(10);
 		
 		JLabel lblType = DefaultComponentFactory.getInstance().createLabel("Type : ");
-		lblType.setBounds(20, 155, 61, 16);
-		add(lblType);
+		lblType.setBounds(37, 227, 61, 16);
+		getContentPane().add(lblType);
 		
 		textFieldType = new JTextField();
 		textFieldType.setEditable(false);
-		textFieldType.setBounds(95, 149, 177, 28);
-		add(textFieldType);
+		textFieldType.setBounds(110, 221, 299, 28);
+		getContentPane().add(textFieldType);
 		textFieldType.setColumns(10);
 		
 		JLabel lblGroupe = DefaultComponentFactory.getInstance().createLabel("Groupe :");
-		lblGroupe.setBounds(19, 179, 120, 16);
-		add(lblGroupe);
+		lblGroupe.setBounds(37, 269, 120, 16);
+		getContentPane().add(lblGroupe);
 		
 		textFieldGroupe = new JTextField();
 		textFieldGroupe.setEditable(false);
-		textFieldGroupe.setBounds(95, 173, 177, 28);
-		add(textFieldGroupe);
+		textFieldGroupe.setBounds(110, 263, 299, 28);
+		getContentPane().add(textFieldGroupe);
 		textFieldGroupe.setColumns(10);
 		
 		btnAnnuler = new JButton("Annuler");
 		btnAnnuler.setIcon(new ImageIcon(GestionReservation.class.getResource("/ProgrammePrincipal/delete-icon.png")));
-		btnAnnuler.setBounds(19, 242, 117, 29);
-		add(btnAnnuler);
+		btnAnnuler.setBounds(274, 327, 117, 29);
+		getContentPane().add(btnAnnuler);
 		
 		btnEnregistrer = new JButton("Sauver");
 		btnEnregistrer.setIcon(new ImageIcon(GestionReservation.class.getResource("/ProgrammePrincipal/save.png")));
-		btnEnregistrer.setBounds(19, 286, 117, 29);
-		add(btnEnregistrer);
+		btnEnregistrer.setBounds(67, 327, 117, 29);
+		getContentPane().add(btnEnregistrer);
 		
         initialize();
 

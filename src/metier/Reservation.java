@@ -118,7 +118,7 @@ public class Reservation   {
 	{
 		return this.getEns().getGroupe().getLibelle()+" "+this.getSalle().getLibelle()+"\n\r"+
 				
-				getEns().getCours().getMatiere().getNomMat()+"\n\r "+this.getEns().getEnseignant().getNom();
+				getEns().getCours().getMatiere().getNomMat()+"\n\r"+this.getEns().getEnseignant().getNom();
 				
 	}
 

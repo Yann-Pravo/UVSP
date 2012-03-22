@@ -6,9 +6,9 @@ import java.awt.event.ItemEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
@@ -24,7 +24,7 @@ import java.awt.event.ItemListener;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 
-public class GestionDemande extends JPanel {
+public class GestionDemande extends JFrame {
 
 	private Reservation res;
 	private GestionnaireReservation gRes;
@@ -47,80 +47,80 @@ public class GestionDemande extends JPanel {
 	 * Create the panel.
 	 */
 	public GestionDemande(MainFrame mainFrame, GestionnaireReservation gRes) {
-		setLayout(null);
-		
-		this.mainFrame = mainFrame;
-		this.gRes = gRes;
-		gSalle = GestionnaireSalle.getInstance();
-		
-		comboBoxRes = new JComboBox();
-		comboBoxRes.setBounds(6, 6, 124, 27);
-		add(comboBoxRes);
-		
-		comboBoxSalle = new JComboBox();
-		comboBoxSalle.setBounds(175, 6, 112, 27);
-		add(comboBoxSalle);
-		
-		JLabel lblMatiere = DefaultComponentFactory.getInstance().createLabel("Mati\u00E8re :");
-		lblMatiere.setBounds(6, 93, 61, 16);
-		add(lblMatiere);
-		
-		textFieldMatiere = new JTextField();
-		textFieldMatiere.setEditable(false);
-		textFieldMatiere.setBounds(81, 87, 299, 28);
-		add(textFieldMatiere);
-		textFieldMatiere.setColumns(10);
-		
-		JLabel lblType = DefaultComponentFactory.getInstance().createLabel("Type : ");
-		lblType.setBounds(7, 118, 61, 16);
-		add(lblType);
-		
-		textFieldType = new JTextField();
-		textFieldType.setEditable(false);
-		textFieldType.setBounds(82, 112, 177, 28);
-		add(textFieldType);
-		textFieldType.setColumns(10);
-		
-		JLabel lblGroupe = DefaultComponentFactory.getInstance().createLabel("Groupe :");
-		lblGroupe.setBounds(6, 142, 120, 16);
-		add(lblGroupe);
-		
-		textFieldGroupe = new JTextField();
-		textFieldGroupe.setEditable(false);
-		textFieldGroupe.setBounds(82, 136, 177, 28);
-		add(textFieldGroupe);
-		textFieldGroupe.setColumns(10);
-		
-		btnSupprimer = new JButton("Supprimer");
-		btnSupprimer.setIcon(new ImageIcon(GestionDemande.class.getResource("/ProgrammePrincipal/delete-icon.png")));
-		btnSupprimer.setBounds(6, 176, 117, 32);
-		add(btnSupprimer);
-		
-		btnEnregistrer = new JButton("Sauver");
-		btnEnregistrer.setIcon(new ImageIcon(GestionDemande.class.getResource("/ProgrammePrincipal/save.png")));
-		btnEnregistrer.setBounds(142, 176, 117, 32);
-		add(btnEnregistrer);
-		
-		JLabel lblDate = new JLabel("Date :");
-		lblDate.setBounds(6, 55, 61, 16);
-		add(lblDate);
-		
-		textFieldDate = new JTextField();
-		textFieldDate.setEditable(false);
-		textFieldDate.setBounds(81, 47, 97, 28);
-		add(textFieldDate);
-		textFieldDate.setColumns(10);
-		
-		JLabel lblCrneau = new JLabel("Cr\u00E9neau :");
-		lblCrneau.setBounds(190, 55, 61, 16);
-		add(lblCrneau);
-		
-		textFieldCren = new JTextField();
-		textFieldCren.setEditable(false);
-		textFieldCren.setBounds(263, 47, 117, 28);
-		add(textFieldCren);
-		textFieldCren.setColumns(10);
-		
+		getContentPane().setLayout(null);
+		this.setBounds(200, 200, 449, 429);
+				this.mainFrame = mainFrame;
+				this.gRes = gRes;
+				gSalle = GestionnaireSalle.getInstance();
+				
+				comboBoxRes = new JComboBox();
+				comboBoxRes.setBounds(65, 37, 299, 27);
+				getContentPane().add(comboBoxRes);
+				
+				comboBoxSalle = new JComboBox();
+				comboBoxSalle.setBounds(65, 76, 299, 27);
+				getContentPane().add(comboBoxSalle);
+				
+				JLabel lblMatiere = DefaultComponentFactory.getInstance().createLabel("Mati\u00E8re :");
+				lblMatiere.setBounds(40, 177, 61, 16);
+				getContentPane().add(lblMatiere);
+				
+				textFieldMatiere = new JTextField();
+				textFieldMatiere.setEditable(false);
+				textFieldMatiere.setBounds(113, 171, 299, 28);
+				getContentPane().add(textFieldMatiere);
+				textFieldMatiere.setColumns(10);
+				
+				JLabel lblType = DefaultComponentFactory.getInstance().createLabel("Type : ");
+				lblType.setBounds(40, 222, 61, 16);
+				getContentPane().add(lblType);
+				
+				textFieldType = new JTextField();
+				textFieldType.setEditable(false);
+				textFieldType.setBounds(113, 211, 177, 28);
+				getContentPane().add(textFieldType);
+				textFieldType.setColumns(10);
+				
+				JLabel lblGroupe = DefaultComponentFactory.getInstance().createLabel("Groupe :");
+				lblGroupe.setBounds(40, 261, 120, 16);
+				getContentPane().add(lblGroupe);
+				
+				textFieldGroupe = new JTextField();
+				textFieldGroupe.setEditable(false);
+				textFieldGroupe.setBounds(113, 255, 177, 28);
+				getContentPane().add(textFieldGroupe);
+				textFieldGroupe.setColumns(10);
+				
+				btnSupprimer = new JButton("Supprimer");
+				btnSupprimer.setIcon(new ImageIcon(GestionDemande.class.getResource("/ProgrammePrincipal/delete-icon.png")));
+				btnSupprimer.setBounds(81, 326, 117, 32);
+				getContentPane().add(btnSupprimer);
+				
+				btnEnregistrer = new JButton("Sauver");
+				btnEnregistrer.setIcon(new ImageIcon(GestionDemande.class.getResource("/ProgrammePrincipal/save.png")));
+				btnEnregistrer.setBounds(263, 326, 117, 32);
+				getContentPane().add(btnEnregistrer);
+				
+				JLabel lblDate = new JLabel("Date :");
+				lblDate.setBounds(40, 133, 61, 16);
+				getContentPane().add(lblDate);
+				
+				textFieldDate = new JTextField();
+				textFieldDate.setEditable(false);
+				textFieldDate.setBounds(113, 127, 97, 28);
+				getContentPane().add(textFieldDate);
+				textFieldDate.setColumns(10);
+				
+				JLabel lblCrneau = new JLabel("Cr\u00E9neau :");
+				lblCrneau.setBounds(218, 133, 61, 16);
+				getContentPane().add(lblCrneau);
+				
+				textFieldCren = new JTextField();
+				textFieldCren.setEditable(false);
+				textFieldCren.setBounds(282, 127, 130, 28);
+				getContentPane().add(textFieldCren);
+				textFieldCren.setColumns(10);
+				
 		initialize();
 
 	}
