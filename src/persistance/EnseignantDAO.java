@@ -24,12 +24,15 @@ public class EnseignantDAO extends DAO<Enseignant>{
     }
 
     /**
-     * Méthode permettant de créer un enseignant en base de donnée
+     * Méthode qui exécute une requête d'ajout d'une nouvelle matière dans la base de données.
+     * Cette méthode redéfinit la méthode create(T obj) de la superclasse DAO.
+     * @exception SQLException
+     * @param instance Objet Enseignant qui doit être mappé dans la base
+     * @return Boolean - Vrai si l'insertion s'est déroulée correctement, Faux sinon
      */
     public boolean create(Enseignant instance) {
     	boolean ok = true;
     	try {
-    		// Si le statut n'existe pas en base on le cr√©e
     		this.connect.createStatement().executeUpdate("INSERT INTO enseignant(ID_ENSEIGNANT, NOM, PRENOM, MDP, SUPER_USER) VALUES(seqEnseignant.nextval, '" + instance.getNom() + "', '" + instance.getPrenom() + "', '" + instance.getMdp() + "', " + instance.getSu() + ")");
     	}
     	catch (SQLException e) {
@@ -39,6 +42,12 @@ public class EnseignantDAO extends DAO<Enseignant>{
             return ok;
     }
 
+    /**
+     * Méthode qui recherche dans la base de données l'enregistrement correspondant
+     * au enseignant bat en paramêtre et retourne les résultats sous forme d'un objet Enseignant.
+     * @param instance Objet Enseignant à rechercher dans la base de données
+     * @return Enseignant - Objet Enseignant créé à partir des résultats trouvés dans la base
+     */
 	public Enseignant find(Enseignant instance) {
 		try {
 			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY)
@@ -59,7 +68,13 @@ public class EnseignantDAO extends DAO<Enseignant>{
 		return instance;
 	}
 
-	
+    /**
+     * Méthode qui exécute une requête de mise à jour d'un enregistrement de la table 'ENSEIGNANT' dans la base de données.
+     * Cette méthode redéfint la méthode update(T obj) de la superclasse DAO.
+     * @exception SQLException
+     * @param enseignant Objet Enseignant qui doit être mappé pour mettre à jour la ligne correspondante dans la base
+     * @return Boolean - Vrai si la mise à jour s'est déroulée correctement, Faux sinon
+     */
 	public boolean update(Enseignant enseignant) {
 		boolean resultat = false;
 		try {
@@ -79,6 +94,13 @@ public class EnseignantDAO extends DAO<Enseignant>{
 		return resultat;
 	}
 
+    /**
+     * Méthode qui exécute une requête de suppression d'un enseignant dans la base de données.
+     * Cette méthode redéfinit la méthode find(T obj) de la superclasse DAO.
+     * @exception SQLException
+     * @param enseignant Objet Enseignant dont l'enregistrement correspondant dans la base doit être supprimé
+     * @return Boolean - Vrai si la suppression s'est bien déroulée, Faux sinon
+     */
 	public boolean delete(Enseignant enseignant) {
 		boolean resultat=false;
 		try {
@@ -92,7 +114,14 @@ public class EnseignantDAO extends DAO<Enseignant>{
 		}
 		return resultat;
 	}
-
+	 /**
+     * Méthode qui :
+     *      1) récupère l'ensemble des Enseignant de la table correspondante dans la base
+     *      2) les mappe en objet java Enseignant
+     *      3) les stocke dans une liste d'objets Enseignant
+     * @exception SQLException
+     * @return ArrayList<Enseignant> - Liste des Enseignant stockées dans la base
+     */
 	public ArrayList<Enseignant> getListe() {
 		ArrayList<Enseignant> list = new ArrayList<Enseignant>();
 		try {
@@ -116,7 +145,12 @@ public class EnseignantDAO extends DAO<Enseignant>{
 		return false;
 	}
 
-	@Override
+    /**
+     * Méthode qui vérifie si le nom d'utilisateur et le mot de passe qu'à entré l'utilisateur correspond à celui en BDD
+     * @exception SQLException
+     * @param enseignant Objet Enseignant
+     * @return Boolean - Vrai si le login s'est bien déroulée, Faux sinon
+     */
 	public boolean login(Enseignant ens) {
 		boolean find = false;
 		try {
@@ -143,13 +177,4 @@ public class EnseignantDAO extends DAO<Enseignant>{
 		return find;
 		
 	}
-
-
-
-
-
-
-
-
-
 }

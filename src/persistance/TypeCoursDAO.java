@@ -25,7 +25,11 @@ public class TypeCoursDAO extends DAO<TypeCours> {
     }
 
     /**
-     * Méthode permettant de créer un typecours en base de donnée
+     * Méthode qui exécute une requête d'ajout d'une nouvelle TypeCours dans la base de données.
+     * Cette méthode redéfinit la méthode create(T obj) de la superclasse DAO.
+     * @exception SQLException
+     * @param instance Objet TypeCours qui doit être mappé dans la base
+     * @return Boolean - Vrai si l'insertion s'est déroulée correctement, Faux sinon
      */
     public boolean create(TypeCours instance) {
     	boolean ok = false;
@@ -42,6 +46,12 @@ public class TypeCoursDAO extends DAO<TypeCours> {
             return ok;
     }
 
+    /**
+     * Méthode qui recherche dans la base de données l'enregistrement correspondant
+     * à la TypeCours instance en paramêtre et retourne les résultats sous forme d'un objet TypeCours.
+     * @param instance Objet TypeCours à rechercher dans la base de données
+     * @return TypeCours - Objet TypeCours créé à partir des résultats trouvés dans la base
+     */
 	public TypeCours find(TypeCours instance) {
 		try {
 			ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY)
@@ -59,6 +69,13 @@ public class TypeCoursDAO extends DAO<TypeCours> {
 		return instance;
 	}
 
+    /**
+     * Méthode qui exécute une requête de mise à jour d'un enregistrement de la table 'TypeCours' dans la base de données.
+     * Cette méthode redéfint la méthode update(T obj) de la superclasse DAO.
+     * @exception SQLException
+     * @param type Objet TypeCours qui doit être mappé pour mettre à jour la ligne correspondante dans la base
+     * @return Boolean - Vrai si la mise à jour s'est déroulée correctement, Faux sinon
+     */
 	public boolean update(TypeCours type) {
 		boolean resultat = false;
 		try {
@@ -75,6 +92,13 @@ public class TypeCoursDAO extends DAO<TypeCours> {
 		return resultat;
 	}
 
+    /**
+     * Méthode qui exécute une requête de suppression d'une TypeCours dans la base de données.
+     * Cette méthode redéfinit la méthode find(T obj) de la superclasse DAO.
+     * @exception SQLException
+     * @param type Objet TypeCours dont l'enregistrement correspondant dans la base doit être supprimé
+     * @return Boolean - Vrai si la suppression s'est bien déroulée, Faux sinon
+     */
 	public boolean delete(TypeCours type) {
 		boolean resultat=false;
 		try {
@@ -89,6 +113,14 @@ public class TypeCoursDAO extends DAO<TypeCours> {
 		return resultat;
 	}
 
+    /**
+     * Méthode qui :
+     *      1) récupère l'ensemble des TypeCours de la table correspondante dans la base
+     *      2) les mappe en objet java TypeCours
+     *      3) les stocke dans une liste d'objets TypeCours
+     * @exception SQLException
+     * @return ArrayList<TypeCours> - Liste des TypeCours stockées dans la base
+     */
 	public ArrayList<TypeCours> getListe() {
 		ArrayList<TypeCours> list = new ArrayList<TypeCours>();
 		try {

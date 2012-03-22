@@ -25,7 +25,11 @@ public class CreneauDAO extends DAO<Creneau> {
     }
 
     /**
-     * Méthode permettant de créer un créneau en base de donnée
+     * Méthode qui exécute une requête d'ajout d'une nouvelle matière dans la base de données.
+     * Cette méthode redéfinit la méthode create(T obj) de la superclasse DAO.
+     * @exception SQLException
+     * @param instance Objet Creneau qui doit être mappé dans la base
+     * @return Boolean - Vrai si l'insertion s'est déroulée correctement, Faux sinon
      */
     public boolean create(Creneau instance) {
     	boolean ok = false;

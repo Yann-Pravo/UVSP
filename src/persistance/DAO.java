@@ -4,6 +4,11 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import jdbc.ConnectionToOracle;
 
+/**
+ * Classe permettant de définir les méthodes abstraites des DAOs.
+ * @authors Ahardane Abdeslam, Balestrat Clément, Pravossoudovitch Yann
+ * @version 1.0
+ */
 public abstract class DAO<T> {
 
 	public Connection connect = ConnectionToOracle.getInstance();
