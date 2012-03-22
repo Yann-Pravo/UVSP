@@ -3,8 +3,10 @@ import metier.Enseignant;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.io.BufferedReader; 
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException; 
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException; 
 
 
@@ -105,7 +107,12 @@ public class EnseignantDAOTXT extends DAO<Enseignant>{
 			
 			for(int i = 0; i<lens.size();i++){
 				if ((ens.getNom().equals(lens.get(i).getNom())) && (ens.getMdp().equals(lens.get(i).getMdp()))){
-					find = true;				
+						find = true;
+						ens.setIdEns(lens.get(i).getIdEns());
+						ens.setMdp(lens.get(i).getMdp());
+						ens.setNom(lens.get(i).getNom());
+						ens.setPrenom(lens.get(i).getPrenom());
+						ens.setSu(lens.get(i).getSu());
 				}
 			}
 		
@@ -114,10 +121,36 @@ public class EnseignantDAOTXT extends DAO<Enseignant>{
 	}
 
 
-	@Override
 	public boolean create(Enseignant obj) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean ok = true;
+		ArrayList<Enseignant> lens = new ArrayList<Enseignant>();
+		EnseignantDAOTXT DAOens = new EnseignantDAOTXT();
+		lens = DAOens.getListe();
+
+		int id,su;
+		String nom, prenom;
+		id = lens.get(lens.size()-1).getIdEns() +1;
+		su = obj.getSu();	
+		nom = obj.getNom();
+		prenom = obj.getPrenom();
+			
+		String s = id + "|" + nom + "|" + prenom+ "|" + su ;
+
+		BufferedWriter bufWriter = null;
+		FileWriter fileWriter = null;
+		String filename = "BDTXT/Enseignant.txt";
+		try {
+			fileWriter = new FileWriter(filename, true);
+			bufWriter = new BufferedWriter(fileWriter);
+
+			bufWriter.write(s);
+			bufWriter.newLine();
+			bufWriter.close();
+			fileWriter.close();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} 
+		return ok;
 	}
 
 

@@ -1,8 +1,10 @@
 package persistance;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
@@ -133,10 +135,35 @@ private static final SalleDAOTXT instance = new SalleDAOTXT();
 		
 	}
 
-	@Override
 	public boolean create(Salle obj) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean ok = true;
+		ArrayList<Salle> lsal = new ArrayList<Salle>();
+		SalleDAOTXT DAOsal = new SalleDAOTXT();
+		lsal = DAOsal.getListe();
+
+		int id,bat;
+		String lib;
+		id = lsal.get(lsal.size()-1).getIdSalle() +1;
+		bat = obj.getBatiment().getIdBat();	
+		lib = obj.getLibelle();
+			
+		String s = id + "|" + bat + "|" + lib;
+
+		BufferedWriter bufWriter = null;
+		FileWriter fileWriter = null;
+		String filename = "BDTXT/Salle.txt";
+		try {
+			fileWriter = new FileWriter(filename, true);
+			bufWriter = new BufferedWriter(fileWriter);
+
+			bufWriter.write(s);
+			bufWriter.newLine();
+			bufWriter.close();
+			fileWriter.close();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} 
+		return ok;
 	}
 
 	@Override

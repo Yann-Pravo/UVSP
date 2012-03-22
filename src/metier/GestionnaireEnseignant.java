@@ -76,7 +76,7 @@ public class GestionnaireEnseignant {
         Enseignant enseignant = new Enseignant(nom, prenom, mdp, su);
         Boolean ok= enseignantDao.create(enseignant);
         if ( ok )
-            listeEnseignants.add(enseignant);
+        	listeEnseignants = enseignantDao.getListe();
     }
 
     /**

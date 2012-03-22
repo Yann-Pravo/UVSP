@@ -60,7 +60,12 @@ public class GestionnaireReservation {
 	
 	public void updateReservation(Reservation r, Salle s, Enseignement e, Date d, ArrayList<Caracteristique> car)
 	{
-		this.listeReservation.remove(r);
+        int i = 0;
+        while (r.getIdResa() != listeReservation.get(i).getIdResa())
+        {
+                i++;
+        }
+        listeReservation.remove(i);
 		r.setSalle(s);
 		r.setEns(e);
 		r.setDateResa(d);

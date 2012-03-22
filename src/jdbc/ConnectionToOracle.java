@@ -39,7 +39,7 @@ public class ConnectionToOracle{
 			try {
 				Class.forName("oracle.jdbc.driver.OracleDriver");
 				connect = DriverManager.getConnection(url, user, passwd);
-                                System.out.println("Connection effectuée !");
+                                //System.out.println("Connection effectuée !");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

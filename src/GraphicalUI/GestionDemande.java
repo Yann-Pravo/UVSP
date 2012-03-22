@@ -41,15 +41,13 @@ public class GestionDemande extends JFrame {
 	private JButton btnEnregistrer;
 	private JTextField textFieldDate;
 	private JTextField textFieldCren;
-	private MainFrame mainFrame;
 	
 	/**
 	 * Create the panel.
 	 */
-	public GestionDemande(MainFrame mainFrame, GestionnaireReservation gRes) {
+	public GestionDemande(GestionnaireReservation gRes) {
 		getContentPane().setLayout(null);
 		this.setBounds(200, 200, 449, 429);
-				this.mainFrame = mainFrame;
 				this.gRes = gRes;
 				gSalle = GestionnaireSalle.getInstance();
 				
@@ -162,7 +160,6 @@ public class GestionDemande extends JFrame {
             		textFieldCren.setText("");
 
             		gRes = GestionnaireReservation.getInstance();
-            		mainFrame.setGr(gRes);
             		
             		listeReservation();
             		listeSalle();

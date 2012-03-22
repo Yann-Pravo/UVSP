@@ -53,7 +53,7 @@ public class GestionnaireSalle {
     public Salle addSalle(String lib, Batiment bat, ArrayList<Caracteristique> c) {
         Salle salle = new Salle(lib, bat, c);
         salleDAO.create(salle);
-        listeSalles.add(salle);
+        listeSalles = salleDAO.getListe();
         return salle;
     }
 
