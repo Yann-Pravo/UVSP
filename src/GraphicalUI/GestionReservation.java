@@ -228,5 +228,21 @@ public class GestionReservation extends JFrame {
 			}
 			i++;
 		}
+		
+	
 	}
+	
+	public GestionnaireReservation getReservation()
+	{
+		return this.gRes;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
