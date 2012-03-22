@@ -7,22 +7,35 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-
-
+/**
+ * Classe permettant de mapper les objets Reservation vers la table Reservation de la base de données.
+ * Cette classe hérite de la classe DAO.
+ * @authors Ahardane Abdeslam, Balestrat Clément, Pravossoudovitch Yann
+ * @version 1.0
+ */
 public class ReservationDAO extends DAO<Reservation>
 {
 
 	private static final ReservationDAO instance = new ReservationDAO();
 
+    /**
+     * Méthode permettant de récupérer l'objet unique de type ReservationDAO
+     * @return ReservationDAO - Instance unique de l'objet ReservationDAO
+     */
 	public final static ReservationDAO getInstance()
 	{
 		return instance;
 	}
 
-	@Override
+    /**
+     * Méthode qui exécute une requête d'ajout d'une nouvelle Reservation dans la base de données.
+     * Cette méthode redéfinit la méthode create(T obj) de la superclasse DAO.
+     * @exception SQLException
+     * @param m Objet Reservation qui doit être mappé dans la base
+     * @return Boolean - Vrai si l'insertion s'est déroulée correctement, Faux sinon
+     */
 	public boolean create(Reservation res)
 	{
-
 		boolean ok = true;
         try {
         	SimpleDateFormat formatter = new SimpleDateFormat ("dd-MM-yyyy" ); 
@@ -37,7 +50,13 @@ public class ReservationDAO extends DAO<Reservation>
         return ok;
 	}
 
-	@Override
+    /**
+     * Méthode qui exécute une requête de mise à jour d'un enregistrement de la table 'Reservation' dans la base de données.
+     * Cette méthode redéfint la méthode update(T obj) de la superclasse DAO.
+     * @exception SQLException
+     * @param m Objet Reservation qui doit être mappé pour mettre à jour la ligne correspondante dans la base
+     * @return Boolean - Vrai si la mise à jour s'est déroulée correctement, Faux sinon
+     */
 	public boolean update(Reservation res)
 	{
 		boolean ok = true; 
@@ -77,7 +96,12 @@ public class ReservationDAO extends DAO<Reservation>
 		return false;
 	}
 
-	@Override
+    /**
+     * Méthode qui recherche dans la base de données l'enregistrement correspondant
+     * à la Reservation m en paramêtre et retourne les résultats sous forme d'un objet Reservation.
+     * @param m Objet Reservation à rechercher dans la base de données
+     * @return Reservation - Objet Reservation créé à partir des résultats trouvés dans la base
+     */
 	public Reservation find(Reservation res) 
 	{
 		Salle s;
@@ -148,7 +172,13 @@ public class ReservationDAO extends DAO<Reservation>
 
 	}
 
-	@Override
+    /**
+     * Méthode qui exécute une requête de suppression d'une Reservation dans la base de données.
+     * Cette méthode redéfinit la méthode find(T obj) de la superclasse DAO.
+     * @exception SQLException
+     * @param res Objet Reservation dont l'enregistrement correspondant dans la base doit être supprimé
+     * @return Boolean - Vrai si la suppression s'est bien déroulée, Faux sinon
+     */
 	public boolean delete(Reservation res)
 	{
 		 boolean ok = true; 
@@ -166,7 +196,14 @@ public class ReservationDAO extends DAO<Reservation>
 	        return ok;
 	}
 
-	@Override
+    /**
+     * Méthode qui :
+     *      1) récupère l'ensemble des Reservation de la table correspondante dans la base
+     *      2) les mappe en objet java Reservation
+     *      3) les stocke dans une liste d'objets Reservation
+     * @exception SQLException
+     * @return ArrayList<Reservation> - Liste des Reservation stockées dans la base
+     */
 	public ArrayList<Reservation> getListe() 
 	{
 		Reservation res;

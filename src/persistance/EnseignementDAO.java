@@ -53,6 +53,12 @@ public class EnseignementDAO extends DAO<Enseignement> {
 
     }
 
+    /**
+     * Méthode qui recherche dans la base de données l'enregistrement correspondant
+     * au enseignant bat en paramêtre et retourne les résultats sous forme d'un objet Enseignement.
+     * @param Enseign Objet Enseignement à rechercher dans la base de données
+     * @return Enseignement - Objet Enseignement créé à partir des résultats trouvés dans la base
+     */
     public Enseignement find(Enseignement Enseig) {
         try {
         	ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY)
@@ -85,6 +91,13 @@ public class EnseignementDAO extends DAO<Enseignement> {
 
     }
 
+    /**
+     * Méthode qui exécute une requête de mise à jour d'un enregistrement de la table 'ENSEIGNEMENT' dans la base de données.
+     * Cette méthode redéfint la méthode update(T obj) de la superclasse DAO.
+     * @exception SQLException
+     * @param ens Objet Enseignement qui doit être mappé pour mettre à jour la ligne correspondante dans la base
+     * @return Boolean - Vrai si la mise à jour s'est déroulée correctement, Faux sinon
+     */
     public boolean update(Enseignement ens) {
         boolean ok = true;
         try {
@@ -117,6 +130,13 @@ public class EnseignementDAO extends DAO<Enseignement> {
         return false;
     }
 
+    /**
+     * Méthode qui exécute une requête de suppression d'un Enseignement dans la base de données.
+     * Cette méthode redéfinit la méthode find(T obj) de la superclasse DAO.
+     * @exception SQLException
+     * @param enseign Objet Enseignement dont l'enregistrement correspondant dans la base doit être supprimé
+     * @return Boolean - Vrai si la suppression s'est bien déroulée, Faux sinon
+     */
     public boolean delete(Enseignement Enseig) {
         boolean resultat = false;
         try {
@@ -132,6 +152,14 @@ public class EnseignementDAO extends DAO<Enseignement> {
         return resultat;
     }
 
+	 /**
+     * Méthode qui :
+     *      1) récupère l'ensemble des Enseignement de la table correspondante dans la base
+     *      2) les mappe en objet java Enseignement
+     *      3) les stocke dans une liste d'objets Enseignement
+     * @exception SQLException
+     * @return ArrayList<Enseignement> - Liste des Enseignement stockées dans la base
+     */
     public ArrayList<Enseignement> getListe() {
         ArrayList<Enseignement> list = new ArrayList<Enseignement>();
         try {
