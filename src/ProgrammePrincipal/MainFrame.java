@@ -437,11 +437,13 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 		}
 		if(ae.getActionCommand().equals("Gestion des demandes"))
 		{
+
 			gr = null;
 			gr = GestionnaireReservation.getInstance();
-			gd = new GestionDemande(this, gr);	
+			gd = new GestionDemande(gr);	
 			gd.setVisible(true);
 			gr = gd.getReservation();
+
 		}
 		if(ae.getActionCommand().equals("A propos de UVSP"))
 		{
@@ -602,6 +604,7 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 			{
 				for(int i=0; i<r.size(); i++)
 				{
+					System.out.println("test");
 					d = date.format(r.get(i).getDateResa());
 					if(d.compareTo(w.getMonday()) == 0 &&  r.get(i).getSalle().getLibelle() != null && r.get(i).getEns().getGroupe().getIdGroupe() == this.groupeCourant.getIdGroupe())
 					{	
@@ -719,10 +722,6 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
         	
         	
         }  
-	
-		public void setGr(GestionnaireReservation gr) {
-			this.gr = gr;
-		}
 		
 	
 		public void removeComponents()

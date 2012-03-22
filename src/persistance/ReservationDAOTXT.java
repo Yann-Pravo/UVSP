@@ -2,6 +2,7 @@ package persistance;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -73,7 +74,7 @@ public class ReservationDAOTXT extends DAO<Reservation> {
 
 
 
-							SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
+							SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 							try {
 							bufferReader2 = new BufferedReader(new FileReader(file2));						
 							try {
@@ -105,16 +106,16 @@ public class ReservationDAOTXT extends DAO<Reservation> {
 							} catch (ParseException e1) {
 								e1.printStackTrace();
 							}
-							if(strToken.hasMoreTokens()){
-							str = strToken.nextToken();
-							if (str.length()==0){
+							if(!strToken.hasMoreTokens()){
 								s = new Salle(null);
 							}
-							if (str.length()>0){
+							if (strToken.hasMoreTokens()){
+								str = strToken.nextToken();
 								s = new Salle((Integer)Integer.parseInt(str));
 								s = sDAO.find(s);	
 							}
-							}
+							
+							
 							res.setSalle(s);
 							res.setCreneau(c);
 							res.setEns(ens);
@@ -203,7 +204,7 @@ public class ReservationDAOTXT extends DAO<Reservation> {
 //			s = s+ date.getMonth()+ "/";
 //		}
 //			s = s + (date.getYear()+1900) +"|"; 
-		SimpleDateFormat formatter = new SimpleDateFormat ("dd/mm/yyyy" ); 
+		SimpleDateFormat formatter = new SimpleDateFormat ("dd/MM/yyyy" ); 
 		String dateString = formatter.format(date);
 		s = s + dateString + "|";
 		BufferedWriter bufWriter = null;
@@ -225,8 +226,63 @@ public class ReservationDAOTXT extends DAO<Reservation> {
 
 
 	public boolean update(Reservation obj) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean ok = true;
+		ArrayList<Reservation> list = new ArrayList<Reservation>();
+		ReservationDAOTXT DAOres = new ReservationDAOTXT();
+		list = DAOres.getListe();
+		int id,idCreneau,idLensg,idSalle;
+		int i = 0;
+		String filename = "BDTXT/Reservation.txt";
+		while (obj.getIdResa() != list.get(i).getIdResa() && i<list.size()){
+			i++;
+		}
+		if (i == list.size()){
+			ok = false;
+		}
+		if (i<list.size()){
+			System.out.println(i);
+		list.remove(i);
+		list.add(obj);
+		File Myfile = new File(filename);
+		Myfile.delete();
+		try {
+			Myfile.createNewFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		for(int j=0;j <list.size();j++){
+			id = list.get(j).getIdResa();
+			idCreneau = list.get(j).getCreneau().getIdCreneau();
+			idLensg = list.get(j).getEns().getIdEnseignement();
+			Date date = list.get(j).getDateResa();	
+			String s = id + "|" + idCreneau + "|" + idLensg+ "|" ;
+			SimpleDateFormat formatter = new SimpleDateFormat ("dd/MM/yyyy" ); 
+			String dateString = formatter.format(date);
+			s = s + dateString + "|";
+			if(list.get(j).getSalle().getLibelle() != null){
+				idSalle = list.get(j).getSalle().getIdSalle();
+				s = s + idSalle;
+			}
+			FileWriter fileWriter = null;
+			BufferedWriter bufWriter = null;
+			try {
+				fileWriter = new FileWriter(filename, true);
+				bufWriter = new BufferedWriter(fileWriter);
+				bufWriter.write(s);
+				bufWriter.newLine();
+				bufWriter.close();
+				fileWriter.close();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			} 
+
+		}
+		}
+
+
+        return ok;
 	}
 
 
