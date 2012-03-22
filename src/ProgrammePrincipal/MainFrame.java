@@ -170,6 +170,10 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 	public void displayHome()
 	{
 		
+			
+		
+		
+		
 		
 		this.getContentPane().setLayout(null);
 		setBounds(30, 40, 1200, 750);
@@ -185,8 +189,11 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 		titre.setFont(new Font("Lucida Grande", Font.BOLD, 18));
 		getContentPane().add(titre);
 		
-		this.getContentPane().remove(mnAbout);
+		
 		this.getContentPane().remove(itemAbout);
+		this.getContentPane().remove(mnAbout);
+		
+		menuBar.remove(mnAbout);
 		
 		mnGestion = new JMenu("Gestion");
 		menuBar.add(mnGestion);
@@ -195,21 +202,33 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 		itemDelog.setVisible(true);
 
 		
-		JMenuItem itemSalle = new JMenuItem("Gestion des salles");
-		itemSalle.addActionListener(this);
-		mnGestion.add(itemSalle);
 		
-		JMenuItem itemEnseignant = new JMenuItem("Gestion des enseignants");
-		itemEnseignant.addActionListener(this);
-		mnGestion.add(itemEnseignant);
 		
-		JMenuItem mntmGestionDesRservations = new JMenuItem("Gestion des r\u00E9servations");
+		
+		if(this.enseignant.getSu() == 1)
+		{
+			JMenuItem itemSalle = new JMenuItem("Gestion des salles");
+			itemSalle.addActionListener(this);
+			mnGestion.add(itemSalle);
+			
+			JMenuItem itemEnseignant = new JMenuItem("Gestion des enseignants");
+			itemEnseignant.addActionListener(this);
+			mnGestion.add(itemEnseignant);
+			
+			JMenuItem mntmGestionDemande = new JMenuItem("Gestion des demandes");
+			mntmGestionDemande.addActionListener(this);
+			mnGestion.add(mntmGestionDemande);
+		}
+		
+		
+		
+		
+		
+		JMenuItem mntmGestionDesRservations = new JMenuItem("Demande de réservation");
 		mntmGestionDesRservations.addActionListener(this);
 		mnGestion.add(mntmGestionDesRservations);
 		
-		JMenuItem mntmGestionDemande = new JMenuItem("Gestion des demandes");
-		mntmGestionDemande.addActionListener(this);
-		mnGestion.add(mntmGestionDemande);
+		
 		
 		mnAffichage = new JMenu("Emploi du temps");
 		menuBar.add(mnAffichage);
@@ -219,12 +238,11 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 		mnAffichage.add(mntmAfficherLeCalendrier);
 		
 		
-		mnAbout = new JMenu("About");
+		
 		menuBar.add(mnAbout);
 		
-		JMenuItem itemAbout = new JMenuItem("A propos de UVSP");
-		itemAbout.addActionListener(this);
-		mnAbout.add(itemAbout);
+		
+		
 		
 		
 		nextButton = new JButton();
@@ -405,7 +423,7 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 			ge = new GestionEnseignant();			
 			ge.setVisible(true);			
 		}
-		if(ae.getActionCommand().equals("Gestion des r\u00E9servations"))
+		if(ae.getActionCommand().equals("Demande de réservation"))
 		{
 			gre = new GestionReservation(enseignant, gr);			
 			gre.setVisible(true);			
