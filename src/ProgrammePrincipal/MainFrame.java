@@ -246,13 +246,13 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 		
 		
 		nextButton = new JButton();
-		nextButton.setIcon(new ImageIcon("/Users/clementbalestrat/Desktop/projetJava/UVSP/src/ProgrammePrincipal/suivant.png"));
+		nextButton.setIcon(new ImageIcon("./src/ProgrammePrincipal/suivant.png"));
 		nextButton.setBounds(1070, 40, 79, 44);
 		nextButton.addActionListener(this);
 		add(nextButton);
 		
 		backButton = new JButton("");
-		backButton.setIcon(new ImageIcon("/Users/clementbalestrat/Desktop/projetJava/UVSP/src/ProgrammePrincipal/precedent.png"));
+		backButton.setIcon(new ImageIcon("./src/ProgrammePrincipal/precedent.png"));
 		backButton.setBounds(770, 40, 79, 44);
 		backButton.addActionListener(this);
 		add(backButton);
