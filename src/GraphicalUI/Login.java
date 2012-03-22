@@ -38,7 +38,7 @@ public class Login extends JInternalFrame {
 	
 	public Login(MainFrame m) 
 	{
-		super("Connexion", true, true, true, true);
+		super("Connexion", true, false, true, true);
 		this.main = m;
 		//this.setBounds(100, 100, 100, 300);
 		this.setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);

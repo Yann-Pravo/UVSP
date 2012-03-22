@@ -41,7 +41,10 @@ public class GestionDemande extends JFrame {
 	private JButton btnEnregistrer;
 	private JTextField textFieldDate;
 	private JTextField textFieldCren;
-	
+
+
+	private int isAdded;
+
 	/**
 	 * Create the panel.
 	 */
@@ -124,6 +127,7 @@ public class GestionDemande extends JFrame {
 	}
 	
 	private void initialize() {
+		this.isAdded = 0;
 		listeReservation();
 		
 		btnSupprimer.addActionListener(new ActionListener() {
@@ -163,6 +167,7 @@ public class GestionDemande extends JFrame {
             		
             		listeReservation();
             		listeSalle();
+            		setAdded(1);
         		}
 			}
 		});
@@ -255,6 +260,30 @@ public class GestionDemande extends JFrame {
 			}
 			dispo = true;
 		}
-
+		
 	}
+	
+	
+	public GestionnaireReservation getReservation()
+	{
+		return this.gRes;
+	}
+	
+	
+	public void setAdded(int i)
+	{
+		this.isAdded = i;
+	}
+	
+	public int isAdded()
+	{
+		return this.isAdded;
+	}
+	
+	
+	
+	
+	
+	
+	
 }

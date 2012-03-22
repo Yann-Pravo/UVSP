@@ -82,6 +82,7 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 	private WeekDate currentWeek;
 	private JButton nextButton;
 	private JButton backButton;
+	private JButton refreshButton;
 	private GestionnaireReservation gr;
 	private ArrayList<Reservation> listeResa;
 	private JTable tableau;
@@ -133,6 +134,7 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 		itemLog = new JMenuItem("Connexion");
 		itemLog.addActionListener(this);
 		mnFichier.add(itemLog);
+		itemLog.setVisible(false);
 		
 		itemDelog = new JMenuItem("Déconnexion");
 		itemDelog.addActionListener(this);
@@ -181,7 +183,7 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 		
 		texte = new JLabel("Connecté(e) en tant que "+ enseignant.getPrenom()+" "+enseignant.getNom());
 		texte.setFont(new Font("Lucida Grande", Font.ITALIC, 12));
-		texte.setBounds(30, 10, 250, 16);
+		texte.setBounds(30, 10, 350, 16);
 		getContentPane().add(texte);
 		
 		titre = new JLabel("Emploi du temps IG4");
@@ -257,7 +259,11 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 		backButton.addActionListener(this);
 		add(backButton);
 		
-		
+		refreshButton = new JButton("");
+		refreshButton.setIcon(new ImageIcon("./src/ProgrammePrincipal/refresh.png"));
+		refreshButton.setBounds(60, 40, 50, 50);
+		refreshButton.addActionListener(this);
+		add(refreshButton);
 		
 		today = Calendar.getInstance();
 		today.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
@@ -425,13 +431,19 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 		}
 		if(ae.getActionCommand().equals("Demande de réservation"))
 		{
-			gre = new GestionReservation(enseignant, gr);			
-			gre.setVisible(true);			
+			gre = new GestionReservation(enseignant, gr);
+			gre.setVisible(true);
+			
 		}
 		if(ae.getActionCommand().equals("Gestion des demandes"))
 		{
+
+			gr = null;
+			gr = GestionnaireReservation.getInstance();
 			gd = new GestionDemande(gr);	
-			gd.setVisible(true);			
+			gd.setVisible(true);
+			gr = gd.getReservation();
+
 		}
 		if(ae.getActionCommand().equals("A propos de UVSP"))
 		{
@@ -461,6 +473,16 @@ public class MainFrame extends JFrame implements ActionListener, ItemListener, E
 			displayConnexion();
 			
 		}
+		
+		if(ae.getSource().equals(refreshButton))
+		{
+			
+			gr = GestionnaireReservation.getInstance();
+			listeResa = gr.getListeReservation();
+			setTimetable(tableau, currentWeek, listeResa);
+		}
+		
+		
 		if(ae.getSource().equals(nextButton))
 		{
 			currentWeek.setNextWeek();

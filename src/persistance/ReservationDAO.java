@@ -62,7 +62,7 @@ public class ReservationDAO extends DAO<Reservation>
 		boolean ok = true; 
         try {
         
-            this.connect.createStatement().executeUpdate(
+        					this.connect.createStatement().executeUpdate(
                             "UPDATE Reservation " +
                             "SET id_salle=" + res.getSalle().getIdSalle()+
                             "WHERE id_reservation=" + res.getIdResa());
@@ -81,7 +81,7 @@ public class ReservationDAO extends DAO<Reservation>
                     "UPDATE Reservation " +
                     "SET date_reservation='" + res.getDateResa()+"'"+
                     "WHERE id_reservation=" + res.getIdResa());
-
+         
             }
         catch (SQLException e) {
             ok = false;

@@ -37,12 +37,12 @@ public class SalleDAO extends DAO<Salle>{
 	{
 		 boolean ok = true;
          try {
-        	 
-             this.connect.createStatement().executeUpdate(
-                         "INSERT INTO salle " +
-                         "(id_salle, id_batiment, numero_salle) " +
-                         "VALUES (seqSalle.nextval, "+ sal.getBatiment().getIdBat()+ ",'"
-                                     + sal.getLibelle()+"')");
+        	 this.connect.createStatement().executeUpdate(
+                     "INSERT INTO salle " +
+                     "(id_salle, id_batiment, numero_salle) " +
+                     "VALUES (seqSalle.nextval, "+ sal.getBatiment().getIdBat()+ ",'"
+                                 + sal.getLibelle()+"')");
+                        
          }
          catch (SQLException e) 
          {
